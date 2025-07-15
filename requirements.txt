@@ -1,0 +1,17 @@
+# Core web stack
+fastapi==0.116.1           # API framework :contentReference[oaicite:0]{index=0}
+uvicorn[standard]==0.35.0  # ASGI server  :contentReference[oaicite:1]{index=1}
+pydantic==2.9.2            # Typed models :contentReference[oaicite:2]{index=2}
+
+# LLM SDKs
+openai==1.95.1             # OpenAI client :contentReference[oaicite:3]{index=3}
+anthropic==0.57.1          # Anthropic client :contentReference[oaicite:4]{index=4}
+
+# Networking & utilities
+httpx==0.28.1              # Async HTTP    :contentReference[oaicite:5]{index=5}
+python-dotenv==1.1.1       # .env loader   :contentReference[oaicite:6]{index=6}
+rich==13.7.1               # Pretty logging/tracebacks
+
+# Testing (optional but recommended)
+pytest==8.1.0
+pytest-asyncio==0.23.5
