@@ -1,2 +1,11 @@
-need to pin version openai==0.28.0 to the requirements.txt file in order for it to run.
-generates 1000 iterations before it goes to optimize those iterations.
+# SwiftSolve
+
+## Build Instructions
+
+Set the `PYTHONPATH` environment variable.
+
+```sh
+export PYTHONPATH="${HOME}/swiftsolve/src/swiftsolve"
+```
+
+Provide API keys using `OPENAI_API_KEY` and `ANTHROPIC_API_KEY`.
