@@ -1,0 +1,9 @@
+{
+  "task_id": "test001",
+  "prompt": "Write a C++ program that reads two integers and outputs their sum",
+  "constraints": {"runtime_limit": 2000, "memory_limit": 512},
+  "unit_tests": [
+    {"input": "3 5", "expected": "8"},
+    {"input": "10 20", "expected": "30"}
+  ]
+}

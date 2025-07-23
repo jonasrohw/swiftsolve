@@ -1,13 +1,11 @@
-from agents.planner import Planner
-from agents.coder import Coder
-from agents.profiler import Profiler
-from agents.analyst import Analyst
-from static_pruner import pruner
-from schemas.plan import ProblemInput
-from schemas.verdict import VerdictMessage
-from schemas.code import CodeMessage
-from utils.config import get_settings
-from utils.logger import get_logger
+from ..agents.planner import Planner
+from ..agents.coder import Coder
+from ..agents.profiler import Profiler
+from ..agents.analyst import Analyst
+from ..static_pruner import pruner
+from ..schemas import ProblemInput, VerdictMessage, CodeMessage
+from ..utils.config import get_settings
+from ..utils.logger import get_logger
 
 log = get_logger("SolveLoop")
 planner, coder, profiler, analyst = Planner(), Coder(), Profiler(), Analyst()

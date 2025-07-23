@@ -1,6 +1,6 @@
 # static_pruner/pruner.py
 import ast, re
-from schemas.plan import PlanMessage
+from ..schemas import PlanMessage
 
 _BAD_SORT_LOOP = re.compile(r"for .* in .*:.*sort\(.*\)", re.S)
 
