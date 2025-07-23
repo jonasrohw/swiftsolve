@@ -1,6 +1,6 @@
 # agents/base.py
 import abc
-from utils.logger import get_logger
+from ..utils.logger import get_logger
 
 class Agent(abc.ABC):
     def __init__(self, name: str):

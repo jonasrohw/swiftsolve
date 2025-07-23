@@ -1,14 +1,17 @@
 import argparse
 from fastapi import FastAPI
-from api.routes import router
-from controller.solve_loop import run_pipeline
-from schemas.plan import ProblemInput
+from .api.routes import router
+from .controller.solve_loop import run_pipeline
+from .schemas import ProblemInput
 import json, pathlib
 
 def make_app():
     app = FastAPI(title="SwiftSolve API")
     app.include_router(router)
     return app
+
+# Create the app instance for uvicorn
+app = make_app()
 
 def _cli():
     p = argparse.ArgumentParser()

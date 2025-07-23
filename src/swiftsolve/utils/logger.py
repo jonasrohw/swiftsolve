@@ -1,5 +1,5 @@
 import logging, pathlib, sys
-from utils.config import get_settings
+from .config import get_settings
 
 def get_logger(name: str) -> logging.Logger:
     log_dir = pathlib.Path(get_settings().log_dir)
