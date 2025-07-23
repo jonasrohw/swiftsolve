@@ -31,7 +31,7 @@ Example valid JSON:
         user_msg = f"Generate C++ code for this plan:\nAlgorithm: {plan.algorithm}\nInput bounds: {plan.input_bounds}\nConstraints: {plan.constraints}"
         
         resp = self.client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4.1",
             messages=[{"role": "system", "content": system_msg},
                       {"role": "user", "content": user_msg}],
             temperature=0.1,
