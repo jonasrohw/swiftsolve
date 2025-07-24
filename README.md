@@ -107,7 +107,7 @@ SwiftSolve uses a multi-agent pipeline:
 
 1. **Planner** (Claude) - Creates algorithmic plans from natural language
 2. **Static Pruner** - Filters out obviously inefficient approaches
-3. **Coder** (GPT-4) - Generates C++ code from the plan
+3. **Coder** (GPT-4.1) - Generates C++ code from the plan
 4. **Profiler** - Compiles and benchmarks the code in a sandbox
 5. **Analyst** - Evaluates efficiency and suggests improvements
 

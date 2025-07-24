@@ -76,7 +76,7 @@ class CodeMessage(_BaseMessage):
     type: Literal[MessageType.CODE] = Field(default=MessageType.CODE)
     code_cpp: str                            = Field(..., description="ISO C++17 source code")
     compiler_flags: List[str]                = Field(default_factory=lambda: ["-O2", "-std=c++17"])
-    model_version: Optional[str]             = None   # gpt-4o build hash
+    model_version: Optional[str]             = None   # gpt-4.1 build hash
     seed: Optional[int]                      = None
 
 
