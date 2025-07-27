@@ -1,7 +1,7 @@
 # api/routes.py
 from fastapi import APIRouter
-from schemas.plan import ProblemInput
-from controller.solve_loop import run_pipeline
+from ..schemas import ProblemInput
+from ..controller.solve_loop import run_pipeline
 
 router = APIRouter()
 

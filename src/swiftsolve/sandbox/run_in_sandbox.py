@@ -1,6 +1,6 @@
 # sandbox/run_in_sandbox.py
 import shutil, subprocess, tempfile, os, json, pathlib, shlex
-from utils.logger import get_logger
+from ..utils.logger import get_logger
 
 log = get_logger("Sandbox")
 
@@ -20,12 +20,20 @@ def compile_and_run(code: str, input_data: str, timeout: int) -> tuple[str]:
         src_path.write_text(code, encoding="utf-8")
         compile_cmd = [shutil.which("g++")] + COMPILE_FLAGS + [str(src_path), "-o", str(bin_path)]
         log.info(" ".join(shlex.quote(c) for c in compile_cmd))
-        subprocess.run(compile_cmd, check=True)
-        run_cmd = ["timeout", f"{timeout}", str(bin_path)]
-        res = subprocess.run(
-            run_cmd, input=input_data.encode(), capture_output=True
-        )
-        return str(res.stdout.decode()), str(res.stderr.decode())
+        
+        try:
+            subprocess.run(compile_cmd, check=True, capture_output=True)
+            run_cmd = ["timeout", f"{timeout}", str(bin_path)] if shutil.which("timeout") else [str(bin_path)]
+            res = subprocess.run(
+                run_cmd, input=input_data.encode(), capture_output=True, timeout=timeout
+            )
+            return str(res.stdout.decode()), str(res.stderr.decode())
+        except subprocess.CalledProcessError as e:
+            log.error(f"Compilation failed: {e.stderr.decode() if e.stderr else 'Unknown error'}")
+            return "", f"Compilation failed: {e.stderr.decode() if e.stderr else 'Unknown error'}"
+        except Exception as e:
+            log.error(f"Execution failed: {e}")
+            return "", f"Execution failed: {e}"
 
 def compile_and_profile(code: str, input_data: str) -> str:
     """
