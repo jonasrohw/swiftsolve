@@ -4,7 +4,8 @@ A multi-agent code generation framework that synthesizes functionally correct an
 
 ## Build Instructions
 
-Set the `PYTHONPATH` environment variable.
+Set the `PYTHONPATH` environment variable to wherever the SwiftSolve directory is located.
+For example, if you cloned the repo into your home directory:
 
 ```sh
 export PYTHONPATH="${HOME}/swiftsolve/src/swiftsolve"
@@ -16,7 +17,7 @@ Provide API keys using `OPENAI_API_KEY` and `ANTHROPIC_API_KEY`.
 
 1. Create and activate a virtual environment:
 ```bash
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate
 ```
 or if you're on Windows,
