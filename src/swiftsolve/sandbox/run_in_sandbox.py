@@ -6,6 +6,9 @@ log = get_logger("Sandbox")
 
 #TODO: Increase stack size, to something ~256 MB
 
+# Last 2 flags help the compiler to perform auto-vectorization
+COMPILE_FLAGS = ["-O3", "-std=c++17", "-march=native", "-ffast-math"]
+
 def compile_and_run(code: str, input_data: str, timeout: int) -> tuple[str]:
     """
     Generates optimized code, good for checking total runtime.
@@ -15,10 +18,7 @@ def compile_and_run(code: str, input_data: str, timeout: int) -> tuple[str]:
         src_path = pathlib.Path(tmp) / "main.cpp"
         bin_path = pathlib.Path(tmp) / "a.out"
         src_path.write_text(code, encoding="utf-8")
-        compile_cmd = [
-            shutil.which("g++"), "-O2", "-std=c++17",
-            str(src_path), "-o", str(bin_path)
-        ]
+        compile_cmd = [shutil.which("g++")] + COMPILE_FLAGS + [str(src_path), "-o", str(bin_path)]
         log.info(" ".join(shlex.quote(c) for c in compile_cmd))
         subprocess.run(compile_cmd, check=True)
         run_cmd = ["timeout", f"{timeout}", str(bin_path)]
@@ -37,10 +37,7 @@ def compile_and_profile(code: str, input_data: str) -> str:
         src_path = pathlib.Path(tmp) / "main.cpp"
         bin_path = pathlib.Path(tmp) / "a.out"
         src_path.write_text(code, encoding="utf-8")
-        compile_cmd = [
-            shutil.which("g++"), "-O2", "-std=c++17", "-pg", "-g",
-            str(src_path), "-o", str(bin_path)
-        ]
+        compile_cmd = [shutil.which("g++")] + COMPILE_FLAGS + ["-pg", "-g"] + [str(src_path), "-o", str(bin_path)]
         log.info(" ".join(shlex.quote(c) for c in compile_cmd))
         subprocess.run(compile_cmd, check=True)
         run_cmd = [str(bin_path)]
