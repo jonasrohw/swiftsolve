@@ -11,6 +11,8 @@ class Coder(Agent):
         self.client = OpenAI(api_key=get_settings().openai_api_key)
 
     def run(self, plan: PlanMessage) -> CodeMessage:
+        self.log.info(f"Coder starting with plan: {plan.model_dump_json(indent=2)}")
+        
         system_msg = """You are an expert ICPC competitive programmer.
         
 Generate EXACTLY this JSON format:
@@ -30,6 +32,8 @@ Example valid JSON:
 
         user_msg = f"Generate C++ code for this plan:\nAlgorithm: {plan.algorithm}\nInput bounds: {plan.input_bounds}\nConstraints: {plan.constraints}"
         
+        self.log.info(f"Sending request to GPT with prompt: {user_msg}")
+        
         resp = self.client.chat.completions.create(
             model="gpt-4.1-mini",
             messages=[{"role": "system", "content": system_msg},
@@ -39,6 +43,8 @@ Example valid JSON:
         )
         
         code_text = resp.choices[0].message.content.strip()
+        self.log.info(f"Raw GPT response: {code_text}")
+        
         # Extract JSON from markdown code blocks if present
         if "```" in code_text:
             code_text = code_text.split("```")[1]
@@ -46,11 +52,17 @@ Example valid JSON:
                 code_text = code_text[4:]
         code_text = code_text.strip()
         
+        self.log.info(f"Extracted JSON text: {code_text}")
+        
         try:
             code_data = json.loads(code_text)
+            self.log.info(f"Parsed JSON data: {json.dumps(code_data, indent=2)}")
+            
             # Fix newline encoding in the C++ code - handle multiple formats
             cpp_code = code_data["code_cpp"]
             cpp_code = cpp_code.replace('\\n', '\n').replace('\\t', '\t').replace('\\"', '"')
+            
+            self.log.info(f"Decoded C++ code:\n{cpp_code}")
             
             # Basic validation - ensure it has includes
             if "#include" not in cpp_code:
@@ -66,6 +78,9 @@ Example valid JSON:
                 iteration=plan.iteration,
                 code_cpp=cpp_code
             )
+            
+            self.log.info(f"Successfully created CodeMessage: {code.model_dump_json(indent=2)}")
+            
         except Exception as e:
             self.log.error(f"Malformed code response: {e}\n{code_text}")
             # Fallback to simple template
@@ -86,4 +101,7 @@ int main() {
                 iteration=plan.iteration,
                 code_cpp=fallback_code
             )
+            self.log.info(f"Using fallback code: {code.model_dump_json(indent=2)}")
+        
+        self.log.info("Coder completed successfully")
         return code

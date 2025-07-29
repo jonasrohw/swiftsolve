@@ -120,3 +120,17 @@ class RunResult(BaseModel):
 
     type: Literal[MessageType.RUN_RESULT] = Field(default=MessageType.RUN_RESULT)
     task_id: str
+    status: RunStatus
+    timestamp_utc: datetime = Field(
+        default_factory=lambda: datetime.now(tz=timezone.utc),
+        description="ISO-8601 UTC timestamp"
+    )
+    schema_version: Literal["1.0.0"] = Field(default=SCHEMA_VERSION)
+    
+    # Success results
+    code_cpp: Optional[str] = None
+    profile: Optional[ProfileReport] = None
+    
+    # Failure details
+    error_message: Optional[str] = None
+    last_verdict: Optional[Dict] = None

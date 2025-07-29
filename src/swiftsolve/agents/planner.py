@@ -12,6 +12,8 @@ class Planner(Agent):
         self.client = Anthropic(api_key=get_settings().anthropic_api_key)
 
     def run(self, problem: ProblemInput) -> PlanMessage:
+        self.log.info(f"Planner starting with problem: {problem.model_dump_json(indent=2)}")
+        
         system_msg = """You are a competitive programming strategist. 
         
 Output EXACTLY this JSON format:
@@ -29,6 +31,8 @@ Rules:
 
         user_msg = f"PROBLEM:\n{problem.prompt}\n\nGenerate the JSON plan:"
         
+        self.log.info(f"Sending request to Claude with prompt: {user_msg}")
+        
         resp = self.client.messages.create(
             model="claude-sonnet-4-20250514",
             max_tokens=512,
@@ -38,6 +42,8 @@ Rules:
         )
         
         plan_text = resp.content[0].text.strip()
+        self.log.info(f"Raw Claude response: {plan_text}")
+        
         # Extract JSON from markdown code blocks if present
         if "```" in plan_text:
             plan_text = plan_text.split("```")[1]
@@ -45,8 +51,11 @@ Rules:
                 plan_text = plan_text[4:]
         plan_text = plan_text.strip()
         
+        self.log.info(f"Extracted JSON text: {plan_text}")
+        
         try:
             plan_data = json.loads(plan_text)
+            self.log.info(f"Parsed JSON data: {json.dumps(plan_data, indent=2)}")
             
             # Ensure input_bounds has integer values
             input_bounds = {}
@@ -74,6 +83,9 @@ Rules:
                 input_bounds=input_bounds,
                 constraints=constraints
             )
+            
+            self.log.info(f"Successfully created PlanMessage: {plan.model_dump_json(indent=2)}")
+            
         except Exception as e:
             self.log.error(f"Malformed plan: {e}\n{plan_text}")
             # Fallback to default plan
@@ -84,4 +96,7 @@ Rules:
                 input_bounds={"n": 100000},
                 constraints={"runtime_limit": 2000, "memory_limit": 512}
             )
+            self.log.info(f"Using fallback plan: {plan.model_dump_json(indent=2)}")
+        
+        self.log.info("Planner completed successfully")
         return plan
