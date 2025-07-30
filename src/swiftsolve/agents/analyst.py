@@ -22,7 +22,7 @@ class Analyst(Agent):
                 return "O(1)"  # Default assumption
                 
             self.log.info(f"Valid runtimes: {valid_runtimes}")
-            
+                
             ys = [math.log10(t) for t in valid_runtimes]
             xs = [math.log10(n) for n in report.input_sizes[:len(valid_runtimes)]]
             
