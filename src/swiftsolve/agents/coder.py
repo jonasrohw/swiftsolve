@@ -3,6 +3,7 @@ from openai import OpenAI
 from .base import Agent
 from ..schemas import PlanMessage, CodeMessage
 from ..utils.config import get_settings
+from typing import Optional
 import json, textwrap
 
 class Coder(Agent):
@@ -10,10 +11,35 @@ class Coder(Agent):
         super().__init__("Coder")
         self.client = OpenAI(api_key=get_settings().openai_api_key)
 
-    def run(self, plan: PlanMessage) -> CodeMessage:
+    def run(self, plan: PlanMessage, patch: Optional[str] = None) -> CodeMessage:
         self.log.info(f"Coder starting with plan: {plan.model_dump_json(indent=2)}")
+        if patch:
+            self.log.info(f"Applying patch: {patch}")
         
-        system_msg = """You are an expert ICPC competitive programmer.
+        # Build system message based on whether we have a patch
+        if patch:
+            system_msg = f"""You are an expert ICPC competitive programmer applying a performance optimization patch.
+
+PATCH TO APPLY: {patch}
+
+Generate EXACTLY this JSON format:
+{{"code_cpp": "your_optimized_cpp_code_here"}}
+
+CRITICAL RULES:
+- Write efficient ISO C++17 code ONLY
+- MUST apply the optimization specified in the patch above
+- Include all necessary headers (#include <iostream>, etc.)
+- Use proper competitive programming template
+- In the JSON, escape ALL special characters: use \\n for newlines, \\t for tabs, \\" for quotes
+- Ensure valid JSON - test your response before sending
+- NO explanation, just the JSON with properly escaped code
+- Make sure the C++ code compiles without errors
+- Focus on the specific optimization mentioned in the patch
+
+Example valid JSON:
+{{"code_cpp": "#include <iostream>\\n#include <unordered_map>\\nusing namespace std;\\n\\nint main() {{\\n    // optimized code here\\n    return 0;\\n}}"}}"""
+        else:
+            system_msg = """You are an expert ICPC competitive programmer.
         
 Generate EXACTLY this JSON format:
 {"code_cpp": "your_cpp_code_here"}
@@ -30,7 +56,21 @@ CRITICAL RULES:
 Example valid JSON:
 {"code_cpp": "#include <iostream>\\nusing namespace std;\\n\\nint main() {\\n    int a, b;\\n    cin >> a >> b;\\n    cout << a + b << endl;\\n    return 0;\\n}"}"""
 
-        user_msg = f"Generate C++ code for this plan:\nAlgorithm: {plan.algorithm}\nInput bounds: {plan.input_bounds}\nConstraints: {plan.constraints}"
+        # Build user message based on whether we have a patch
+        if patch:
+            user_msg = f"""Apply the optimization patch to solve this problem:
+
+ORIGINAL PLAN:
+Algorithm: {plan.algorithm}
+Input bounds: {plan.input_bounds}
+Constraints: {plan.constraints}
+
+OPTIMIZATION PATCH TO APPLY:
+{patch}
+
+Generate optimized C++ code that implements the algorithm while applying the specific optimization mentioned in the patch."""
+        else:
+            user_msg = f"Generate C++ code for this plan:\nAlgorithm: {plan.algorithm}\nInput bounds: {plan.input_bounds}\nConstraints: {plan.constraints}"
         
         self.log.info(f"Sending request to GPT with prompt: {user_msg}")
         

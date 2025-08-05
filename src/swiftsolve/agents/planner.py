@@ -3,7 +3,7 @@ from anthropic import Anthropic
 from .base import Agent
 from ..schemas import PlanMessage, ProblemInput
 from ..utils.config import get_settings
-import json
+from typing import Optional
 import json
 
 class Planner(Agent):
@@ -11,10 +11,33 @@ class Planner(Agent):
         super().__init__("Planner")
         self.client = Anthropic(api_key=get_settings().anthropic_api_key)
 
-    def run(self, problem: ProblemInput) -> PlanMessage:
+    def run(self, problem: ProblemInput, feedback: Optional[str] = None) -> PlanMessage:
         self.log.info(f"Planner starting with problem: {problem.model_dump_json(indent=2)}")
+        if feedback:
+            self.log.info(f"Re-planning with feedback: {feedback}")
         
-        system_msg = """You are a competitive programming strategist. 
+        # Build system message based on whether we have feedback
+        if feedback:
+            system_msg = f"""You are a competitive programming strategist creating a NEW algorithmic approach based on performance feedback.
+
+FEEDBACK FROM PREVIOUS ATTEMPT: {feedback}
+
+Output EXACTLY this JSON format:
+{{
+    "algorithm": "different_algorithm_name",
+    "input_bounds": {{"n": 100000, "m": 50000}},
+    "constraints": {{"runtime_limit": 2000, "memory_limit": 512}}
+}}
+
+CRITICAL RULES:
+- Choose a COMPLETELY DIFFERENT algorithm than before
+- algorithm: short string describing the NEW approach
+- input_bounds: simple key-value pairs where values are INTEGER limits
+- constraints: simple key-value pairs with INTEGER values only
+- NO nested objects, NO strings in values, NO arrays
+- Address the performance issues mentioned in the feedback"""
+        else:
+            system_msg = """You are a competitive programming strategist. 
         
 Output EXACTLY this JSON format:
 {
@@ -29,7 +52,17 @@ Rules:
 - constraints: simple key-value pairs with INTEGER values only
 - NO nested objects, NO strings in values, NO arrays"""
 
-        user_msg = f"PROBLEM:\n{problem.prompt}\n\nGenerate the JSON plan:"
+        # Build user message based on whether we have feedback
+        if feedback:
+            user_msg = f"""PROBLEM:
+{problem.prompt}
+
+PREVIOUS PERFORMANCE FEEDBACK:
+{feedback}
+
+Generate a NEW algorithmic plan that addresses the performance issues. Choose a fundamentally different approach than before."""
+        else:
+            user_msg = f"PROBLEM:\n{problem.prompt}\n\nGenerate the JSON plan:"
         
         self.log.info(f"Sending request to Claude with prompt: {user_msg}")
         

@@ -66,8 +66,14 @@ class Analyst(Agent):
         self.log.info(f"Analysis results: complexity={time_complexity}, efficient={efficient}")
         
         from ..schemas import TargetAgent
-        target_agent = TargetAgent.CODER if not efficient else None
-        patch = "Inline the outer loop" if not efficient else None
+        
+        # Generate intelligent patches based on detected complexity
+        if not efficient:
+            target_agent = TargetAgent.CODER
+            patch = self._generate_optimization_patch(time_complexity, report)
+        else:
+            target_agent = None
+            patch = None
         
         self.log.info(f"Routing decision: target_agent={target_agent}, patch={patch}")
         
@@ -80,3 +86,28 @@ class Analyst(Agent):
         
         self.log.info(f"Analyst completed. Verdict: {verdict.model_dump_json(indent=2)}")
         return verdict
+    
+    def _generate_optimization_patch(self, complexity: str, report: ProfileReport) -> str:
+        """Generate specific optimization suggestions based on detected complexity."""
+        self.log.info(f"Generating optimization patch for complexity: {complexity}")
+        
+        # Check memory usage pattern for additional hints
+        memory_growth = "high" if len(report.peak_memory_mb) > 1 and report.peak_memory_mb[-1] / report.peak_memory_mb[0] > 5 else "low"
+        
+        if complexity == "O(n^2)":
+            if memory_growth == "high":
+                patch = "Replace nested loops with hash map lookup. Use unordered_map<int, int> to store values and their indices, then iterate once to find complements in O(1) time."
+            else:
+                patch = "Optimize nested loop structure. Consider using sorting + two pointers technique, or hash map for O(n) lookups instead of O(n^2) nested iteration."
+        elif complexity == "O(n^k)" or "n^" in complexity:
+            patch = "Reduce algorithmic complexity. Current solution appears exponential/polynomial. Consider: 1) Dynamic programming to eliminate redundant calculations, 2) Memoization, 3) Greedy algorithm, or 4) Different data structure (hash map, set, priority queue)."
+        elif complexity == "O(n log n)" and memory_growth == "high":
+            patch = "Optimize memory usage while maintaining O(n log n) time. Consider in-place operations, iterative instead of recursive approaches, or streaming algorithms to reduce space complexity."
+        elif complexity == "O(n)" and memory_growth == "high":
+            patch = "Reduce memory allocation. Current O(n) solution uses excessive memory. Consider: 1) Process data in chunks, 2) Reuse containers, 3) Use primitive arrays instead of vectors where possible, 4) Eliminate unnecessary data structures."
+        else:
+            # Generic optimization for unknown/complex patterns
+            patch = f"Optimize {complexity} algorithm. Current implementation is inefficient. Consider: 1) Better data structures (hash maps, sets), 2) Eliminate redundant operations, 3) Use standard library algorithms, 4) Reduce memory allocations."
+        
+        self.log.info(f"Generated optimization patch: {patch}")
+        return patch
