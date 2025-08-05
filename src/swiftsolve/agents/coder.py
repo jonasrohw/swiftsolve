@@ -33,7 +33,10 @@ CRITICAL RULES:
 - In the JSON, escape ALL special characters: use \\n for newlines, \\t for tabs, \\" for quotes
 - Ensure valid JSON - test your response before sending
 - NO explanation, just the JSON with properly escaped code
-- Make sure the C++ code compiles without errors
+- Make sure the C++ code compiles WITHOUT SYNTAX ERRORS
+- Pay special attention to matching quotes, semicolons, and braces
+- Always end cout statements with endl (NOT string newlines)  
+- Test every quote character is properly escaped in JSON
 - Focus on the specific optimization mentioned in the patch
 
 Example valid JSON:
@@ -51,7 +54,10 @@ CRITICAL RULES:
 - In the JSON, escape ALL special characters: use \\n for newlines, \\t for tabs, \\" for quotes
 - Ensure valid JSON - test your response before sending
 - NO explanation, just the JSON with properly escaped code
-- Make sure the C++ code compiles without errors
+- Make sure the C++ code compiles WITHOUT SYNTAX ERRORS
+- Pay special attention to matching quotes, semicolons, and braces
+- Always end cout statements with endl (NOT string newlines)  
+- Test every quote character is properly escaped in JSON
 
 Example valid JSON:
 {"code_cpp": "#include <iostream>\\nusing namespace std;\\n\\nint main() {\\n    int a, b;\\n    cin >> a >> b;\\n    cout << a + b << endl;\\n    return 0;\\n}"}"""
@@ -75,7 +81,7 @@ Generate optimized C++ code that implements the algorithm while applying the spe
         self.log.info(f"Sending request to GPT with prompt: {user_msg}")
         
         resp = self.client.chat.completions.create(
-            model="gpt-4.1-mini",
+            model="gpt-4o-mini",
             messages=[{"role": "system", "content": system_msg},
                       {"role": "user", "content": user_msg}],
             temperature=0.1,
@@ -100,7 +106,13 @@ Generate optimized C++ code that implements the algorithm while applying the spe
             
             # Fix newline encoding in the C++ code - handle multiple formats
             cpp_code = code_data["code_cpp"]
-            cpp_code = cpp_code.replace('\\n', '\n').replace('\\t', '\t').replace('\\"', '"')
+            # Only decode newlines that are NOT inside string literals
+            # First, replace escaped quotes to protect them
+            cpp_code = cpp_code.replace('\\"', '###ESCAPED_QUOTE###')
+            # Now safely decode the structural escapes
+            cpp_code = cpp_code.replace('\\n', '\n').replace('\\t', '\t')
+            # Restore escaped quotes
+            cpp_code = cpp_code.replace('###ESCAPED_QUOTE###', '"')
             
             self.log.info(f"Decoded C++ code:\n{cpp_code}")
             
@@ -109,9 +121,33 @@ Generate optimized C++ code that implements the algorithm while applying the spe
                 self.log.warning("Generated code missing includes, adding basic ones")
                 cpp_code = "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\n" + cpp_code
                 
-            # Additional validation - check for common issues
+            # Additional validation - check for common syntax issues
             if "cout" in cpp_code and "endl" not in cpp_code and "\\n" not in cpp_code:
                 self.log.warning("Generated code might be missing proper output formatting")
+            
+            # Check for unterminated strings and fix common cout issues
+            if 'cout << ' in cpp_code:
+                lines = cpp_code.split('\n')
+                for i, line in enumerate(lines):
+                    # Fix specific patterns that cause issues
+                    if 'cout << ' in line:
+                        # Replace problematic newline patterns with endl
+                        if '" << "\\n"' in line:
+                            lines[i] = line.replace('" << "\\n"', '" << endl')
+                        elif '<< "\\n"' in line:
+                            lines[i] = line.replace('<< "\\n"', '<< endl')
+                        elif "'" in line and "\\n" in line:
+                            # Replace single quotes with double quotes for newlines
+                            lines[i] = line.replace("'\\n'", "endl")
+                        elif "'" in line and line.count("'") % 2 != 0:
+                            # Fix unterminated single quotes
+                            self.log.warning(f"Fixing unterminated single quote in line {i+1}: {line}")
+                            lines[i] = line.replace("'", "").replace("cout << max_val <<", "cout << max_val << endl") + ";"
+                        elif '"' in line and line.count('"') % 2 != 0:
+                            # Fix unterminated double quotes  
+                            self.log.warning(f"Fixing unterminated double quote in line {i+1}: {line}")
+                            lines[i] = line.replace('"', '').replace("cout << max_val <<", "cout << max_val << endl") + ";"
+                cpp_code = '\n'.join(lines)
             
             code = CodeMessage(
                 task_id=plan.task_id,

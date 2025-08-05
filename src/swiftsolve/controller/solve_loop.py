@@ -18,17 +18,37 @@ def run_pipeline(problem: ProblemInput):
     max_iter = get_settings().max_iterations
     log.info(f"Max iterations: {max_iter}")
     
+    # Crash handling: track agent failures (CONTEXT.md line 257)
+    agent_failures = 0
+    max_failures = 2
+    
     # Planner phase
     log.info("--- Starting Planner ---")
-    plan = planner.run(problem)
-    log.info(f"Planner completed. Plan: {plan.model_dump_json(indent=2)}")
+    try:
+        plan = planner.run(problem)
+        log.info(f"Planner completed. Plan: {plan.model_dump_json(indent=2)}")
+    except Exception as e:
+        agent_failures += 1
+        log.error(f"Planner failed (attempt {agent_failures}/{max_failures}): {e}")
+        if agent_failures >= max_failures:
+            log.error("=== PIPELINE ABORTED - Maximum agent failures reached ===")
+            return {"status": "agent_failure", "error": "Planner failed", "details": str(e)}
+        return {"status": "agent_failure", "error": "Planner failed", "details": str(e)}
     
     # Static pruner phase
     log.info("--- Starting Static Pruner ---")
-    if not pruner.validate(plan):
-        log.warning("Static pruner rejected plan")
-        return {"status": "static_prune_failed"}
-    log.info("Static pruner approved plan")
+    try:
+        if not pruner.validate(plan):
+            log.warning("Static pruner rejected plan")
+            return {"status": "static_prune_failed"}
+        log.info("Static pruner approved plan")
+    except Exception as e:
+        agent_failures += 1
+        log.error(f"Static Pruner failed (attempt {agent_failures}/{max_failures}): {e}")
+        if agent_failures >= max_failures:
+            log.error("=== PIPELINE ABORTED - Maximum agent failures reached ===")
+            return {"status": "agent_failure", "error": "Static Pruner failed", "details": str(e)}
+        return {"status": "agent_failure", "error": "Static Pruner failed", "details": str(e)}
 
     last_time = float("inf")
     pending_patch = None  # Track patches to apply in next iteration
@@ -38,23 +58,47 @@ def run_pipeline(problem: ProblemInput):
         
         # Coder phase - apply pending patch if any
         log.info("--- Starting Coder ---")
-        if pending_patch:
-            log.info(f"Applying pending patch: {pending_patch}")
-            code = coder.run(plan, patch=pending_patch)
-            pending_patch = None  # Clear the patch after applying
-        else:
-            code = coder.run(plan)
-        log.info(f"Coder completed. Code message: {code.model_dump_json(indent=2)}")
+        try:
+            if pending_patch:
+                log.info(f"Applying pending patch: {pending_patch}")
+                code = coder.run(plan, patch=pending_patch)
+                pending_patch = None  # Clear the patch after applying
+            else:
+                code = coder.run(plan)
+            log.info(f"Coder completed. Code message: {code.model_dump_json(indent=2)}")
+        except Exception as e:
+            agent_failures += 1
+            log.error(f"Coder failed (attempt {agent_failures}/{max_failures}): {e}")
+            if agent_failures >= max_failures:
+                log.error("=== PIPELINE ABORTED - Maximum agent failures reached ===")
+                return {"status": "agent_failure", "error": "Coder failed", "details": str(e)}
+            continue  # Skip this iteration and try again
         
         # Profiler phase
         log.info("--- Starting Profiler ---")
-        profile = profiler.run(code)
-        log.info(f"Profiler completed. Profile report: {profile.model_dump_json(indent=2)}")
+        try:
+            profile = profiler.run(code)
+            log.info(f"Profiler completed. Profile report: {profile.model_dump_json(indent=2)}")
+        except Exception as e:
+            agent_failures += 1
+            log.error(f"Profiler failed (attempt {agent_failures}/{max_failures}): {e}")
+            if agent_failures >= max_failures:
+                log.error("=== PIPELINE ABORTED - Maximum agent failures reached ===")
+                return {"status": "agent_failure", "error": "Profiler failed", "details": str(e)}
+            continue  # Skip this iteration and try again
         
         # Analyst phase
         log.info("--- Starting Analyst ---")
-        verdict: VerdictMessage = analyst.run(profile, problem.constraints)
-        log.info(f"Analyst completed. Verdict: {verdict.model_dump_json(indent=2)}")
+        try:
+            verdict: VerdictMessage = analyst.run(profile, problem.constraints)
+            log.info(f"Analyst completed. Verdict: {verdict.model_dump_json(indent=2)}")
+        except Exception as e:
+            agent_failures += 1
+            log.error(f"Analyst failed (attempt {agent_failures}/{max_failures}): {e}")
+            if agent_failures >= max_failures:
+                log.error("=== PIPELINE ABORTED - Maximum agent failures reached ===")
+                return {"status": "agent_failure", "error": "Analyst failed", "details": str(e)}
+            continue  # Skip this iteration and try again
 
         if verdict.efficient:
             log.info("=== Pipeline SUCCESS - Solution is efficient ===")
@@ -80,10 +124,18 @@ def run_pipeline(problem: ProblemInput):
             pending_patch = verdict.patch
         else:
             log.info("Routing to Planner for re-planning")
-            # Generate feedback for planner based on current performance issues
-            feedback = f"Previous algorithm '{plan.algorithm}' showed inefficient performance with runtime {current_time:.2f}ms for large inputs. The current approach is not meeting the efficiency requirements. Choose a fundamentally different algorithmic approach that can achieve O(n log n) or better time complexity."
-            plan = planner.run(problem, feedback=feedback)  # re-plan with feedback
-            log.info(f"Planner re-plan completed. Updated plan: {plan.model_dump_json(indent=2)}")
+            try:
+                # Generate feedback for planner based on current performance issues
+                feedback = f"Previous algorithm '{plan.algorithm}' showed inefficient performance with runtime {current_time:.2f}ms for large inputs. The current approach is not meeting the efficiency requirements. Choose a fundamentally different algorithmic approach that can achieve O(n log n) or better time complexity."
+                plan = planner.run(problem, feedback=feedback)  # re-plan with feedback
+                log.info(f"Planner re-plan completed. Updated plan: {plan.model_dump_json(indent=2)}")
+            except Exception as e:
+                agent_failures += 1
+                log.error(f"Planner re-planning failed (attempt {agent_failures}/{max_failures}): {e}")
+                if agent_failures >= max_failures:
+                    log.error("=== PIPELINE ABORTED - Maximum agent failures reached ===")
+                    return {"status": "agent_failure", "error": "Planner re-planning failed", "details": str(e)}
+                continue  # Skip this iteration and try again
         
         last_time = current_time
     

@@ -1,0 +1,28 @@
+{
+  "dataset": "bigobench",
+  "version": "1.0.0",
+  "task_count": 3,
+  "tasks": [
+    {
+      "task_id": "BIGOBENCH_001",
+      "title": "Maximum Element",
+      "difficulty": "easy",
+      "complexity": "O(n)",
+      "file": "task_bigobench_001.json"
+    },
+    {
+      "task_id": "BIGOBENCH_002",
+      "title": "Binary Search",
+      "difficulty": "easy",
+      "complexity": "O(log n)",
+      "file": "task_bigobench_002.json"
+    },
+    {
+      "task_id": "BIGOBENCH_003",
+      "title": "Bubble Sort",
+      "difficulty": "medium",
+      "complexity": "O(n^2)",
+      "file": "task_bigobench_003.json"
+    }
+  ]
+}

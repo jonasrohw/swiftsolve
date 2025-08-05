@@ -1,0 +1,46 @@
+{
+  "dataset": "codeforces",
+  "version": "1.0.0",
+  "task_count": 3,
+  "rating_range": [
+    800,
+    1800
+  ],
+  "tasks": [
+    {
+      "task_id": "CF1285A",
+      "title": "Mezo Playing Zoma",
+      "difficulty": "easy",
+      "rating": 800,
+      "complexity": "O(n)",
+      "tags": [
+        "implementation"
+      ],
+      "file": "task_cf1285a.json"
+    },
+    {
+      "task_id": "CF1285B",
+      "title": "Just Eat It!",
+      "difficulty": "medium",
+      "rating": 1200,
+      "complexity": "O(n)",
+      "tags": [
+        "greedy",
+        "implementation"
+      ],
+      "file": "task_cf1285b.json"
+    },
+    {
+      "task_id": "CF1285C",
+      "title": "Fadi and LCM",
+      "difficulty": "hard",
+      "rating": 1600,
+      "complexity": "O(1)",
+      "tags": [
+        "math",
+        "number theory"
+      ],
+      "file": "task_cf1285c.json"
+    }
+  ]
+}
