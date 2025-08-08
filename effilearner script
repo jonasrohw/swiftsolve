@@ -1,0 +1,71 @@
+# Clone the repo (once)
+!git clone https://github.com/huangd1999/EffiLearner.git
+
+# Move into the repo
+%cd EffiLearner
+
+# Install the pinned OpenAI SDK and Hugging Face tools
+!pip install --upgrade openai==0.28.0
+!pip install --upgrade datasets transformers fsspec
+
+
+from getpass import getpass
+import os
+
+# Prompt once for your key; it will be picked up by the SDK
+if "OPENAI_API_KEY" not in os.environ:
+    os.environ["OPENAI_API_KEY"] = getpass("OpenAI API key: ")
+
+
+from datasets import load_dataset
+import json, os
+
+# 1) Load the full BigOBench train split
+bb = load_dataset("facebook/BigOBench", split="train")
+
+# 2) Shuffle and take x amount of examples (10 in this case)
+sampled = bb.shuffle(seed=42).select(range(10))
+
+# 3) Transform into the simple {prompt,reference} format
+effibench_like = [
+    {
+      "prompt":    ex["description"], 
+      "reference": ex.get("solution_code","")
+    }
+    for ex in sampled
+]
+
+# 4) Write into the repository’s datasets/ folder
+os.makedirs("datasets", exist_ok=True)
+with open("datasets/dataset.json", "w") as f:
+    json.dump(effibench_like, f, indent=2)
+
+# 5) Confirm
+print("Wrote", len(effibench_like), "examples to datasets/dataset.json")
+
+
+import json
+
+path = "datasets/dataset.json"
+data = json.load(open(path))
+
+for ex in data:
+    ex["markdown_description"] = ex["prompt"]
+    ex["small_test_cases"]    = [ { "input": ex["prompt"] } ]
+
+with open(path, "w") as f:
+    json.dump(data, f, indent=2)
+
+print("Injected markdown_description + small_test_cases into dataset.json")
+
+
+# Go into the src folder so the relative paths line up
+%cd src
+
+# Run the code‐generation step on your 10 examples
+!python gpt_generation.py \
+    --checkpoint gpt-4 \
+    --dataset EffiBench
+
+
+python gpt_EffiLearner.py --checkpoint gpt-4 --dataset ../datasets/dataset_gpt-4.json
