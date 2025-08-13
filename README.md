@@ -122,7 +122,7 @@ SwiftSolve uses a comprehensive multi-agent pipeline with iterative optimization
 ### Core Agents
 1. **Planner** (Claude) - Creates algorithmic plans from natural language
 2. **Static Pruner** - Filters out obviously inefficient approaches  
-3. **Coder** (GPT-4o-mini) - Generates C++ code from the plan
+3. **Coder** (GPT-4.1) - Generates C++ code from the plan
 4. **Profiler** - Compiles and benchmarks code with real GNU time measurements
 5. **Analyst** - Evaluates efficiency using heuristics + LLM fallback for ambiguous cases
 
@@ -130,7 +130,7 @@ SwiftSolve uses a comprehensive multi-agent pipeline with iterative optimization
 - **Iterative Feedback Loop**: Analyst provides patches to Coder or feedback to Planner
 - **Crash Handling**: Pipeline aborts gracefully after 2 agent failures
 - **Real Performance Profiling**: Actual runtime/memory measurements across input scales
-- **LLM Fallback**: GPT-4o-mini analyzes ambiguous performance curves when heuristics fail
+- **LLM Fallback**: GPT-4.1 analyzes ambiguous performance curves when heuristics fail
 
 ### Research & Evaluation Infrastructure
 - **Dataset Support**: BigO(Bench) and Codeforces task parsers

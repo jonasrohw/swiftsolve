@@ -306,7 +306,7 @@ def main():
         print("🎉 All tests passed! The Analyst LLM fallback is working correctly.")
         print("\n📋 What has been fixed in Gap #3:")
         print("   ✅ Analyst can detect ambiguous performance curves using multiple criteria")
-        print("   ✅ LLM fallback (GPT-4o-mini) is properly triggered for complex cases")
+        print("   ✅ LLM fallback (GPT-4.1) is properly triggered for complex cases")
         print("   ✅ LLM can analyze noisy, irregular, or edge-case performance patterns")
         print("   ✅ Response parsing handles various LLM output formats robustly")
         print("   ✅ R-squared goodness-of-fit analysis improves heuristic reliability")

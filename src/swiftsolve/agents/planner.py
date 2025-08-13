@@ -67,7 +67,7 @@ Generate a NEW algorithmic plan that addresses the performance issues. Choose a 
         self.log.info(f"Sending request to Claude with prompt: {user_msg}")
         
         resp = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-4-opus-20250514",
             max_tokens=512,
             temperature=0.1,
             system=system_msg,

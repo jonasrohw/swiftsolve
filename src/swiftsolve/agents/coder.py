@@ -81,7 +81,7 @@ Generate optimized C++ code that implements the algorithm while applying the spe
         self.log.info(f"Sending request to GPT with prompt: {user_msg}")
         
         resp = self.client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-4.1",
             messages=[{"role": "system", "content": system_msg},
                       {"role": "user", "content": user_msg}],
             temperature=0.1,

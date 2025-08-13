@@ -176,7 +176,7 @@ Response format: Just the complexity class (e.g., "O(n^2)")"""
         
         try:
             resp = self.client.chat.completions.create(
-                model="gpt-4o-mini",  # Using gpt-4o-mini as specified in CONTEXT.md
+                model="gpt-4.1",  # Using gpt-4.1 as specified in CONTEXT.md
                 messages=[
                     {"role": "system", "content": system_msg},
                     {"role": "user", "content": user_msg}
