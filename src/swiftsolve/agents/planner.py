@@ -113,6 +113,7 @@ Generate a NEW algorithmic plan that addresses the performance issues. Choose a 
             plan = PlanMessage(
                 task_id=problem.task_id,
                 iteration=0,
+                problem_statement=problem.prompt,
                 algorithm=plan_data["algorithm"],
                 input_bounds=input_bounds,
                 constraints=constraints
@@ -126,6 +127,7 @@ Generate a NEW algorithmic plan that addresses the performance issues. Choose a 
             plan = PlanMessage(
                 task_id=problem.task_id,
                 iteration=0,
+                problem_statement=problem.prompt,
                 algorithm="linear_solution",
                 input_bounds={"n": 100000},
                 constraints={"runtime_limit": 2000, "memory_limit": 512}

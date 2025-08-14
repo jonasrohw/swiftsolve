@@ -59,6 +59,7 @@ class _BaseMessage(BaseModel):
 # --------------------------------------------------------------------------- #
 class PlanMessage(_BaseMessage):
     type: Literal[MessageType.PLAN] = Field(default=MessageType.PLAN)
+    problem_statement: str
     algorithm: str
     input_bounds: Dict[str, int]            = Field(..., examples=[{"n": 100000}])
     constraints: Dict[str, int]             = Field(

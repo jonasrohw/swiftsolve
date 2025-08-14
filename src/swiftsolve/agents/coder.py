@@ -17,70 +17,60 @@ class Coder(Agent):
         
         # Build system message based on whether we have a patch
         if patch:
-            system_msg = f"""You are an expert ICPC competitive programmer applying a performance optimization patch.
+            system_msg = """You are an expert ICPC competitive programmer applying a performance optimization patch.
 
 PATCH TO APPLY: {patch}
 
-Generate EXACTLY this JSON format:
-{{"code_cpp": "your_optimized_cpp_code_here"}}
+Write the completed program as a string.
 
 CRITICAL RULES:
 - Write efficient ISO C++17 code ONLY
 - MUST apply the optimization specified in the patch above
 - Include all necessary headers (#include <iostream>, etc.)
 - Use proper competitive programming template
-- In the JSON, escape ALL special characters: use \\n for newlines, \\t for tabs, \\" for quotes
-- Ensure valid JSON - test your response before sending
-- NO explanation, just the JSON with properly escaped code
 - Make sure the C++ code compiles WITHOUT SYNTAX ERRORS
 - Pay special attention to matching quotes, semicolons, and braces
-- Always end cout statements with endl (NOT string newlines)  
-- Test every quote character is properly escaped in JSON
 - Focus on the specific optimization mentioned in the patch
 
-Example valid JSON:
-{{"code_cpp": "#include <iostream>\\n#include <unordered_map>\\nusing namespace std;\\n\\nint main() {{\\n    // optimized code here\\n    return 0;\\n}}"}}"""
+Example valid response for the problem a + b:
+#include <iostream>
+using namespace std;
+int main() {
+    int a;
+    int b;
+    cin >> a >> b;
+    cout << a + b << '\\n';
+}
+
+Note that this is not the 
+""".format(patch)
         else:
             system_msg = """You are an expert ICPC competitive programmer.
-        
-# Generate EXACTLY this JSON format:
-# {"code_cpp": "your_cpp_code_here"}
-
-# CRITICAL RULES:
-# - Write efficient ISO C++17 code ONLY
-# - Include all necessary headers (#include <iostream>, etc.)
-# - Use proper competitive programming template
-# - In the JSON, escape ALL special characters: use \\n for newlines, \\t for tabs, \\" for quotes
-# - Ensure valid JSON - test your response before sending
-# - NO explanation, just the JSON with properly escaped code
-# - Make sure the C++ code compiles without errors
-
-# Example valid JSON:
-# {"code_cpp": "#include <iostream>\\nusing namespace std;\\n\\nint main() {\\n    int a, b;\\n    cin >> a >> b;\\n    cout << a + b << endl;\\n    return 0;\\n}"}
-# """
-
-        system_msg = """You are an expert ICPC competitive programmer.
-Write code to solve the problem.
+Write the completed program as a string.
 
 CRITICAL RULES:
 - Write efficient ISO C++17 code ONLY
 - Include all necessary headers (#include <iostream>, etc.)
 - Use proper competitive programming template
-- In the JSON, escape ALL special characters: use \\n for newlines, \\t for tabs, \\" for quotes
-- Ensure valid JSON - test your response before sending
-- NO explanation, just the JSON with properly escaped code
 - Make sure the C++ code compiles WITHOUT SYNTAX ERRORS
 - Pay special attention to matching quotes, semicolons, and braces
-- Always end cout statements with endl (NOT string newlines)  
-- Test every quote character is properly escaped in JSON
 
-Example valid Response:
-#include <iostream> using namespace std; int main() {int a, b; cin >> a >> b; cout << a + b << endl; return 0;}
+Example valid response for the problem a + b:
+#include <iostream>
+using namespace std;
+int main() {
+    int a;
+    int b;
+    cin >> a >> b;
+    cout << a + b << '\\n';
+}
 """
 
         # Build user message based on whether we have a patch
         if patch:
             user_msg = f"""Apply the optimization patch to solve this problem:
+
+Problem Statement: {plan.problem_statement}
 
 ORIGINAL PLAN:
 Algorithm: {plan.algorithm}
@@ -92,12 +82,15 @@ OPTIMIZATION PATCH TO APPLY:
 
 Generate optimized C++ code that implements the algorithm while applying the specific optimization mentioned in the patch."""
         else:
-            user_msg = f"Generate C++ code for this plan:\nAlgorithm: {plan.algorithm}\nInput bounds: {plan.input_bounds}\nConstraints: {plan.constraints}"
+            user_msg = f"Generate C++ code for this plan:\nProblem Statement: {plan.problem_statement}\nAlgorithm: {plan.algorithm}\nInput bounds: {plan.input_bounds}\nConstraints: {plan.constraints}"
         
         self.log.info(f"🤖 LLM REQUEST to gpt-4.1:")
         self.log.info(f"System: {system_msg[:200]}...")
         self.log.info(f"User: {user_msg[:200]}...")
-        
+
+        self.log.info(f"System: {system_msg}...")
+        self.log.info(f"User: {user_msg}...")
+
         resp = self.client.chat.completions.create(
             model="gpt-4.1",
             messages=[{"role": "system", "content": system_msg},
@@ -119,18 +112,18 @@ Generate optimized C++ code that implements the algorithm while applying the spe
 
         
         try:
-            code_data = json.loads(code_text)
-
+            # code_data = json.loads(code_text)
+            cpp_code = code_text
             
             # Fix newline encoding in the C++ code - handle multiple formats
-            cpp_code = code_data["code_cpp"]
+            # cpp_code = code_data["code_cpp"]
             # Only decode newlines that are NOT inside string literals
             # First, replace escaped quotes to protect them
-            cpp_code = cpp_code.replace('\\"', '###ESCAPED_QUOTE###')
+            # cpp_code = cpp_code.replace('\\"', '###ESCAPED_QUOTE###')
             # Now safely decode the structural escapes
-            cpp_code = cpp_code.replace('\\n', '\n').replace('\\t', '\t')
+            # cpp_code = cpp_code.replace('\\n', '\n').replace('\\t', '\t')
             # Restore escaped quotes
-            cpp_code = cpp_code.replace('###ESCAPED_QUOTE###', '"')
+            # cpp_code = cpp_code.replace('###ESCAPED_QUOTE###', '"')
             
             self.log.info(f"Decoded C++ code:\n{cpp_code}")
             
