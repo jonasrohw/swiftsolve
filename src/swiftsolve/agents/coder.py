@@ -11,22 +11,36 @@ class Coder(Agent):
         self.client = OpenAI(api_key=get_settings().openai_api_key)
 
     def run(self, plan: PlanMessage) -> CodeMessage:
-        system_msg = """You are an expert ICPC competitive programmer.
+#         system_msg = """You are an expert ICPC competitive programmer.
         
-Generate EXACTLY this JSON format:
-{"code_cpp": "your_cpp_code_here"}
+# Generate EXACTLY this JSON format:
+# {"code_cpp": "your_cpp_code_here"}
+
+# CRITICAL RULES:
+# - Write efficient ISO C++17 code ONLY
+# - Include all necessary headers (#include <iostream>, etc.)
+# - Use proper competitive programming template
+# - In the JSON, escape ALL special characters: use \\n for newlines, \\t for tabs, \\" for quotes
+# - Ensure valid JSON - test your response before sending
+# - NO explanation, just the JSON with properly escaped code
+# - Make sure the C++ code compiles without errors
+
+# Example valid JSON:
+# {"code_cpp": "#include <iostream>\\nusing namespace std;\\n\\nint main() {\\n    int a, b;\\n    cin >> a >> b;\\n    cout << a + b << endl;\\n    return 0;\\n}"}
+# """
+
+        system_msg = """You are an expert ICPC competitive programmer.
+Write code to solve the problem.
 
 CRITICAL RULES:
 - Write efficient ISO C++17 code ONLY
 - Include all necessary headers (#include <iostream>, etc.)
-- Use proper competitive programming template
-- In the JSON, escape ALL special characters: use \\n for newlines, \\t for tabs, \\" for quotes
-- Ensure valid JSON - test your response before sending
-- NO explanation, just the JSON with properly escaped code
+- NO explanation, just the code
 - Make sure the C++ code compiles without errors
 
-Example valid JSON:
-{"code_cpp": "#include <iostream>\\nusing namespace std;\\n\\nint main() {\\n    int a, b;\\n    cin >> a >> b;\\n    cout << a + b << endl;\\n    return 0;\\n}"}"""
+Example valid Response:
+#include <iostream> using namespace std; int main() {int a, b; cin >> a >> b; cout << a + b << endl; return 0;}
+"""
 
         user_msg = f"Generate C++ code for this plan:\nAlgorithm: {plan.algorithm}\nInput bounds: {plan.input_bounds}\nConstraints: {plan.constraints}"
         
@@ -47,10 +61,10 @@ Example valid JSON:
         code_text = code_text.strip()
         
         try:
-            code_data = json.loads(code_text)
+            cpp_code = code_text
             # Fix newline encoding in the C++ code - handle multiple formats
-            cpp_code = code_data["code_cpp"]
-            cpp_code = cpp_code.replace('\\n', '\n').replace('\\t', '\t').replace('\\"', '"')
+            # cpp_code = code_data["code_cpp"]
+            # cpp_code = cpp_code.replace('\\n', '\n').replace('\\t', '\t').replace('\\"', '"')
             
             # Basic validation - ensure it has includes
             if "#include" not in cpp_code:
