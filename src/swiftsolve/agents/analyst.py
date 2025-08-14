@@ -11,7 +11,7 @@ class Analyst(Agent):
         self.client = OpenAI(api_key=get_settings().openai_api_key)
 
     def _curve_fit(self, report: ProfileReport):
-        self.log.info(f"Starting curve fitting for profile report: {report.model_dump_json(indent=2)}")
+
         
         # Robust curve fitting with error handling
         try:
@@ -172,7 +172,8 @@ What is the most likely time complexity class? Consider that:
 
 Response format: Just the complexity class (e.g., "O(n^2)")"""
 
-        self.log.info(f"Sending LLM request with data: {data_summary}")
+        self.log.info(f"🤖 LLM REQUEST to gpt-4.1 for complexity analysis:")
+        self.log.info(f"Data: {data_summary}")
         
         try:
             resp = self.client.chat.completions.create(
@@ -186,7 +187,7 @@ Response format: Just the complexity class (e.g., "O(n^2)")"""
             )
             
             complexity = resp.choices[0].message.content.strip()
-            self.log.info(f"LLM analyzed complexity: {complexity}")
+            self.log.info(f"📥 LLM RESPONSE: {complexity}")
             
             # Validate and normalize the response
             valid_complexities = ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n^2)", "O(n^3)", "O(2^n)", "O(n!)"]
@@ -194,7 +195,7 @@ Response format: Just the complexity class (e.g., "O(n^2)")"""
             # Handle variations in LLM response format
             for valid in valid_complexities:
                 if valid.lower() in complexity.lower() or valid.replace(" ", "") in complexity.replace(" ", ""):
-                    self.log.info(f"LLM complexity normalized to: {valid}")
+                    self.log.info(f"✅ Normalized to: {valid}")
                     return valid
             
             # If we can't parse it, try to extract the core pattern
@@ -217,14 +218,14 @@ Response format: Just the complexity class (e.g., "O(n^2)")"""
             return "O(?)"
 
     def run(self, report: ProfileReport, constraints: dict) -> VerdictMessage:
-        self.log.info(f"Analyst starting with report: {report.model_dump_json(indent=2)}")
+
         self.log.info(f"Constraints: {constraints}")
         
         time_complexity = self._curve_fit(report)
         efficient = time_complexity in {"O(1)", "O(log n)", "O(n)", "O(n log n)"}
         perf_gain = 0.0  # compute real gain vs last iter outside
         
-        self.log.info(f"Analysis results: complexity={time_complexity}, efficient={efficient}")
+        self.log.info(f"📊 Analysis: {time_complexity}, efficient={efficient}")
         
         from ..schemas import TargetAgent
         
@@ -236,7 +237,8 @@ Response format: Just the complexity class (e.g., "O(n^2)")"""
             target_agent = None
             patch = None
         
-        self.log.info(f"Routing decision: target_agent={target_agent}, patch={patch}")
+        if not efficient:
+            self.log.info(f"🎯 Routing: {target_agent}, patch=True")
         
         verdict = VerdictMessage(task_id=report.task_id,
                               iteration=report.iteration,
@@ -245,7 +247,7 @@ Response format: Just the complexity class (e.g., "O(n^2)")"""
                               patch=patch,
                               perf_gain=perf_gain)
         
-        self.log.info(f"Analyst completed. Verdict: {verdict.model_dump_json(indent=2)}")
+
         return verdict
     
     def _generate_optimization_patch(self, complexity: str, report: ProfileReport) -> str:

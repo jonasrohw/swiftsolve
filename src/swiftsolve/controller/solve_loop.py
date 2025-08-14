@@ -24,9 +24,11 @@ def run_pipeline(problem: ProblemInput):
     
     # Planner phase
     log.info("--- Starting Planner ---")
+    log.info(f"🔄 HANDOFF: ProblemInput → Planner")
     try:
         plan = planner.run(problem)
-        log.info(f"Planner completed. Plan: {plan.model_dump_json(indent=2)}")
+        log.info(f"✅ HANDOFF: Planner → Pipeline [SUCCESS]")
+        log.info(f"Plan: {plan.model_dump_json(indent=2)}")
     except Exception as e:
         agent_failures += 1
         log.error(f"Planner failed (attempt {agent_failures}/{max_failures}): {e}")
@@ -37,6 +39,7 @@ def run_pipeline(problem: ProblemInput):
     
     # Static pruner phase
     log.info("--- Starting Static Pruner ---")
+    log.info(f"🔄 HANDOFF: Planner → StaticPruner")
     try:
         if not pruner.validate(plan):
             log.warning("Static pruner rejected plan")
@@ -58,14 +61,16 @@ def run_pipeline(problem: ProblemInput):
         
         # Coder phase - apply pending patch if any
         log.info("--- Starting Coder ---")
+        log.info(f"🔄 HANDOFF: Plan → Coder [patch={bool(pending_patch)}]")
         try:
             if pending_patch:
-                log.info(f"Applying pending patch: {pending_patch}")
+                log.info(f"🩹 Applying patch: {pending_patch}")
                 code = coder.run(plan, patch=pending_patch)
                 pending_patch = None  # Clear the patch after applying
             else:
                 code = coder.run(plan)
-            log.info(f"Coder completed. Code message: {code.model_dump_json(indent=2)}")
+            log.info(f"✅ HANDOFF: Coder → Pipeline [SUCCESS]")
+            log.info(f"Code: {code.model_dump_json(indent=2)}")
         except Exception as e:
             agent_failures += 1
             log.error(f"Coder failed (attempt {agent_failures}/{max_failures}): {e}")
@@ -76,9 +81,11 @@ def run_pipeline(problem: ProblemInput):
         
         # Profiler phase
         log.info("--- Starting Profiler ---")
+        log.info(f"🔄 HANDOFF: Code → Profiler")
         try:
             profile = profiler.run(code)
-            log.info(f"Profiler completed. Profile report: {profile.model_dump_json(indent=2)}")
+            log.info(f"✅ HANDOFF: Profiler → Pipeline [SUCCESS]")
+            log.info(f"Profile: {profile.model_dump_json(indent=2)}")
         except Exception as e:
             agent_failures += 1
             log.error(f"Profiler failed (attempt {agent_failures}/{max_failures}): {e}")
@@ -89,9 +96,11 @@ def run_pipeline(problem: ProblemInput):
         
         # Analyst phase
         log.info("--- Starting Analyst ---")
+        log.info(f"🔄 HANDOFF: Profile → Analyst")
         try:
             verdict: VerdictMessage = analyst.run(profile, problem.constraints)
-            log.info(f"Analyst completed. Verdict: {verdict.model_dump_json(indent=2)}")
+            log.info(f"✅ HANDOFF: Analyst → Pipeline [SUCCESS]")
+            log.info(f"Verdict: {verdict.model_dump_json(indent=2)}")
         except Exception as e:
             agent_failures += 1
             log.error(f"Analyst failed (attempt {agent_failures}/{max_failures}): {e}")
@@ -127,8 +136,10 @@ def run_pipeline(problem: ProblemInput):
             try:
                 # Generate feedback for planner based on current performance issues
                 feedback = f"Previous algorithm '{plan.algorithm}' showed inefficient performance with runtime {current_time:.2f}ms for large inputs. The current approach is not meeting the efficiency requirements. Choose a fundamentally different algorithmic approach that can achieve O(n log n) or better time complexity."
+                log.info(f"🔄 HANDOFF: Feedback → Planner [RE-PLANNING]")
                 plan = planner.run(problem, feedback=feedback)  # re-plan with feedback
-                log.info(f"Planner re-plan completed. Updated plan: {plan.model_dump_json(indent=2)}")
+                log.info(f"✅ HANDOFF: Planner → Pipeline [RE-PLAN SUCCESS]")
+                log.info(f"Updated plan: {plan.model_dump_json(indent=2)}")
             except Exception as e:
                 agent_failures += 1
                 log.error(f"Planner re-planning failed (attempt {agent_failures}/{max_failures}): {e}")

@@ -145,6 +145,33 @@ SwiftSolve uses a comprehensive multi-agent pipeline with iterative optimization
 python src/swiftsolve/main.py --task_json src/swiftsolve/test.json
 ```
 
+### Dry-Run Batch Mode
+Test SwiftSolve with predefined tasks across difficulty levels:
+
+```bash
+# Install required dependency (if you didnt already)
+pip install aiohttp
+
+# List all available tasks (3 Easy, 5 Medium, 2 Hard)
+python dry_run_batch.py --list-tasks
+
+# Run first 5 tasks (default)
+python dry_run_batch.py
+
+# Run specific number of tasks with custom timeout
+python dry_run_batch.py --tasks 3 --timeout 120
+
+# Run all 10 tasks with custom API endpoint
+python dry_run_batch.py --tasks 10 --host localhost --port 8080
+```
+
+**Features:**
+- **No external datasets needed** - uses built-in tasks
+- **Comprehensive reporting** - success rates, timing, difficulty breakdown
+- **JSON output** - results saved to `dry_run_results/batch_TIMESTAMP.json`
+- **Real-time progress** - live status updates during execution
+- **Health checking** - validates API connectivity before starting
+
 ### Batch Evaluation
 ```bash
 python -m src.swiftsolve.evaluation.batch_runner --benchmark --seeds 42 123 456

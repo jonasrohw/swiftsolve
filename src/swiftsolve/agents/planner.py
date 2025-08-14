@@ -12,9 +12,8 @@ class Planner(Agent):
         self.client = Anthropic(api_key=get_settings().anthropic_api_key)
 
     def run(self, problem: ProblemInput, feedback: Optional[str] = None) -> PlanMessage:
-        self.log.info(f"Planner starting with problem: {problem.model_dump_json(indent=2)}")
         if feedback:
-            self.log.info(f"Re-planning with feedback: {feedback}")
+            self.log.info(f"🔄 Re-planning with feedback: {feedback}")
         
         # Build system message based on whether we have feedback
         if feedback:
@@ -64,7 +63,9 @@ Generate a NEW algorithmic plan that addresses the performance issues. Choose a 
         else:
             user_msg = f"PROBLEM:\n{problem.prompt}\n\nGenerate the JSON plan:"
         
-        self.log.info(f"Sending request to Claude with prompt: {user_msg}")
+        self.log.info(f"🤖 LLM REQUEST to claude-4-opus:")
+        self.log.info(f"System: {system_msg[:200]}...")
+        self.log.info(f"User: {user_msg[:200]}...")
         
         resp = self.client.messages.create(
             model="claude-4-opus-20250514",
@@ -75,7 +76,7 @@ Generate a NEW algorithmic plan that addresses the performance issues. Choose a 
         )
         
         plan_text = resp.content[0].text.strip()
-        self.log.info(f"Raw Claude response: {plan_text}")
+        self.log.info(f"📥 LLM RESPONSE from claude-4-opus: {plan_text}")
         
         # Extract JSON from markdown code blocks if present
         if "```" in plan_text:
@@ -84,11 +85,11 @@ Generate a NEW algorithmic plan that addresses the performance issues. Choose a 
                 plan_text = plan_text[4:]
         plan_text = plan_text.strip()
         
-        self.log.info(f"Extracted JSON text: {plan_text}")
+
         
         try:
             plan_data = json.loads(plan_text)
-            self.log.info(f"Parsed JSON data: {json.dumps(plan_data, indent=2)}")
+
             
             # Ensure input_bounds has integer values
             input_bounds = {}
@@ -117,7 +118,7 @@ Generate a NEW algorithmic plan that addresses the performance issues. Choose a 
                 constraints=constraints
             )
             
-            self.log.info(f"Successfully created PlanMessage: {plan.model_dump_json(indent=2)}")
+
             
         except Exception as e:
             self.log.error(f"Malformed plan: {e}\n{plan_text}")
@@ -129,7 +130,7 @@ Generate a NEW algorithmic plan that addresses the performance issues. Choose a 
                 input_bounds={"n": 100000},
                 constraints={"runtime_limit": 2000, "memory_limit": 512}
             )
-            self.log.info(f"Using fallback plan: {plan.model_dump_json(indent=2)}")
+            self.log.warning("⚠️ Using fallback plan due to parsing error")
         
         self.log.info("Planner completed successfully")
         return plan

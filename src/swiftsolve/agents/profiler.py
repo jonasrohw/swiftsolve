@@ -63,7 +63,7 @@ class Profiler(Agent):
         Raises:
             SandboxError: on compilation or runtime error that persists after 1 retry.
         """
-        self.log.info(f"Profiler starting with code: {code.model_dump_json(indent=2)}")
+
         self.log.info(f"Debug mode: {debug}")
         self.log.info(f"Time command: {self.time_cmd}")
         
@@ -117,7 +117,7 @@ class Profiler(Agent):
             hotspots=hotspots
         )
         
-        self.log.info(f"Profiler completed. Profile report: {profile.model_dump_json(indent=2)}")
+
         return profile
     
     def _prepare_inputs(self, code: CodeMessage) -> Tuple[List[int], List[str]]:
