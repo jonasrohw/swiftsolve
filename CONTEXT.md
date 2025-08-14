@@ -286,4 +286,4 @@ The following hierarchy represents **all work items** required for SwiftSolve v
 
 ---
 
-Note that for testing, we will be using gpt-4.1-mini and claude-sonnet-4 for budgeting reasons.
+Note that for testing, we will be using gpt-4.1 and claude-4-opus for budgeting reasons.

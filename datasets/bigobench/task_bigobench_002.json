@@ -1,0 +1,38 @@
+{
+  "task_id": "BIGOBENCH_002",
+  "title": "Binary Search",
+  "source": "bigobench",
+  "difficulty": "easy",
+  "description": "Find target element in sorted array",
+  "input_format": "First line: n (input size)\\nFollowing lines: input data",
+  "output_format": "Output according to problem requirements",
+  "input_bounds": {
+    "n": 100000
+  },
+  "time_limit_ms": 2000,
+  "memory_limit_mb": 512,
+  "expected_complexity": "O(log n)",
+  "expected_approach": "binary search",
+  "test_cases": [
+    {
+      "input": "5 3\n1 2 3 4 5",
+      "output": "2",
+      "explanation": "Test case 1"
+    },
+    {
+      "input": "3 1\n1 2 3",
+      "output": "0",
+      "explanation": "Test case 2"
+    },
+    {
+      "input": "4 5\n1 2 3 4",
+      "output": "-1",
+      "explanation": "Test case 3"
+    }
+  ],
+  "source_url": null,
+  "source_rating": null,
+  "tags": [
+    "olog-n"
+  ]
+}

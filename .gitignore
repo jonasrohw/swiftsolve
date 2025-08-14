@@ -11,5 +11,8 @@ venv
 .venv
 .env
 
-#Logs
+# Logs
 logs
+
+# Dry-run batch results
+dry_run_results/
