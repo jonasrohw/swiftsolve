@@ -62,6 +62,77 @@ Check if the server is running and get version information.
 curl -X GET "http://localhost:8000/healthz"
 ```
 
+### Research Evaluation Endpoint
+
+**POST** `/research/evaluate`
+
+Start a comprehensive 225-iteration research evaluation (25 tasks × 3 seeds × 3 replans). This endpoint runs the evaluation in the background and returns immediately.
+
+#### Request Format
+
+```bash
+curl -X POST "http://localhost:8000/research/evaluate" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "seeds": [42, 123, 456],
+    "max_workers": 4,
+    "output_dir": "research_results"
+  }'
+```
+
+#### Response
+
+```json
+{
+  "message": "Research evaluation started with ID: research_eval_20250124_143022",
+  "evaluation_id": "research_eval_20250124_143022",
+  "estimated_duration_minutes": 56.25,
+  "total_runs": 225
+}
+```
+
+### Research Status Endpoint
+
+**GET** `/research/status/{evaluation_id}`
+
+Check the status of a running research evaluation.
+
+```bash
+curl -X GET "http://localhost:8000/research/status/research_eval_20250124_143022"
+```
+
+#### Response (Running)
+
+```json
+{
+  "evaluation_id": "research_eval_20250124_143022",
+  "status": "running",
+  "message": "Evaluation is still in progress",
+  "output_directory": "research_results/research_eval_20250124_143022"
+}
+```
+
+#### Response (Completed)
+
+```json
+{
+  "evaluation_id": "research_eval_20250124_143022",
+  "status": "completed",
+  "message": "Evaluation completed successfully",
+  "summary": {
+    "total_runs": 225,
+    "successful_runs": 187,
+    "success_rate_percent": 83.1,
+    "total_duration_minutes": 52.3,
+    "avg_duration_per_run_seconds": 13.9
+  },
+  "results_files": {
+    "detailed_results": "research_results/research_eval_20250124_143022/research_results_20250124_162245.json",
+    "analysis": "research_results/research_eval_20250124_143022/research_analysis_20250124_162245.json"
+  }
+}
+```
+
 ### Solve Endpoint
 
 **POST** `/solve`
