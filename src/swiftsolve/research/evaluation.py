@@ -19,7 +19,7 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 
 from ..controller.solve_loop import run_pipeline
 from ..schemas import ProblemInput
-from ..datasets.task_format import TaskMetadata, DifficultyLevel, ComplexityClass
+from ..datasets.task_format import TaskMetadata, DifficultyLevel, ComplexityClass, TestCase
 from ..utils.logger import get_logger
 
 log = get_logger("ResearchEval")
@@ -117,22 +117,28 @@ class ResearchDatasetCurator:
             "hard": DifficultyLevel.HARD,
         }
         
-        # Generate a realistic problem prompt for this task
+        # Generate a realistic problem prompt and test cases
         prompt = cls._generate_bigobench_prompt(task_spec)
+        test_cases = cls._generate_bigobench_test_cases(task_spec)
+        expected_approach = cls._get_expected_approach(task_spec)
         
         return TaskMetadata(
             task_id=task_spec["id"],
             title=task_spec["id"].replace("_", " ").title(),
-            description=f"BigO(Bench) task focusing on {task_spec['complexity']} algorithms",
-            difficulty=difficulty_map[task_spec["difficulty"]],
-            expected_complexity=complexity_map.get(task_spec["complexity"], ComplexityClass.LINEAR),
             source="bigobench",
-            constraints={"runtime_limit": 2000, "memory_limit": 512},
+            difficulty=difficulty_map[task_spec["difficulty"]],
+            description=prompt,
             input_format="Standard input format for algorithmic problems",
-            output_format="Standard output format", 
-            examples=[],
-            unit_tests=[],
-            prompt=prompt
+            output_format="Standard output format",
+            input_bounds={"n": 100000},
+            time_limit_ms=2000,
+            memory_limit_mb=512,
+            expected_complexity=complexity_map.get(task_spec["complexity"], ComplexityClass.LINEAR),
+            expected_approach=expected_approach,
+            test_cases=test_cases,
+            source_url=None,
+            source_rating=None,
+            tags=[task_spec["complexity"].lower().replace(" ", "_")]
         )
     
     @classmethod
@@ -155,22 +161,28 @@ class ResearchDatasetCurator:
         else:
             complexity = ComplexityClass.CUBIC
         
-        # Generate a realistic problem prompt for this task
+        # Generate a realistic problem prompt and test cases
         prompt = cls._generate_codeforces_prompt(task_spec)
+        test_cases = cls._generate_codeforces_test_cases(task_spec)
+        expected_approach = cls._get_expected_approach_cf(task_spec)
         
         return TaskMetadata(
             task_id=task_spec["id"],
             title=task_spec["id"].replace("_", " ").title(),
-            description=f"Codeforces Div-2 problem (rating {rating})",
-            difficulty=difficulty_map[task_spec["difficulty"]], 
-            expected_complexity=complexity,
             source="codeforces",
-            constraints={"runtime_limit": 2000, "memory_limit": 256},
+            difficulty=difficulty_map[task_spec["difficulty"]], 
+            description=prompt,
             input_format="Codeforces standard input",
             output_format="Codeforces standard output",
-            examples=[],
-            unit_tests=[],
-            prompt=prompt
+            input_bounds={"n": 200000},
+            time_limit_ms=2000,
+            memory_limit_mb=256,
+            expected_complexity=complexity,
+            expected_approach=expected_approach,
+            test_cases=test_cases,
+            source_url=f"https://codeforces.com/problem/{task_spec['id'].split('_')[1]}",
+            source_rating=rating,
+            tags=["codeforces", f"rating_{rating}"]
         )
     
     @classmethod 
@@ -211,6 +223,62 @@ class ResearchDatasetCurator:
             "cf_1286c2_madness_hard": "Solve an interactive problem where you need to guess a hidden permutation by asking comparison queries (hard version)."
         }
         return prompts.get(task_spec["id"], f"Solve this Codeforces problem with rating {task_spec['rating']}.")
+    
+    @classmethod
+    def _generate_bigobench_test_cases(cls, task_spec: Dict[str, str]) -> List[TestCase]:
+        """Generate test cases for BigO(Bench) tasks."""
+        # Simple test cases for demonstration
+        return [
+            TestCase(input="5\n1 2 3 4 5", output="5", explanation="Basic test case"),
+            TestCase(input="1\n42", output="42", explanation="Single element"),
+            TestCase(input="3\n-1 0 1", output="1", explanation="Edge case with negatives")
+        ]
+    
+    @classmethod
+    def _generate_codeforces_test_cases(cls, task_spec: Dict[str, Any]) -> List[TestCase]:
+        """Generate test cases for Codeforces tasks."""
+        # Simple test cases for demonstration
+        return [
+            TestCase(input="3\n1 2 3", output="6", explanation="Sample test case"),
+            TestCase(input="1\n5", output="5", explanation="Single element"),
+            TestCase(input="4\n2 4 6 8", output="20", explanation="Even numbers")
+        ]
+    
+    @classmethod
+    def _get_expected_approach(cls, task_spec: Dict[str, str]) -> str:
+        """Get expected algorithmic approach for BigO(Bench) tasks."""
+        approaches = {
+            "bigobench_binary_search": "binary search",
+            "bigobench_linear_scan": "linear iteration",
+            "bigobench_two_pointers": "two pointers technique",
+            "bigobench_hash_lookup": "hash table lookup",
+            "bigobench_prefix_sum": "prefix sum array",
+            "bigobench_sliding_window": "sliding window technique",
+            "bigobench_merge_sort": "divide and conquer sorting",
+            "bigobench_quick_sort": "quicksort partitioning",
+            "bigobench_heap_operations": "priority queue/heap",
+            "bigobench_bfs_graph": "breadth-first search",
+            "bigobench_dfs_graph": "depth-first search",
+            "bigobench_dijkstra": "shortest path algorithm",
+            "bigobench_dynamic_programming": "dynamic programming",
+            "bigobench_backtracking": "recursive backtracking",
+            "bigobench_matrix_multiplication": "nested loops",
+            "bigobench_segment_tree": "segment tree data structure"
+        }
+        return approaches.get(task_spec["id"], "optimal algorithm")
+    
+    @classmethod
+    def _get_expected_approach_cf(cls, task_spec: Dict[str, Any]) -> str:
+        """Get expected algorithmic approach for Codeforces tasks."""
+        rating = task_spec["rating"]
+        if rating <= 1000:
+            return "greedy or simulation"
+        elif rating <= 1400:
+            return "sorting or data structures"
+        elif rating <= 1800:
+            return "dynamic programming or graph algorithms"
+        else:
+            return "advanced algorithms"
 
 
 class ResearchEvaluationRunner:
@@ -318,11 +386,11 @@ class ResearchEvaluationRunner:
         start_time = time.time()
         
         try:
-            # Create problem input manually since we don't import create_problem_input
+            # Create problem input from task metadata
             problem = ProblemInput(
                 task_id=f"{task.task_id}_seed{seed}_replan{replan_id}",
-                prompt=task.prompt,
-                unit_tests=task.unit_tests
+                prompt=task.description,  # Use description field
+                unit_tests=[{"input": tc.input, "output": tc.output} for tc in task.test_cases[:3]]  # Convert test cases
             )
             
             # Force replanning by modifying the problem slightly for subsequent attempts

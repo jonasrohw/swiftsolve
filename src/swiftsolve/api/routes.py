@@ -109,7 +109,8 @@ async def get_research_status(evaluation_id: str):
     # Look for result files - check multiple possible base directories
     possible_dirs = [
         Path("research_results") / evaluation_id,
-        Path("test_research_results") / evaluation_id  # For testing
+        Path("test_research_results") / evaluation_id,  # For testing
+        Path("test_research_results_fixed") / evaluation_id  # For latest testing
     ]
     
     base_dir = None
