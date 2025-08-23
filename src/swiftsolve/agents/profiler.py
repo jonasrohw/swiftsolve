@@ -15,6 +15,8 @@ from ..utils.logger import get_logger
 # Regex patterns for parsing /usr/bin/time -v output
 _RX_WALL = re.compile(r"Elapsed \(wall clock\) time.*?:\s*(\d+):(\d+\.\d+)")
 _RX_RSS = re.compile(r"Maximum resident set size \(kbytes\):\s*(\d+)")
+_RX_USER = re.compile(r"User time \(seconds\):\s*(\d+\.\d+)")
+_RX_SYS = re.compile(r"System time \(seconds\):\s*(\d+\.\d+)")
 
 class SandboxError(Exception):
     """Raised when sandbox compilation or execution fails."""
@@ -142,9 +144,12 @@ class Profiler(Agent):
     
     def _generate_input_for_size(self, n: int) -> str:
         """Generate input string for given size n."""
-        # Generic generator - just feed n and assume program reads it
-        # TODO: Use task-specific generators when datasets/ is implemented
-        return f"{n}\n"
+        # Generic: n, optional target, then n integers
+        target = 42
+        # A simple adversarial-ish array that forces some work:
+        arr = [((i * 2654435761) ^ (i >> 3)) % (max(2, n)) for i in range(n)]
+        # Emit as: n target \n arr...
+        return f"{n} {target}\n" + " ".join(str(x) for x in arr) + "\n"
     
     def _compile_cpp(self, code: str) -> pathlib.Path:
         """Compile source to binary; retry once on failure."""
@@ -237,23 +242,45 @@ class Profiler(Agent):
         """Parse /usr/bin/time -v output to extract runtime and memory."""
         self.log.debug(f"Parsing time output: {repr(time_output)}")
         
+        runtime_ms = 0.0
+        
         # Parse wall clock time
         wall_match = _RX_WALL.search(time_output)
-        if not wall_match:
-            # Fallback for macOS built-in time command
-            if "real" in time_output:
-                # Try to parse macOS time format: "real 0m0.001s"
-                real_match = re.search(r"real\s+(\d+)m(\d+\.\d+)s", time_output)
-                if real_match:
-                    mins, secs = real_match.groups()
-                    runtime_ms = (int(mins) * 60 + float(secs)) * 1000
-                else:
-                    raise ParseError(f"Could not parse macOS time format from: {time_output}")
-            else:
-                raise ParseError(f"Could not parse wall clock time from: {time_output}")
-        else:
+        if wall_match:
             mins, secs = wall_match.groups()
             runtime_ms = (int(mins) * 60 + float(secs)) * 1000
+        elif "real" in time_output:
+            # Fallback for macOS built-in time command
+            real_match = re.search(r"real\s+(\d+)m(\d+\.\d+)s", time_output)
+            if real_match:
+                mins, secs = real_match.groups()
+                runtime_ms = (int(mins) * 60 + float(secs)) * 1000
+            else:
+                raise ParseError(f"Could not parse macOS time format from: {time_output}")
+        else:
+            raise ParseError(f"Could not parse wall clock time from: {time_output}")
+        
+        # Timing resolution bias fix: if elapsed time < 1ms, try user+sys time
+        if runtime_ms < 1.0:
+            user_match = _RX_USER.search(time_output)
+            sys_match = _RX_SYS.search(time_output)
+            
+            if user_match and sys_match:
+                user_time = float(user_match.group(1)) * 1000  # Convert to ms
+                sys_time = float(sys_match.group(1)) * 1000   # Convert to ms
+                cpu_time_ms = user_time + sys_time
+                
+                if cpu_time_ms >= 1.0:
+                    runtime_ms = cpu_time_ms
+                    self.log.debug(f"Used CPU time fallback: {runtime_ms:.2f}ms (user: {user_time:.2f}ms, sys: {sys_time:.2f}ms)")
+                else:
+                    # Still very fast, clamp to tiny epsilon for log-plots
+                    runtime_ms = 0.01
+                    self.log.debug(f"Clamped very fast execution to epsilon: {runtime_ms}ms")
+            else:
+                # Clamp to epsilon if we can't parse user/sys time
+                runtime_ms = 0.01
+                self.log.debug(f"No user/sys time found, clamped to epsilon: {runtime_ms}ms")
         
         # Parse RSS memory
         rss_match = _RX_RSS.search(time_output)
