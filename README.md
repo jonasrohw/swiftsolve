@@ -66,9 +66,13 @@ curl -X GET "http://localhost:8000/healthz"
 
 **POST** `/research/evaluate`
 
-Start a comprehensive 225-iteration research evaluation (25 tasks × 3 seeds × 3 replans). This endpoint runs the evaluation in the background and returns immediately.
+Start a research evaluation with your choice of scale:
+- **Full evaluation**: 225 iterations (25 tasks × 3 seeds × 3 replans)
+- **Mini evaluation**: 18 iterations (2 tasks × 3 seeds × 3 replans)
 
-#### Request Format
+The evaluation runs in the background and returns immediately with tracking information.
+
+#### Full Evaluation (225 iterations)
 
 ```bash
 curl -X POST "http://localhost:8000/research/evaluate" \
@@ -80,14 +84,44 @@ curl -X POST "http://localhost:8000/research/evaluate" \
   }'
 ```
 
+#### Mini Evaluation (18 iterations - Perfect for Testing!)
+
+```bash
+curl -X POST "http://localhost:8000/mini-research/evaluate" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "seeds": [42, 123, 456],
+    "max_workers": 2,
+    "output_dir": "mini_results"
+  }'
+```
+
+#### Request Parameters
+
+**Full Research Evaluation (`/research/evaluate`):**
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `seeds` | `List[int]` | `[42, 123, 456]` | Random seeds for reproducibility |
+| `max_workers` | `int` | `4` | Number of parallel workers |
+| `output_dir` | `string` | `"research_results"` | Output directory for results |
+
+**Mini Research Evaluation (`/mini-research/evaluate`):**
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `seeds` | `List[int]` | `[42, 123, 456]` | Random seeds for reproducibility |
+| `max_workers` | `int` | `2` | Number of parallel workers |
+| `output_dir` | `string` | `"mini_research_results"` | Output directory for results |
+
 #### Response
 
 ```json
 {
-  "message": "Research evaluation started with ID: research_eval_20250124_143022",
-  "evaluation_id": "research_eval_20250124_143022",
-  "estimated_duration_minutes": 56.25,
-  "total_runs": 225
+  "message": "Research evaluation started with ID: research_eval_mini_20250823_143022",
+  "evaluation_id": "research_eval_mini_20250823_143022",
+  "estimated_duration_minutes": 4.5,
+  "total_runs": 18
 }
 ```
 
@@ -208,6 +242,43 @@ SwiftSolve uses a comprehensive multi-agent pipeline with iterative optimization
 - **Evaluation Metrics**: pass@k, eff@k_runtime, eff@k_memory, TLE/MLE rates
 - **Batch Runner**: Systematic benchmarking with multiprocessing and progress tracking
 - **Statistical Analysis**: Comprehensive reporting with plots and CSV exports
+- **Mini-Run Mode**: Fast 18-iteration testing (2 tasks vs 25) for setup validation
+
+## Quick Start Guide
+
+### 1. Test Your Setup (Mini-Run)
+
+Before running the full 225-iteration benchmark, test your setup with the mini-run:
+
+```bash
+# Start the API server
+PYTHONPATH=src uvicorn swiftsolve.main:app --host 127.0.0.1 --port 8000 &
+
+# Run mini evaluation (18 iterations, ~5 minutes)
+curl -X POST "http://localhost:8000/mini-research/evaluate" \
+  -H "Content-Type: application/json" \
+  -d '{"max_workers": 2}'
+
+# Or use the test script
+python test_mini_run.py
+```
+
+**Mini-run includes:**
+- 1 BigO(Bench) task: Binary Search (O(log n))
+- 1 Codeforces task: CF1285A (O(n))
+- Same comprehensive analysis as full run
+- 12.5x faster for testing!
+
+### 2. Full Research Evaluation
+
+Once your setup is verified, run the complete benchmark:
+
+```bash
+# Full evaluation (225 iterations, ~60 minutes)
+curl -X POST "http://localhost:8000/research/evaluate" \
+  -H "Content-Type: application/json" \
+  -d '{"max_workers": 4}'
+```
 
 ## CLI Usage
 
@@ -252,3 +323,18 @@ python -m src.swiftsolve.evaluation.batch_runner --benchmark --seeds 42 123 456
 ```bash
 python -m src.swiftsolve.evaluation.batch_runner --create-samples
 ```
+
+### Test Mini-Run Feature
+```bash
+# Interactive test script for mini-run functionality
+python test_mini_run.py
+```
+
+## Evaluation Modes
+
+| Mode | Tasks | Iterations | Duration | Use Case |
+|------|-------|------------|----------|----------|
+| **Mini-Run** | 2 tasks | 18 iterations | ~5 minutes | Setup testing, development |
+| **Full Run** | 25 tasks | 225 iterations | ~60 minutes | Research benchmarking |
+
+The mini-run includes 1 BigO(Bench) task (Binary Search) and 1 Codeforces task (CF1285A) with the same comprehensive analysis pipeline as the full evaluation.

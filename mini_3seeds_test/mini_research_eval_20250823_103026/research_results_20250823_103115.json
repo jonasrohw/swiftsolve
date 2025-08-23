@@ -1,0 +1,207 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-23T10:31:15.088163",
+    "total_runs": 18,
+    "evaluation_type": "research_225_iterations"
+  },
+  "results": [
+    {
+      "task_id": "bigobench_binary_search",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.624258279800415,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int n, target;\n    cin >> n >> target;\n    vector<int> a(n);\n    for (int i = 0; i < n; ++i) {\n        cin >> a[i];\n    }\n    int left = 0, right = n - 1, ans = -1;\n    while (left <= right) {\n        int mid = left + (right - left) / 2;\n        if (a[mid] == target) {\n            ans = mid;\n            break;\n        } else if (a[mid] < target) {\n            left = mid + 1;\n        } else {\n            right = mid - 1;\n        }\n    }\n    cout << ans << endl;\n}",
+      "iterations_used": 0,
+      "agent_failures": 0,
+      "error_details": null
+    },
+    {
+      "task_id": "bigobench_binary_search",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "agent_failure",
+      "duration_seconds": 9.107589721679688e-05,
+      "final_code": null,
+      "iterations_used": 0,
+      "agent_failures": 0,
+      "error_details": "1 validation error for ProblemInput\nprompt\n  Instance is frozen [type=frozen_instance, input_value='Given a sorted array of ...than previous attempts]', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.9/v/frozen_instance"
+    },
+    {
+      "task_id": "bigobench_binary_search",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "agent_failure",
+      "duration_seconds": 1.0013580322265625e-05,
+      "final_code": null,
+      "iterations_used": 0,
+      "agent_failures": 0,
+      "error_details": "1 validation error for ProblemInput\nprompt\n  Instance is frozen [type=frozen_instance, input_value='Given a sorted array of ...than previous attempts]', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.9/v/frozen_instance"
+    },
+    {
+      "task_id": "bigobench_binary_search",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.852845907211304,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n, target;\n    cin >> n >> target;\n    vector<int> a(n);\n    for (int i = 0; i < n; ++i) {\n        cin >> a[i];\n    }\n    int left = 0, right = n - 1, ans = -1;\n    while (left <= right) {\n        int mid = left + (right - left) / 2;\n        if (a[mid] == target) {\n            ans = mid;\n            break;\n        } else if (a[mid] < target) {\n            left = mid + 1;\n        } else {\n            right = mid - 1;\n        }\n    }\n    cout << ans << endl;\n}",
+      "iterations_used": 0,
+      "agent_failures": 0,
+      "error_details": null
+    },
+    {
+      "task_id": "bigobench_binary_search",
+      "seed": 123,
+      "replan_id": 1,
+      "status": "agent_failure",
+      "duration_seconds": 0.00013303756713867188,
+      "final_code": null,
+      "iterations_used": 0,
+      "agent_failures": 0,
+      "error_details": "1 validation error for ProblemInput\nprompt\n  Instance is frozen [type=frozen_instance, input_value='Given a sorted array of ...than previous attempts]', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.9/v/frozen_instance"
+    },
+    {
+      "task_id": "bigobench_binary_search",
+      "seed": 123,
+      "replan_id": 2,
+      "status": "agent_failure",
+      "duration_seconds": 1.0967254638671875e-05,
+      "final_code": null,
+      "iterations_used": 0,
+      "agent_failures": 0,
+      "error_details": "1 validation error for ProblemInput\nprompt\n  Instance is frozen [type=frozen_instance, input_value='Given a sorted array of ...than previous attempts]', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.9/v/frozen_instance"
+    },
+    {
+      "task_id": "bigobench_binary_search",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 4.725951910018921,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n, target;\n    cin >> n >> target;\n    vector<int> a(n);\n    for (int i = 0; i < n; ++i) {\n        cin >> a[i];\n    }\n    int left = 0, right = n - 1, ans = -1;\n    while (left <= right) {\n        int mid = left + (right - left) / 2;\n        if (a[mid] == target) {\n            ans = mid;\n            break;\n        } else if (a[mid] < target) {\n            left = mid + 1;\n        } else {\n            right = mid - 1;\n        }\n    }\n    cout << ans << endl;\n}",
+      "iterations_used": 0,
+      "agent_failures": 0,
+      "error_details": null
+    },
+    {
+      "task_id": "bigobench_binary_search",
+      "seed": 456,
+      "replan_id": 1,
+      "status": "agent_failure",
+      "duration_seconds": 7.200241088867188e-05,
+      "final_code": null,
+      "iterations_used": 0,
+      "agent_failures": 0,
+      "error_details": "1 validation error for ProblemInput\nprompt\n  Instance is frozen [type=frozen_instance, input_value='Given a sorted array of ...than previous attempts]', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.9/v/frozen_instance"
+    },
+    {
+      "task_id": "bigobench_binary_search",
+      "seed": 456,
+      "replan_id": 2,
+      "status": "agent_failure",
+      "duration_seconds": 7.867813110351562e-06,
+      "final_code": null,
+      "iterations_used": 0,
+      "agent_failures": 0,
+      "error_details": "1 validation error for ProblemInput\nprompt\n  Instance is frozen [type=frozen_instance, input_value='Given a sorted array of ...than previous attempts]', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.9/v/frozen_instance"
+    },
+    {
+      "task_id": "cf_1285a_meximum_array",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 9.881794929504395,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <unordered_set>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int &x : a) cin >> x;\n\n    vector<int> res;\n    vector<int> freq(n + 2, 0);\n    int cnt = 0, mex = 0, l = 0;\n\n    for (int i = 0; i < n; ++i) {\n        if (a[i] <= n) {\n            if (freq[a[i]] == 0) cnt++;\n            freq[a[i]]++;\n        }\n        while (freq[mex]) ++mex;\n        if (cnt == mex) {\n            res.push_back(mex);\n            // reset for next subarray\n            for (int j = l; j <= i; ++j) {\n                if (a[j] <= n) {\n                    freq[a[j]]--;\n                    if (freq[a[j]] == 0) cnt--;\n                }\n            }\n            l = i + 1;\n            mex = 0;\n        }\n    }\n\n    cout << res.size() << endl;\n    for (int x : res) cout << x << ' ';\n    cout << endl;\n}",
+      "iterations_used": 0,
+      "agent_failures": 0,
+      "error_details": null
+    },
+    {
+      "task_id": "cf_1285a_meximum_array",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "agent_failure",
+      "duration_seconds": 0.0002570152282714844,
+      "final_code": null,
+      "iterations_used": 0,
+      "agent_failures": 0,
+      "error_details": "1 validation error for ProblemInput\nprompt\n  Instance is frozen [type=frozen_instance, input_value='Given an array of intege...than previous attempts]', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.9/v/frozen_instance"
+    },
+    {
+      "task_id": "cf_1285a_meximum_array",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "agent_failure",
+      "duration_seconds": 9.059906005859375e-06,
+      "final_code": null,
+      "iterations_used": 0,
+      "agent_failures": 0,
+      "error_details": "1 validation error for ProblemInput\nprompt\n  Instance is frozen [type=frozen_instance, input_value='Given an array of intege...than previous attempts]', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.9/v/frozen_instance"
+    },
+    {
+      "task_id": "cf_1285a_meximum_array",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 12.04111909866333,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <unordered_set>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int &x : a) cin >> x;\n\n    vector<int> res;\n    unordered_set<int> seen;\n    int mex = 0, cnt = 0;\n    vector<int> freq(n + 2, 0);\n\n    for (int i = 0; i < n; ++i) {\n        ++freq[a[i]];\n        seen.insert(a[i]);\n        while (seen.count(mex)) ++mex;\n        if ((int)seen.size() == mex) {\n            res.push_back(mex);\n            seen.clear();\n            mex = 0;\n        }\n    }\n\n    cout << res.size() << endl;\n    for (int x : res) cout << x << ' ';\n    cout << endl;\n}",
+      "iterations_used": 0,
+      "agent_failures": 0,
+      "error_details": null
+    },
+    {
+      "task_id": "cf_1285a_meximum_array",
+      "seed": 123,
+      "replan_id": 1,
+      "status": "agent_failure",
+      "duration_seconds": 8.0108642578125e-05,
+      "final_code": null,
+      "iterations_used": 0,
+      "agent_failures": 0,
+      "error_details": "1 validation error for ProblemInput\nprompt\n  Instance is frozen [type=frozen_instance, input_value='Given an array of intege...than previous attempts]', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.9/v/frozen_instance"
+    },
+    {
+      "task_id": "cf_1285a_meximum_array",
+      "seed": 123,
+      "replan_id": 2,
+      "status": "agent_failure",
+      "duration_seconds": 2.0265579223632812e-05,
+      "final_code": null,
+      "iterations_used": 0,
+      "agent_failures": 0,
+      "error_details": "1 validation error for ProblemInput\nprompt\n  Instance is frozen [type=frozen_instance, input_value='Given an array of intege...than previous attempts]', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.9/v/frozen_instance"
+    },
+    {
+      "task_id": "cf_1285a_meximum_array",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 10.77424693107605,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <unordered_set>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int &x : a) cin >> x;\n\n    vector<int> res;\n    vector<int> freq(n + 2, 0);\n    int cnt = 0, mex = 0, l = 0;\n\n    for (int i = 0; i < n; ++i) {\n        if (a[i] <= n) {\n            if (freq[a[i]] == 0) cnt++;\n            freq[a[i]]++;\n        }\n        while (freq[mex]) ++mex;\n        if (cnt == mex) {\n            res.push_back(mex);\n            // reset for next subarray\n            for (int j = l; j <= i; ++j) {\n                if (a[j] <= n) {\n                    freq[a[j]]--;\n                    if (freq[a[j]] == 0) cnt--;\n                }\n            }\n            l = i + 1;\n            mex = 0;\n        }\n    }\n\n    cout << res.size() << endl;\n    for (int x : res) cout << x << ' ';\n    cout << endl;\n}",
+      "iterations_used": 0,
+      "agent_failures": 0,
+      "error_details": null
+    },
+    {
+      "task_id": "cf_1285a_meximum_array",
+      "seed": 456,
+      "replan_id": 1,
+      "status": "agent_failure",
+      "duration_seconds": 0.00047206878662109375,
+      "final_code": null,
+      "iterations_used": 0,
+      "agent_failures": 0,
+      "error_details": "1 validation error for ProblemInput\nprompt\n  Instance is frozen [type=frozen_instance, input_value='Given an array of intege...than previous attempts]', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.9/v/frozen_instance"
+    },
+    {
+      "task_id": "cf_1285a_meximum_array",
+      "seed": 456,
+      "replan_id": 2,
+      "status": "agent_failure",
+      "duration_seconds": 0.00017881393432617188,
+      "final_code": null,
+      "iterations_used": 0,
+      "agent_failures": 0,
+      "error_details": "1 validation error for ProblemInput\nprompt\n  Instance is frozen [type=frozen_instance, input_value='Given an array of intege...than previous attempts]', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.9/v/frozen_instance"
+    }
+  ]
+}

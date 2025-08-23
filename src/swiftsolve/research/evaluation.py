@@ -97,6 +97,25 @@ class ResearchDatasetCurator:
         return tasks
     
     @classmethod
+    def create_mini_dataset(cls) -> List[TaskMetadata]:
+        """Create a mini 2-task dataset for testing (1 BigO + 1 Codeforces)."""
+        tasks = []
+        
+        # Add 1 BigO(Bench) task (easy binary search)
+        bigobench_task = cls._create_bigobench_task(cls.BIGOBENCH_TASKS[0])  # binary_search
+        tasks.append(bigobench_task)
+        
+        # Add 1 Codeforces task (easy implementation)
+        codeforces_task = cls._create_codeforces_task(cls.CODEFORCES_TASKS[0])  # cf_1285a
+        tasks.append(codeforces_task)
+        
+        log.info(f"Created MINI dataset with {len(tasks)} tasks")
+        log.info(f"  BigO(Bench): 1 task ({bigobench_task.task_id})")
+        log.info(f"  Codeforces: 1 task ({codeforces_task.task_id})")
+        
+        return tasks
+    
+    @classmethod
     def _create_bigobench_task(cls, task_spec: Dict[str, str]) -> TaskMetadata:
         """Create a BigO(Bench) task from specification."""
         complexity_map = {
@@ -294,21 +313,28 @@ class ResearchEvaluationRunner:
         log.info(f"📁 Output directory: {self.output_dir}")
         log.info(f"⚡ Max workers: {self.max_workers}")
     
-    def run_full_evaluation(self, seeds: List[int] = [42, 123, 456]) -> Dict[str, Any]:
+    def run_full_evaluation(self, seeds: List[int] = [42, 123, 456], mini_run: bool = False) -> Dict[str, Any]:
         """
-        Run the full 225-iteration research evaluation.
+        Run the research evaluation.
         
         Args:
             seeds: List of random seeds (default: 3 seeds)
+            mini_run: If True, run mini version with 2 tasks (18 total runs)
             
         Returns:
             Comprehensive evaluation results and statistics
         """
-        log.info("🚀 Starting 225-iteration research evaluation")
-        log.info("=" * 60)
-        
-        # Create curated dataset
-        tasks = ResearchDatasetCurator.create_curated_dataset()
+        if mini_run:
+            log.info("🚀 Starting 18-iteration MINI research evaluation")
+            log.info("=" * 60)
+            # Create mini dataset (1 BigO + 1 Codeforces)
+            tasks = ResearchDatasetCurator.create_mini_dataset()
+        else:
+            log.info("🚀 Starting 225-iteration research evaluation")
+            log.info("=" * 60)
+            # Create curated dataset
+            tasks = ResearchDatasetCurator.create_curated_dataset()
+            
         log.info(f"📊 Dataset: {len(tasks)} tasks × {len(seeds)} seeds × 3 replans = {len(tasks) * len(seeds) * 3} total runs")
         
         # Generate all job specifications
@@ -390,6 +416,10 @@ class ResearchEvaluationRunner:
             problem = ProblemInput(
                 task_id=f"{task.task_id}_seed{seed}_replan{replan_id}",
                 prompt=task.description,  # Use description field
+                constraints={
+                    "runtime_limit": task.time_limit_ms,
+                    "memory_limit": task.memory_limit_mb
+                },
                 unit_tests=[{"input": tc.input, "output": tc.output} for tc in task.test_cases[:3]]  # Convert test cases
             )
             

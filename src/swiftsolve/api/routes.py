@@ -52,10 +52,25 @@ class ResearchEvalResponse(BaseModel):
     total_runs: int
 
 
+class MiniResearchEvalRequest(BaseModel):
+    """Request model for mini research evaluation."""
+    seeds: Optional[List[int]] = [42, 123, 456]
+    max_workers: Optional[int] = 2
+    output_dir: Optional[str] = "mini_research_results"
+
+
+class MiniResearchEvalResponse(BaseModel):
+    """Response model for mini research evaluation."""
+    message: str
+    evaluation_id: str
+    estimated_duration_minutes: float
+    total_runs: int
+
+
 @router.post("/research/evaluate", response_model=ResearchEvalResponse)
 async def start_research_evaluation(request: ResearchEvalRequest, background_tasks: BackgroundTasks):
     """
-    Start a 225-iteration research evaluation in the background.
+    Start a comprehensive 225-iteration research evaluation in the background.
     
     Returns immediately with evaluation ID and estimates.
     The actual evaluation runs in the background.
@@ -92,6 +107,54 @@ async def start_research_evaluation(request: ResearchEvalRequest, background_tas
     )
     
     log.info(f"🚀 Research evaluation {evaluation_id} started in background")
+    log.info(f"Response: {response.model_dump_json(indent=2)}")
+    
+    return response
+
+
+@router.post("/mini-research/evaluate", response_model=MiniResearchEvalResponse)
+async def start_mini_research_evaluation(request: MiniResearchEvalRequest, background_tasks: BackgroundTasks):
+    """
+    Start a mini research evaluation in the background (18 iterations instead of 225).
+    
+    Mini evaluation: 2 tasks × 3 seeds × 3 replans = 18 iterations total.
+    Perfect for testing your setup before running the full benchmark.
+    
+    Returns immediately with evaluation ID and estimates.
+    The actual evaluation runs in the background.
+    """
+    log.info(f"=== Mini Research Evaluation Request Received ===")
+    log.info(f"Request: {request.model_dump_json(indent=2)}")
+    
+    # Calculate estimates for mini run
+    total_runs = 2 * len(request.seeds) * 3  # 2 tasks × seeds × 3 replans
+    estimated_duration = total_runs * 60 / request.max_workers / 60  # Assume 60 seconds per run
+    
+    # Generate evaluation ID
+    from datetime import datetime
+    evaluation_id = f"mini_research_eval_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    
+    # Start mini evaluation in background
+    def run_mini_evaluation():
+        try:
+            output_dir = Path(request.output_dir) / evaluation_id
+            runner = ResearchEvaluationRunner(output_dir, max_workers=request.max_workers)
+            analysis = runner.run_full_evaluation(seeds=request.seeds, mini_run=True)
+            log.info(f"✅ Mini research evaluation {evaluation_id} completed successfully")
+            log.info(f"Final success rate: {analysis['evaluation_summary']['success_rate_percent']:.1f}%")
+        except Exception as e:
+            log.error(f"❌ Mini research evaluation {evaluation_id} failed: {e}")
+    
+    background_tasks.add_task(run_mini_evaluation)
+    
+    response = MiniResearchEvalResponse(
+        message=f"Mini research evaluation started with ID: {evaluation_id}",
+        evaluation_id=evaluation_id,
+        estimated_duration_minutes=estimated_duration,
+        total_runs=total_runs
+    )
+    
+    log.info(f"🚀 Mini research evaluation {evaluation_id} started in background")
     log.info(f"Response: {response.model_dump_json(indent=2)}")
     
     return response
