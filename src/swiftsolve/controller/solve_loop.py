@@ -18,6 +18,9 @@ def run_pipeline(problem: ProblemInput):
     max_iter = get_settings().max_iterations
     log.info(f"Max iterations: {max_iter}")
     
+    # Track iteration count for research analysis
+    iteration_count = 0
+    
     # Crash handling: track agent failures (CONTEXT.md line 257)
     agent_failures = 0
     max_failures = 2
@@ -34,8 +37,8 @@ def run_pipeline(problem: ProblemInput):
         log.error(f"Planner failed (attempt {agent_failures}/{max_failures}): {e}")
         if agent_failures >= max_failures:
             log.error("=== PIPELINE ABORTED - Maximum agent failures reached ===")
-            return {"status": "agent_failure", "error": "Planner failed", "details": str(e)}
-        return {"status": "agent_failure", "error": "Planner failed", "details": str(e)}
+            return {"status": "agent_failure", "error": "Planner failed", "details": str(e), "iterations": iteration_count}
+        return {"status": "agent_failure", "error": "Planner failed", "details": str(e), "iterations": iteration_count}
     
     # Static pruner phase
     log.info("--- Starting Static Pruner ---")
@@ -50,13 +53,14 @@ def run_pipeline(problem: ProblemInput):
         log.error(f"Static Pruner failed (attempt {agent_failures}/{max_failures}): {e}")
         if agent_failures >= max_failures:
             log.error("=== PIPELINE ABORTED - Maximum agent failures reached ===")
-            return {"status": "agent_failure", "error": "Static Pruner failed", "details": str(e)}
-        return {"status": "agent_failure", "error": "Static Pruner failed", "details": str(e)}
+            return {"status": "agent_failure", "error": "Static Pruner failed", "details": str(e), "iterations": iteration_count}
+        return {"status": "agent_failure", "error": "Static Pruner failed", "details": str(e), "iterations": iteration_count}
 
     last_time = float("inf")
     pending_patch = None  # Track patches to apply in next iteration
     
     for iter_idx in range(max_iter):
+        iteration_count += 1  # Track actual iterations for research analysis
         log.info(f"=== Starting iteration {iter_idx + 1}/{max_iter} ===")
         
         # Coder phase - apply pending patch if any
@@ -76,7 +80,7 @@ def run_pipeline(problem: ProblemInput):
             log.error(f"Coder failed (attempt {agent_failures}/{max_failures}): {e}")
             if agent_failures >= max_failures:
                 log.error("=== PIPELINE ABORTED - Maximum agent failures reached ===")
-                return {"status": "agent_failure", "error": "Coder failed", "details": str(e)}
+                return {"status": "agent_failure", "error": "Coder failed", "details": str(e), "iterations": iteration_count}
             continue  # Skip this iteration and try again
         
         # Profiler phase
@@ -91,7 +95,7 @@ def run_pipeline(problem: ProblemInput):
             log.error(f"Profiler failed (attempt {agent_failures}/{max_failures}): {e}")
             if agent_failures >= max_failures:
                 log.error("=== PIPELINE ABORTED - Maximum agent failures reached ===")
-                return {"status": "agent_failure", "error": "Profiler failed", "details": str(e)}
+                return {"status": "agent_failure", "error": "Profiler failed", "details": str(e), "iterations": iteration_count}
             continue  # Skip this iteration and try again
         
         # Analyst phase
@@ -106,12 +110,12 @@ def run_pipeline(problem: ProblemInput):
             log.error(f"Analyst failed (attempt {agent_failures}/{max_failures}): {e}")
             if agent_failures >= max_failures:
                 log.error("=== PIPELINE ABORTED - Maximum agent failures reached ===")
-                return {"status": "agent_failure", "error": "Analyst failed", "details": str(e)}
+                return {"status": "agent_failure", "error": "Analyst failed", "details": str(e), "iterations": iteration_count}
             continue  # Skip this iteration and try again
 
         if verdict.efficient:
             log.info("=== Pipeline SUCCESS - Solution is efficient ===")
-            return {"status": "success", "code": code.code_cpp, "profile": profile}
+            return {"status": "success", "code": code.code_cpp, "profile": profile, "iterations": iteration_count}
         
         # Store current performance for gain calculation
         current_time = profile.runtime_ms[-1] if profile.runtime_ms else float('inf')
@@ -145,10 +149,10 @@ def run_pipeline(problem: ProblemInput):
                 log.error(f"Planner re-planning failed (attempt {agent_failures}/{max_failures}): {e}")
                 if agent_failures >= max_failures:
                     log.error("=== PIPELINE ABORTED - Maximum agent failures reached ===")
-                    return {"status": "agent_failure", "error": "Planner re-planning failed", "details": str(e)}
+                    return {"status": "agent_failure", "error": "Planner re-planning failed", "details": str(e), "iterations": iteration_count}
                 continue  # Skip this iteration and try again
         
         last_time = current_time
     
     log.warning("=== Pipeline FAILED - Max iterations reached or insufficient gain ===")
-    return {"status": "failed", "last_verdict": verdict.model_dump()}
+    return {"status": "failed", "last_verdict": verdict.model_dump(), "iterations": iteration_count}

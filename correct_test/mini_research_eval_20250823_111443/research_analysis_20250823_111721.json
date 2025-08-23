@@ -1,0 +1,51 @@
+{
+  "evaluation_summary": {
+    "total_runs": 18,
+    "successful_runs": 18,
+    "success_rate_percent": 100.0,
+    "total_duration_minutes": 2.626762580871582,
+    "avg_duration_per_run_seconds": 8.755627208285862
+  },
+  "status_breakdown": {
+    "success": 18
+  },
+  "replan_analysis": {
+    "replan_0": {
+      "total_runs": 6,
+      "successful_runs": 6,
+      "success_rate": 100.0,
+      "avg_duration": 8.1326953570048
+    },
+    "replan_1": {
+      "total_runs": 6,
+      "successful_runs": 6,
+      "success_rate": 100.0,
+      "avg_duration": 8.682556430498758
+    },
+    "replan_2": {
+      "total_runs": 6,
+      "successful_runs": 6,
+      "success_rate": 100.0,
+      "avg_duration": 9.451629837354025
+    }
+  },
+  "research_insights": {
+    "replan_effectiveness": {
+      "tasks_improved_with_replan": 0,
+      "total_task_groups": 6,
+      "effectiveness_percent": 0.0
+    },
+    "dataset_source_performance": {
+      "bigobench": {
+        "success_rate": 100.0,
+        "avg_duration": 5.596504767735799,
+        "count": 9
+      },
+      "codeforces": {
+        "success_rate": 100.0,
+        "avg_duration": 11.914749648835924,
+        "count": 9
+      }
+    }
+  }
+}

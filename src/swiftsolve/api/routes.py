@@ -1,11 +1,12 @@
 # api/routes.py
 from fastapi import APIRouter, BackgroundTasks
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
 from pathlib import Path
 from ..schemas import ProblemInput
 from ..controller.solve_loop import run_pipeline
 from ..research.evaluation import ResearchEvaluationRunner
+from ..research.data_export import ResearchDataExporter
 from ..utils.logger import get_logger
 
 log = get_logger("API")
@@ -229,3 +230,128 @@ async def get_research_status(evaluation_id: str):
             "message": "Evaluation is still in progress",
             "output_directory": str(base_dir)
         }
+
+
+class ExportResponse(BaseModel):
+    """Response model for data export operations."""
+    message: str
+    evaluation_id: str
+    export_summary: Dict[str, Any]
+    files_created: int
+
+
+@router.post("/research/export/{evaluation_id}", response_model=ExportResponse)
+async def export_research_data(evaluation_id: str, output_dir: Optional[str] = None):
+    """
+    Export research data for figures and analysis.
+    
+    Exports:
+    - Runtime curves (Figure 6.2)
+    - TLE/MLE rates (Figure 6.3) 
+    - Iteration analysis (Figure 6.4)
+    """
+    log.info(f"=== Export Research Data Request for {evaluation_id} ===")
+    
+    # Find result files for this evaluation
+    search_dirs = ["research_results", "mini_research_results", "mini_test_api", "mini_3seeds_test"]
+    results_file = None
+    
+    for search_dir in search_dirs:
+        search_path = Path(search_dir)
+        if search_path.exists():
+            for eval_dir in search_path.glob(f"*{evaluation_id}*"):
+                for file in eval_dir.glob("research_results_*.json"):
+                    results_file = file
+                    break
+                if results_file:
+                    break
+    
+    if not results_file:
+        return ExportResponse(
+            message=f"No results found for evaluation {evaluation_id}",
+            evaluation_id=evaluation_id,
+            export_summary={},
+            files_created=0
+        )
+    
+    # Set output directory
+    if not output_dir:
+        output_dir = f"exports/{evaluation_id}"
+    
+    try:
+        # Export all research data
+        exporter = ResearchDataExporter(results_file)
+        exports = exporter.export_all_research_data(Path(output_dir))
+        
+        total_files = sum(len(files) for files in exports.values())
+        
+        return ExportResponse(
+            message=f"Successfully exported research data for {evaluation_id}",
+            evaluation_id=evaluation_id,
+            export_summary={k: [str(p) for p in v] for k, v in exports.items()},
+            files_created=total_files
+        )
+        
+    except Exception as e:
+        log.error(f"Export failed for {evaluation_id}: {e}")
+        return ExportResponse(
+            message=f"Export failed: {str(e)}",
+            evaluation_id=evaluation_id,
+            export_summary={},
+            files_created=0
+        )
+
+
+@router.get("/research/curves/{evaluation_id}")
+async def get_runtime_curves(evaluation_id: str):
+    """
+    Get runtime curve data for plotting (Figure 6.2).
+    
+    Returns JSON data suitable for plotting libraries.
+    """
+    log.info(f"=== Runtime Curves Request for {evaluation_id} ===")
+    
+    # Find and load results
+    search_dirs = ["research_results", "mini_research_results", "mini_test_api", "mini_3seeds_test"]
+    results_file = None
+    
+    for search_dir in search_dirs:
+        search_path = Path(search_dir)
+        if search_path.exists():
+            for eval_dir in search_path.glob(f"*{evaluation_id}*"):
+                for file in eval_dir.glob("research_results_*.json"):
+                    results_file = file
+                    break
+                if results_file:
+                    break
+    
+    if not results_file:
+        return {"error": f"No results found for evaluation {evaluation_id}"}
+    
+    try:
+        exporter = ResearchDataExporter(results_file)
+        
+        # Extract runtime curve data
+        runtime_data = []
+        for result in exporter.results_data.get('results', []):
+            if result.get('status') == 'success' and result.get('profile_report'):
+                profile = result['profile_report']
+                if 'input_sizes' in profile and 'runtime_ms' in profile:
+                    runtime_data.append({
+                        'task_id': result['task_id'],
+                        'seed': result['seed'],
+                        'replan_id': result['replan_id'],
+                        'input_sizes': profile['input_sizes'],
+                        'runtime_ms': profile['runtime_ms'],
+                        'peak_memory_mb': profile.get('peak_memory_mb', [])
+                    })
+        
+        return {
+            "evaluation_id": evaluation_id,
+            "curve_count": len(runtime_data),
+            "curves": runtime_data
+        }
+        
+    except Exception as e:
+        log.error(f"Failed to get runtime curves for {evaluation_id}: {e}")
+        return {"error": f"Failed to load runtime curves: {str(e)}"}

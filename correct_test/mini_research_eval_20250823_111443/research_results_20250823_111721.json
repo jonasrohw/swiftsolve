@@ -1,0 +1,1431 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-23T11:17:21.049798",
+    "total_runs": 18,
+    "evaluation_type": "research_225_iterations"
+  },
+  "results": [
+    {
+      "task_id": "bigobench_binary_search",
+      "seed": 1111,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.75282096862793,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n, target;\n    cin >> n >> target;\n    vector<int> a(n);\n    for (int i = 0; i < n; ++i) {\n        cin >> a[i];\n    }\n    int left = 0, right = n - 1, ans = -1;\n    while (left <= right) {\n        int mid = left + (right - left) / 2;\n        if (a[mid] == target) {\n            ans = mid;\n            break;\n        } else if (a[mid] < target) {\n            left = mid + 1;\n        } else {\n            right = mid - 1;\n        }\n    }\n    cout << ans << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_binary_search_seed1111_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-23 18:14:49.194315+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          190.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.96875,
+          1.03125,
+          1.203125,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_binary_search",
+      "seed": 1111,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 5.279839038848877,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint interpolation_search(const vector<int>& arr, int target) {\n    int low = 0, high = arr.size() - 1;\n    while (low <= high && target >= arr[low] && target <= arr[high]) {\n        if (arr[low] == arr[high]) {\n            if (arr[low] == target) return low;\n            else break;\n        }\n        int pos = low + (int)((long long)(high - low) * (target - arr[low]) / (arr[high] - arr[low]));\n        if (pos < low || pos > high) break;\n        if (arr[pos] == target)\n            return pos;\n        if (arr[pos] < target)\n            low = pos + 1;\n        else\n            high = pos - 1;\n    }\n    return -1;\n}\n\nint main() {\n    int n, target;\n    cin >> n >> target;\n    vector<int> arr(n);\n    for (int i = 0; i < n; ++i) {\n        cin >> arr[i];\n    }\n    cout << interpolation_search(arr, target) << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_binary_search_seed1111_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-23 18:14:54.475108+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          160.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.96875,
+          1.03125,
+          1.1875,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_binary_search",
+      "seed": 1111,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 5.506637096405029,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint interpolation_search(const vector<int>& arr, int target) {\n    int low = 0, high = arr.size() - 1;\n    while (low <= high && target >= arr[low] && target <= arr[high]) {\n        if (arr[low] == arr[high]) {\n            if (arr[low] == target) return low;\n            else break;\n        }\n        int pos = low + (int)((long long)(high - low) * (target - arr[low]) / (arr[high] - arr[low]));\n        if (pos < low || pos > high) break;\n        if (arr[pos] == target)\n            return pos;\n        if (arr[pos] < target)\n            low = pos + 1;\n        else\n            high = pos - 1;\n    }\n    return -1;\n}\n\nint main() {\n    int n, target;\n    cin >> n >> target;\n    vector<int> arr(n);\n    for (int i = 0; i < n; ++i) cin >> arr[i];\n    cout << interpolation_search(arr, target) << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_binary_search_seed1111_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-23 18:14:59.979456+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          180.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          1.1875,
+          1.0,
+          1.0625,
+          1.1875,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_binary_search",
+      "seed": 2222,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 4.701336145401001,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n, target;\n    cin >> n >> target;\n    vector<int> a(n);\n    for (int i = 0; i < n; ++i) {\n        cin >> a[i];\n    }\n    int left = 0, right = n - 1, ans = -1;\n    while (left <= right) {\n        int mid = left + (right - left) / 2;\n        if (a[mid] == target) {\n            ans = mid;\n            break;\n        } else if (a[mid] < target) {\n            left = mid + 1;\n        } else {\n            right = mid - 1;\n        }\n    }\n    cout << ans << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_binary_search_seed2222_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-23 18:15:04.683104+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          160.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.96875,
+          1.03125,
+          1.203125,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_binary_search",
+      "seed": 2222,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 6.007801055908203,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint interpolation_search(const vector<int>& arr, int target) {\n    int low = 0, high = arr.size() - 1;\n    while (low <= high && target >= arr[low] && target <= arr[high]) {\n        if (arr[low] == arr[high]) {\n            if (arr[low] == target) return low;\n            else break;\n        }\n        int pos = low + (int)((long long)(high - low) * (target - arr[low]) / (arr[high] - arr[low]));\n        if (pos < low || pos > high) break;\n        if (arr[pos] == target)\n            return pos;\n        if (arr[pos] < target)\n            low = pos + 1;\n        else\n            high = pos - 1;\n    }\n    return -1;\n}\n\nint main() {\n    int n, target;\n    cin >> n >> target;\n    vector<int> arr(n);\n    for (int i = 0; i < n; ++i) {\n        cin >> arr[i];\n    }\n    int idx = interpolation_search(arr, target);\n    cout << idx << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_binary_search_seed2222_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-23 18:15:10.690786+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          10.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          1.15625,
+          0.953125,
+          0.96875,
+          1.03125,
+          1.1875,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_binary_search",
+      "seed": 2222,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 4.94033670425415,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint interpolation_search(const vector<int>& arr, int target) {\n    int low = 0, high = arr.size() - 1;\n    while (low <= high && target >= arr[low] && target <= arr[high]) {\n        if (arr[low] == arr[high]) {\n            if (arr[low] == target) return low;\n            else break;\n        }\n        int pos = low + (int)((long long)(high - low) * (target - arr[low]) / (arr[high] - arr[low]));\n        if (pos < low || pos > high) break;\n        if (arr[pos] == target)\n            return pos;\n        if (arr[pos] < target)\n            low = pos + 1;\n        else\n            high = pos - 1;\n    }\n    return -1;\n}\n\nint main() {\n    int n, target;\n    cin >> n >> target;\n    vector<int> arr(n);\n    for (int i = 0; i < n; ++i) cin >> arr[i];\n    cout << interpolation_search(arr, target) << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_binary_search_seed2222_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-23 18:15:15.631752+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.96875,
+          1.03125,
+          1.1875,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_binary_search",
+      "seed": 3333,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.484281063079834,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int n, target;\n    cin >> n >> target;\n    vector<int> a(n);\n    for (int i = 0; i < n; ++i) {\n        cin >> a[i];\n    }\n    int left = 0, right = n - 1, ans = -1;\n    while (left <= right) {\n        int mid = left + (right - left) / 2;\n        if (a[mid] == target) {\n            ans = mid;\n            break;\n        } else if (a[mid] < target) {\n            left = mid + 1;\n        } else {\n            right = mid - 1;\n        }\n    }\n    cout << ans << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_binary_search_seed3333_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-23 18:15:21.115740+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          160.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.96875,
+          1.03125,
+          1.203125,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_binary_search",
+      "seed": 3333,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 5.777681827545166,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint interpolation_search(const vector<int>& arr, int target) {\n    int low = 0, high = arr.size() - 1;\n    while (low <= high && target >= arr[low] && target <= arr[high]) {\n        if (arr[low] == arr[high]) {\n            if (arr[low] == target)\n                return low;\n            else\n                break;\n        }\n        // Estimate the position\n        int pos = low + (int)((long long)(high - low) * (target - arr[low]) / (arr[high] - arr[low]));\n        if (pos < low || pos > high) break;\n        if (arr[pos] == target)\n            return pos;\n        if (arr[pos] < target)\n            low = pos + 1;\n        else\n            high = pos - 1;\n    }\n    return -1;\n}\n\nint main() {\n    int n, target;\n    cin >> n >> target;\n    vector<int> arr(n);\n    for (int i = 0; i < n; ++i) {\n        cin >> arr[i];\n    }\n    int idx = interpolation_search(arr, target);\n    cout << idx << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_binary_search_seed3333_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-23 18:15:26.893430+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          140.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.96875,
+          1.03125,
+          1.1875,
+          1.390625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_binary_search",
+      "seed": 3333,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 6.917809009552002,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint interpolation_search(const vector<int>& arr, int target) {\n    int low = 0, high = arr.size() - 1;\n    while (low <= high && target >= arr[low] && target <= arr[high]) {\n        if (arr[low] == arr[high]) {\n            if (arr[low] == target) return low;\n            else break;\n        }\n        int pos = low + (int)((1LL * (target - arr[low]) * (high - low)) / (arr[high] - arr[low]));\n        if (pos < low || pos > high) break;\n        if (arr[pos] == target)\n            return pos;\n        if (arr[pos] < target)\n            low = pos + 1;\n        else\n            high = pos - 1;\n    }\n    return -1;\n}\n\nint main() {\n    int n, target;\n    cin >> n >> target;\n    vector<int> arr(n);\n    for (int i = 0; i < n; ++i) {\n        cin >> arr[i];\n    }\n    int idx = interpolation_search(arr, target);\n    cout << idx << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_binary_search_seed3333_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-23 18:15:33.811438+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          170.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.96875,
+          1.03125,
+          1.1875,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285a_meximum_array",
+      "seed": 1111,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 9.898508787155151,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <unordered_set>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int &x : a) cin >> x;\n\n    vector<int> res;\n    vector<int> freq(n + 2, 0);\n    int cnt = 0, mex = 0, l = 0;\n\n    for (int i = 0; i < n; ++i) {\n        if (a[i] <= n) {\n            if (freq[a[i]] == 0) cnt++;\n            freq[a[i]]++;\n        }\n        while (freq[mex]) ++mex;\n        if (cnt == mex) {\n            res.push_back(mex);\n            // Reset for next subarray\n            for (int j = l; j <= i; ++j) {\n                if (a[j] <= n) {\n                    freq[a[j]]--;\n                    if (freq[a[j]] == 0) cnt--;\n                }\n            }\n            l = i + 1;\n            mex = 0;\n        }\n    }\n\n    cout << res.size() << endl;\n    for (int x : res) cout << x << ' ';\n    cout << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285a_meximum_array_seed1111_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-23 18:15:43.708222+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          160.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          10.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.96875,
+          1.03125,
+          1.4375,
+          1.84375,
+          2.65625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285a_meximum_array",
+      "seed": 1111,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 9.776761770248413,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <unordered_map>\n#include <set>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int &x : a) cin >> x;\n\n    vector<int> res;\n    int l = 0;\n    while (l < n) {\n        unordered_map<int, int> freq;\n        set<int> present;\n        int mex = 0;\n        int r = l;\n        int cnt = 0;\n        while (r < n) {\n            freq[a[r]]++;\n            present.insert(a[r]);\n            // Update mex\n            while (present.count(mex)) ++mex;\n            // If we have all numbers from 0 to mex-1\n            if ((int)present.size() == mex) {\n                res.push_back(mex);\n                break;\n            }\n            ++r;\n        }\n        if (r == n) break;\n        l = r + 1;\n    }\n\n    cout << res.size() << endl;\n    for (int x : res) cout << x << ' ';\n    cout << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285a_meximum_array_seed1111_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-23 18:15:52.937729+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          10.0,
+          20.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.96875,
+          1.015625,
+          1.140625,
+          1.90625,
+          2.3125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285a_meximum_array",
+      "seed": 1111,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 10.748427152633667,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int &x : a) cin >> x;\n\n    // Find rightmost occurrence for each value in [0, max_value]\n    int max_value = 0;\n    for (int x : a) max_value = max(max_value, x);\n    vector<int> rightmost(max_value + 2, -1); // +2 to handle MEX possibly being max_value+1\n\n    for (int i = 0; i < n; ++i) {\n        rightmost[a[i]] = i;\n    }\n\n    vector<int> res;\n    int i = 0;\n    while (i < n) {\n        int mex = 0;\n        int end = i;\n        // Find the smallest MEX such that all [0, MEX-1] are present in [i, end]\n        // For each value from 0 upwards, extend end to cover its rightmost occurrence\n        while (true) {\n            if (rightmost[mex] == -1 || rightmost[mex] < i) break;\n            end = max(end, rightmost[mex]);\n            ++mex;\n        }\n        res.push_back(mex);\n        i = end + 1;\n    }\n\n    cout << res.size() << endl;\n    for (int x : res) cout << x << ' ';\n    cout << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285a_meximum_array_seed1111_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-23 18:16:04.235809+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.96875,
+          1.03125,
+          1.1875,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285a_meximum_array",
+      "seed": 2222,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 13.103081941604614,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <unordered_set>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int &x : a) cin >> x;\n\n    vector<int> cnt(n + 2, 0);\n    int unique = 0;\n    int max_mex = 0;\n    vector<int> res;\n\n    int l = 0;\n    while (l < n) {\n        int mex = 0;\n        int r = l;\n        unordered_set<int> seen;\n        while (r < n) {\n            seen.insert(a[r]);\n            while (seen.count(mex)) ++mex;\n            if ((int)seen.size() == mex) {\n                ++r;\n                break;\n            }\n            ++r;\n        }\n        res.push_back(mex);\n        l = r;\n    }\n\n    cout << res.size() << endl;\n    for (int x : res) cout << x << ' ';\n    cout << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285a_meximum_array_seed2222_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-23 18:16:16.833564+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          220.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          10.0,
+          10.0
+        ],
+        "peak_memory_mb": [
+          1.046875,
+          1.15625,
+          0.96875,
+          1.28125,
+          1.1875,
+          2.0,
+          2.71875
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285a_meximum_array",
+      "seed": 2222,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 12.760190963745117,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <unordered_map>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int &x : a) cin >> x;\n\n    vector<int> res;\n    unordered_map<int, int> freq;\n    int l = 0, r = 0;\n    while (l < n) {\n        freq.clear();\n        int mex = 0, cnt = 0;\n        for (r = l; r < n; ++r) {\n            freq[a[r]]++;\n            while (freq.count(mex)) ++mex;\n            ++cnt;\n            if (mex == freq.size()) {\n                res.push_back(cnt);\n                ++r;\n                break;\n            }\n        }\n        if (r == n && mex != freq.size()) break;\n        l = r;\n    }\n\n    cout << res.size() << endl;\n    for (int x : res) cout << x << ' ';\n    cout << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285a_meximum_array_seed2222_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-23 18:16:29.580573+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          160.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          10.0,
+          10.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.96875,
+          1.015625,
+          1.140625,
+          1.640625,
+          2.34375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285a_meximum_array",
+      "seed": 2222,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 11.949909925460815,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <unordered_set>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int &x : a) cin >> x;\n\n    vector<int> freq(n + 2, 0);\n    int l = 0, r = 0;\n    vector<int> res;\n    while (l < n) {\n        int mex = 0, cnt = 0;\n        unordered_set<int> seen;\n        while (r < n) {\n            if (a[r] <= n) {\n                freq[a[r]]++;\n                seen.insert(a[r]);\n            }\n            while (seen.count(mex)) ++mex;\n            ++r;\n            if ((int)seen.size() == mex) {\n                res.push_back(mex);\n                break;\n            }\n        }\n        // Clean up freq for this segment\n        for (int i = l; i < r; ++i) {\n            if (a[i] <= n) freq[a[i]] = 0;\n        }\n        l = r;\n    }\n\n    cout << res.size() << endl;\n    for (int x : res) cout << x << ' ';\n    cout << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285a_meximum_array_seed2222_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-23 18:16:41.473755+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          160.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          10.0,
+          10.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.96875,
+          1.03125,
+          1.1875,
+          1.921875,
+          2.71875
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285a_meximum_array",
+      "seed": 3333,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 9.856143236160278,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <unordered_set>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int &x : a) cin >> x;\n\n    vector<int> res;\n    vector<int> freq(n + 2, 0);\n    int cnt = 0, mex = 0, l = 0;\n\n    for (int r = 0; r < n; ++r) {\n        if (a[r] <= n) {\n            if (freq[a[r]] == 0) cnt++;\n            freq[a[r]]++;\n        }\n        while (freq[mex] > 0) ++mex;\n        if (cnt == mex) {\n            res.push_back(mex);\n            // reset for next subarray\n            for (int i = l; i <= r; ++i) {\n                if (a[i] <= n) {\n                    freq[a[i]]--;\n                    if (freq[a[i]] == 0) cnt--;\n                }\n            }\n            l = r + 1;\n            mex = 0;\n        }\n    }\n\n    cout << res.size() << endl;\n    for (int x : res) cout << x << ' ';\n    cout << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285a_meximum_array_seed3333_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-23 18:16:51.906762+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          10.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.96875,
+          1.03125,
+          1.1875,
+          1.84375,
+          2.65625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285a_meximum_array",
+      "seed": 3333,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 12.493063926696777,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <unordered_map>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int &x : a) cin >> x;\n\n    vector<int> res;\n    unordered_map<int, int> freq;\n    int l = 0, r = 0;\n    while (l < n) {\n        freq.clear();\n        int max_val = 0, cnt = 0;\n        for (r = l; r < n; ++r) {\n            if (a[r] < n) {\n                if (freq[a[r]] == 0) cnt++;\n                freq[a[r]]++;\n                if (a[r] > max_val) max_val = a[r];\n            }\n            // Check if we have all numbers from 0 to MEX-1\n            while (freq.count(max_val)) max_val++;\n            if (cnt == max_val) {\n                res.push_back(max_val);\n                l = r + 1;\n                break;\n            }\n        }\n        if (r == n) break;\n    }\n\n    cout << res.size() << endl;\n    for (int x : res) cout << x << ' ';\n    cout << endl;\n}",
+      "iterations_used": 2,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 2,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285a_meximum_array_seed3333_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-23 18:17:03.810848+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          170.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          10.0,
+          10.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.96875,
+          1.015625,
+          1.140625,
+          1.75,
+          2.34375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285a_meximum_array",
+      "seed": 3333,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 16.64665913581848,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <unordered_set>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int &x : a) cin >> x;\n\n    vector<int> freq(n + 2, 0);\n    for (int x : a) if (x <= n) freq[x]++;\n\n    int mex = 0;\n    while (freq[mex]) ++mex;\n\n    vector<int> res;\n    int i = 0;\n    while (i < n) {\n        unordered_set<int> seen;\n        int cur_mex = 0, cnt = 0;\n        for (int j = i; j < n; ++j) {\n            if (a[j] <= n) seen.insert(a[j]);\n            while (seen.count(cur_mex)) ++cur_mex;\n            ++cnt;\n            if (cur_mex == mex) {\n                res.push_back(mex);\n                i = j + 1;\n                // Update freq and recalculate mex for next segment\n                for (int k = i - cnt; k < i; ++k) {\n                    if (a[k] <= n) {\n                        freq[a[k]]--;\n                        if (freq[a[k]] == 0 && a[k] < mex) mex = a[k];\n                    }\n                }\n                break;\n            }\n            if (j == n - 1) {\n                // Last segment, can't reach current mex, so break\n                res.push_back(cur_mex);\n                i = n;\n            }\n        }\n    }\n\n    cout << res.size() << endl;\n    for (int x : res) cout << x << ' ';\n    cout << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285a_meximum_array_seed3333_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-23 18:17:20.488664+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          140.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          10.0,
+          20.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.96875,
+          1.03125,
+          1.421875,
+          1.84375,
+          2.953125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    }
+  ]
+}

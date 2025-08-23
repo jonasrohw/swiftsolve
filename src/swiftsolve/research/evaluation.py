@@ -37,6 +37,13 @@ class ResearchRunResult:
     iterations_used: int = 0
     agent_failures: int = 0
     error_details: Optional[str] = None
+    
+    # Enhanced data collection for research figures/tables
+    profile_report: Optional[Dict[str, Any]] = None  # Full ProfileReport for runtime curves
+    constraints: Optional[Dict[str, int]] = None     # Original constraints for TLE/MLE analysis
+    tle_flags: Optional[List[bool]] = None           # Per-size TLE flags
+    mle_flags: Optional[List[bool]] = None           # Per-size MLE flags
+    actual_iterations: int = 0                       # Real iteration count from controller
 
 
 class ResearchDatasetCurator:
@@ -413,19 +420,21 @@ class ResearchEvaluationRunner:
         
         try:
             # Create problem input from task metadata
+            base_prompt = task.description
+            
+            # Force replanning by modifying the problem slightly for subsequent attempts
+            if replan_id > 0:
+                base_prompt = f"{task.description}\n\n[REPLAN {replan_id+1}/3: Try a different algorithmic approach than previous attempts]"
+            
             problem = ProblemInput(
                 task_id=f"{task.task_id}_seed{seed}_replan{replan_id}",
-                prompt=task.description,  # Use description field
+                prompt=base_prompt,
                 constraints={
                     "runtime_limit": task.time_limit_ms,
                     "memory_limit": task.memory_limit_mb
                 },
-                unit_tests=[{"input": tc.input, "output": tc.output} for tc in task.test_cases[:3]]  # Convert test cases
+                unit_tests=[{"input": tc.input, "output": tc.output} for tc in task.test_cases[:3]]
             )
-            
-            # Force replanning by modifying the problem slightly for subsequent attempts
-            if replan_id > 0:
-                problem.prompt += f"\n\n[REPLAN {replan_id+1}/3: Try a different algorithmic approach than previous attempts]"
             
             # Run pipeline
             result = run_pipeline(problem)
@@ -435,8 +444,38 @@ class ResearchEvaluationRunner:
             # Parse result and extract relevant data
             status = self._parse_run_status(result)
             final_code = result.get('code') if isinstance(result, dict) else None
-            iterations = result.get('iterations', 0) if isinstance(result, dict) else 0
+            actual_iterations = result.get('iterations', 0) if isinstance(result, dict) else 0
             failures = result.get('agent_failures', 0) if isinstance(result, dict) else 0
+            
+            # Store original constraints for TLE/MLE analysis
+            original_constraints = {
+                "runtime_limit": task.time_limit_ms,
+                "memory_limit": task.memory_limit_mb
+            }
+            
+            # Enhanced data extraction for research analysis
+            profile_report = None
+            tle_flags = None
+            mle_flags = None
+            
+            if isinstance(result, dict) and 'profile' in result and result['profile']:
+                # Extract ProfileReport data
+                profile = result['profile']
+                if hasattr(profile, 'model_dump'):
+                    profile_report = profile.model_dump()
+                elif isinstance(profile, dict):
+                    profile_report = profile
+                
+                # Compute TLE/MLE flags if we have profile data
+                if profile_report and 'runtime_ms' in profile_report and 'peak_memory_mb' in profile_report:
+                    tle_flags = self._compute_tle_flags(
+                        profile_report['runtime_ms'], 
+                        original_constraints['runtime_limit']
+                    )
+                    mle_flags = self._compute_mle_flags(
+                        profile_report['peak_memory_mb'], 
+                        original_constraints['memory_limit']
+                    )
             
             return ResearchRunResult(
                 task_id=task.task_id,
@@ -445,8 +484,14 @@ class ResearchEvaluationRunner:
                 status=status,
                 duration_seconds=duration,
                 final_code=final_code,
-                iterations_used=iterations,
-                agent_failures=failures
+                iterations_used=actual_iterations,  # Legacy field for backward compatibility
+                agent_failures=failures,
+                # Enhanced research data
+                profile_report=profile_report,
+                constraints=original_constraints,
+                tle_flags=tle_flags,
+                mle_flags=mle_flags,
+                actual_iterations=actual_iterations
             )
             
         except Exception as e:
@@ -457,7 +502,13 @@ class ResearchEvaluationRunner:
                 replan_id=replan_id,
                 status="agent_failure",
                 duration_seconds=duration,
-                error_details=str(e)
+                error_details=str(e),
+                # Enhanced research data (defaults for failed runs)
+                constraints={
+                    "runtime_limit": task.time_limit_ms,
+                    "memory_limit": task.memory_limit_mb
+                },
+                actual_iterations=0
             )
     
     def _parse_run_status(self, result: Any) -> str:
@@ -474,6 +525,20 @@ class ResearchEvaluationRunner:
                 return "unknown"
         else:
             return "unknown"
+    
+    def _compute_tle_flags(self, runtime_ms: List[float], limit_ms: int) -> List[bool]:
+        """Compute TLE flags for each input size."""
+        return [
+            runtime >= limit_ms or runtime == float('inf') or runtime is None
+            for runtime in runtime_ms
+        ]
+    
+    def _compute_mle_flags(self, memory_mb: List[float], limit_mb: int) -> List[bool]:
+        """Compute MLE flags for each input size."""
+        return [
+            memory >= limit_mb or memory is None
+            for memory in memory_mb
+        ]
     
     def _analyze_results(self, results: List[ResearchRunResult], total_duration: float) -> Dict[str, Any]:
         """Generate comprehensive analysis of evaluation results."""
@@ -606,14 +671,40 @@ class ResearchEvaluationRunner:
     
     def _serialize_result(self, result: ResearchRunResult) -> Dict[str, Any]:
         """Serialize a result for JSON storage."""
-        return {
+        base_result = {
             "task_id": result.task_id,
             "seed": result.seed,
             "replan_id": result.replan_id,
             "status": result.status,
             "duration_seconds": result.duration_seconds,
             "final_code": result.final_code,
-            "iterations_used": result.iterations_used,
+            "iterations_used": result.iterations_used,  # Legacy field
             "agent_failures": result.agent_failures,
-            "error_details": result.error_details
+            "error_details": result.error_details,
+            "actual_iterations": result.actual_iterations  # Real iteration count
         }
+        
+        # Add enhanced research data if available
+        if result.profile_report:
+            base_result["profile_report"] = result.profile_report
+            
+        if result.constraints:
+            base_result["constraints"] = result.constraints
+            
+        if result.tle_flags is not None:
+            base_result["tle_analysis"] = {
+                "tle_flags": result.tle_flags,
+                "tle_count": sum(result.tle_flags),
+                "tle_rate": sum(result.tle_flags) / len(result.tle_flags) if result.tle_flags else 0.0,
+                "total_input_sizes": len(result.tle_flags)
+            }
+            
+        if result.mle_flags is not None:
+            base_result["mle_analysis"] = {
+                "mle_flags": result.mle_flags,
+                "mle_count": sum(result.mle_flags),
+                "mle_rate": sum(result.mle_flags) / len(result.mle_flags) if result.mle_flags else 0.0,
+                "total_input_sizes": len(result.mle_flags)
+            }
+        
+        return base_result
