@@ -1,0 +1,56 @@
+{
+  "task_id": "CF1992D",
+  "title": "Test of Love",
+  "source": "codeforces",
+  "difficulty": "medium",
+  "description": "Codeforces problem CF1992D - Test of Love",
+  "input_format": "See problem statement",
+  "output_format": "See problem statement",
+  "input_bounds": {
+    "t": {
+      "min": 1,
+      "max": 10000
+    },
+    "n": {
+      "min": 1,
+      "max": 200000
+    },
+    "m": {
+      "min": 1,
+      "max": 10
+    },
+    "k": {
+      "min": 0,
+      "max": 200000
+    },
+    "sum_n": "≤ 200000"
+  },
+  "time_limit_ms": 2000,
+  "memory_limit_mb": 256,
+  "expected_complexity": "O(n m) or O(n)",
+  "expected_approach": "Use DP or greedy: keep track of minimum swim meters needed to reach each position or greedily jump to the furthest reachable logs/banks while minimizing swimming.",
+  "test_cases": [
+    {
+      "input": "6\n6 2 0\nLWLLLW\n",
+      "output": "YES",
+      "explanation": "Sample 1: jumps allow crossing without swimming."
+    },
+    {
+      "input": "6\n6 1 1\nLWLLWL\n",
+      "output": "NO",
+      "explanation": "Sample 3: insufficient swim capacity for required water segments."
+    },
+    {
+      "input": "6\n6 6 1\nWCCCCW\n",
+      "output": "YES",
+      "explanation": "Sample 6: jump directly into water and swim once within k."
+    }
+  ],
+  "source_url": "https://codeforces.com/problemset/problem/1992/D",
+  "source_rating": 1200,
+  "tags": [
+    "dp",
+    "greedy",
+    "implementation"
+  ]
+}

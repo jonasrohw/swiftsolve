@@ -1,0 +1,60 @@
+{
+  "task_id": "CF2127D",
+  "title": "Root was Built by Love, Broken by Destiny",
+  "source": "codeforces",
+  "difficulty": "hard",
+  "description": "Codeforces problem CF2127D - Root was Built by Love, Broken by Destiny",
+  "input_format": "See problem statement",
+  "output_format": "See problem statement",
+  "input_bounds": {
+    "t": 10000,
+    "n": {
+      "min": 2,
+      "max": 200000
+    },
+    "m": {
+      "min": "n-1",
+      "max": "min(n(n-1)/2,200000)"
+    },
+    "edges": {
+      "u_i, v_i": {
+        "min": 1,
+        "max": "n"
+      }
+    }
+  },
+  "time_limit_ms": 2000,
+  "memory_limit_mb": 256,
+  "expected_complexity": "O(n)",
+  "expected_approach": "Check that the graph is a tree, no vertex has ≥3 non-leaf neighbors; strip all leaves—if nothing remains: answer = 2; if one node remains: answer = 2*(n-1)!; if two nodes u,v remain: answer = 4*(du-1)!*(dv-1)!; otherwise (path of length ≥3): answer = 4 * product over remaining vertices of (leaf-count)!.",
+  "test_cases": [
+    {
+      "input": "2 1\n1 2",
+      "output": "2",
+      "explanation": "Single edge: 2 ways."
+    },
+    {
+      "input": "3 3\n1 2\n2 3\n1 3",
+      "output": "0",
+      "explanation": "Cycle: invalid, no valid arrangements."
+    },
+    {
+      "input": "5 4\n1 2\n1 3\n3 4\n3 5",
+      "output": "8",
+      "explanation": "Tree with one central non-leaf path of length ≥3; leaf arrangement: result = 8."
+    },
+    {
+      "input": "4 3\n1 2\n1 3\n1 4",
+      "output": "12",
+      "explanation": "Star: one non-leaf remains after stripping leaves, so answer = 2*(n-1)! = 2*3! = 12."
+    }
+  ],
+  "source_url": "https://codeforces.com/problemset/problem/2127/D",
+  "source_rating": 1800,
+  "tags": [
+    "combinatorics",
+    "dfs and similar",
+    "graphs",
+    "trees"
+  ]
+}

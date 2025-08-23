@@ -1,0 +1,57 @@
+{
+  "task_id": "CF1992E",
+  "title": "Novice's Mistake",
+  "source": "codeforces",
+  "difficulty": "hard",
+  "description": "Codeforces problem CF1992E - Novice's Mistake",
+  "input_format": "See problem statement",
+  "output_format": "See problem statement",
+  "input_bounds": {
+    "t": {
+      "min": 1,
+      "max": 100
+    },
+    "n": {
+      "min": 1,
+      "max": 100
+    },
+    "a": {
+      "min": 1,
+      "max": 10000
+    },
+    "b": {
+      "min": 1,
+      "max": "min(10000, a * n)"
+    }
+  },
+  "time_limit_ms": 3000,
+  "memory_limit_mb": 256,
+  "expected_complexity": "O(a * digits(n)) per test",
+  "expected_approach": "Brute-force over a from 1 to 10000, for each compute possible b in range [len(n)*a−6, len(n)*a−1], simulate the 'string' multiplication and check if it matches correct n*a−b.",
+  "test_cases": [
+    {
+      "input": "1\n2\n",
+      "output": "3\n20 18\n219 216\n2218 2214\n",
+      "explanation": "For n=2, three (a, b) pairs produce correct output as in example."
+    },
+    {
+      "input": "1\n3\n",
+      "output": "1\n165 162\n",
+      "explanation": "For n=3, one valid (a, b) pair."
+    },
+    {
+      "input": "1\n10\n",
+      "output": "1\n1262 2519\n",
+      "explanation": "For n=10, one valid (a, b) pair."
+    }
+  ],
+  "source_url": "https://codeforces.com/problemset/problem/1992/E",
+  "source_rating": 1700,
+  "tags": [
+    "brute force",
+    "constructive algorithms",
+    "implementation",
+    "math",
+    "strings"
+  ]
+}

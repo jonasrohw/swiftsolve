@@ -1,0 +1,52 @@
+{
+  "task_id": "CF2127C",
+  "title": "Trip Shopping",
+  "source": "codeforces",
+  "difficulty": "medium",
+  "description": "Codeforces problem CF2127C - Trip Shopping",
+  "input_format": "See problem statement",
+  "output_format": "See problem statement",
+  "input_bounds": {
+    "t": 10000,
+    "n": {
+      "min": 2,
+      "max": 200000
+    },
+    "k": {
+      "min": 1,
+      "max": "n"
+    },
+    "a_i, b_i": {
+      "min": 1,
+      "max": 1000000000
+    }
+  },
+  "time_limit_ms": 2000,
+  "memory_limit_mb": 256,
+  "expected_complexity": "O(n log n) or O(n)",
+  "expected_approach": "Ali cannot reduce the initial v, so Bahamin will maximize v; optimal play results in answer being the initial v = ∑|a_i – b_i|",
+  "test_cases": [
+    {
+      "input": "2 1\n1 7\n3 5",
+      "output": "8",
+      "explanation": "Ali picks (1,2); Bahamin rearranges to maximize v as in sample."
+    },
+    {
+      "input": "3 2\n1 5 3\n6 2 4",
+      "output": "9",
+      "explanation": "Bahamin leaves arrays unchanged; v = |1–6| + |5–2| + |3–4| = 9."
+    },
+    {
+      "input": "5 4\n1 16 10 10 16\n3 2 2 15 15",
+      "output": "30",
+      "explanation": "Matches the sample 3rd case."
+    }
+  ],
+  "source_url": "https://codeforces.com/problemset/problem/2127/C",
+  "source_rating": 1400,
+  "tags": [
+    "games",
+    "greedy",
+    "sortings"
+  ]
+}

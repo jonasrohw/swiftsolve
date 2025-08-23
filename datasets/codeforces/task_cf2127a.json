@@ -1,0 +1,48 @@
+{
+  "task_id": "CF2127A",
+  "title": "Mix Mex Max",
+  "source": "codeforces",
+  "difficulty": "easy",
+  "description": "Codeforces problem CF2127A - Mix Mex Max",
+  "input_format": "See problem statement",
+  "output_format": "See problem statement",
+  "input_bounds": {
+    "t": 500,
+    "n": {
+      "min": 3,
+      "max": 100
+    },
+    "a_i": {
+      "min": -1,
+      "max": 100
+    }
+  },
+  "time_limit_ms": 1000,
+  "memory_limit_mb": 256,
+  "expected_complexity": "O(n)",
+  "expected_approach": "After removing all -1 elements, check whether all remaining elements (if any) are equal and non-zero; if yes print YES, otherwise NO.",
+  "test_cases": [
+    {
+      "input": "3\n-1 -1 -1",
+      "output": "YES",
+      "explanation": "We can set all elements to 1 → mex([1,1,1])=0, and max-min =1−1=0."
+    },
+    {
+      "input": "5\n1 1 1 1 0",
+      "output": "NO",
+      "explanation": "No -1’s to replace, and the condition fails at the last triple."
+    },
+    {
+      "input": "6\n5 5 1 -1 -1 1",
+      "output": "NO",
+      "explanation": "Even with replacements, the first triple fails: mex([5,5,1])=0 ≠ 5–1=4."
+    }
+  ],
+  "source_url": "https://codeforces.com/problemset/problem/2127/A",
+  "source_rating": 800,
+  "tags": [
+    "constructive algorithms",
+    "greedy",
+    "math"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "task_id": "CF2127B",
+  "title": "Hamiiid, Haaamid... Hamid?",
+  "source": "codeforces",
+  "difficulty": "medium",
+  "description": "Codeforces problem CF2127B - Hamiiid, Haaamid... Hamid?",
+  "input_format": "See problem statement",
+  "output_format": "See problem statement",
+  "input_bounds": {
+    "t": 10000,
+    "n": {
+      "min": 2,
+      "max": 200000
+    },
+    "x": {
+      "min": 1,
+      "max": "n"
+    }
+  },
+  "time_limit_ms": 1000,
+  "memory_limit_mb": 256,
+  "expected_complexity": "O(n) per test case",
+  "expected_approach": "Compute nearest walls to the left and right of x (L and R), then answer = max( min(x, n-R+2), min(L+1, n-x+1) )",
+  "test_cases": [
+    {
+      "input": "3 1\n..#",
+      "output": "1",
+      "explanation": "Mani builds wall at 2; Hamid escapes left immediately."
+    },
+    {
+      "input": "4 2\n....",
+      "output": "1",
+      "explanation": "Wherever Mani places a wall, Hamid escapes opposite side next day."
+    },
+    {
+      "input": "5 3\n##..#",
+      "output": "3",
+      "explanation": "As shown in the example: optimal plays lead to 3 days."
+    }
+  ],
+  "source_url": "https://codeforces.com/problemset/problem/2127/B",
+  "source_rating": 1300,
+  "tags": [
+    "games",
+    "greedy"
+  ]
+}
