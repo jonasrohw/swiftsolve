@@ -43,6 +43,7 @@ class ResearchEvalRequest(BaseModel):
     seeds: Optional[List[int]] = [42, 123, 456]
     max_workers: Optional[int] = 4
     output_dir: Optional[str] = "research_results"
+    resume_evaluation_id: Optional[str] = None  # For resuming interrupted evaluations
 
 
 class ResearchEvalResponse(BaseModel):
@@ -83,16 +84,21 @@ async def start_research_evaluation(request: ResearchEvalRequest, background_tas
     total_runs = 25 * len(request.seeds) * 3  # 25 tasks × seeds × 3 replans
     estimated_duration = total_runs * 60 / request.max_workers / 60  # Assume 60 seconds per run
     
-    # Generate evaluation ID
+    # Generate or use existing evaluation ID
     from datetime import datetime
-    evaluation_id = f"research_eval_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    if request.resume_evaluation_id:
+        evaluation_id = request.resume_evaluation_id
+        log.info(f"🔄 RESUMING evaluation with ID: {evaluation_id}")
+    else:
+        evaluation_id = f"research_eval_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        log.info(f"🚀 Starting NEW evaluation with ID: {evaluation_id}")
     
     # Start evaluation in background
     def run_evaluation():
         try:
             output_dir = Path(request.output_dir) / evaluation_id
             runner = ResearchEvaluationRunner(output_dir, max_workers=request.max_workers)
-            analysis = runner.run_full_evaluation(seeds=request.seeds)
+            analysis = runner.run_full_evaluation(seeds=request.seeds, evaluation_id=evaluation_id)
             log.info(f"✅ Research evaluation {evaluation_id} completed successfully")
             log.info(f"Final success rate: {analysis['evaluation_summary']['success_rate_percent']:.1f}%")
         except Exception as e:

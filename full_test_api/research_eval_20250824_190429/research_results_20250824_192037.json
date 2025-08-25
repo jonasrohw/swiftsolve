@@ -1,0 +1,4885 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-24T19:20:37.172682",
+    "total_runs": 78,
+    "evaluation_type": "research_225_iterations",
+    "status": "complete"
+  },
+  "results": [
+    {
+      "task_id": "bigobench_binary_search",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 18.542819023132324,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int n, target;\n    cin >> n >> target;\n    vector<int> a(n);\n    for (int i = 0; i < n; ++i) {\n        cin >> a[i];\n    }\n    int left = 0, right = n - 1, ans = -1;\n    while (left <= right) {\n        int mid = left + (right - left) / 2;\n        if (a[mid] == target) {\n            ans = mid;\n            break;\n        } else if (a[mid] < target) {\n            left = mid + 1;\n        } else {\n            right = mid - 1;\n        }\n    }\n    cout << ans << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_binary_search_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:04:47.227464+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          460.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          70.0,
+          140.0
+        ],
+        "peak_memory_mb": [
+          1.015625,
+          0.953125,
+          0.984375,
+          1.0,
+          1.0625,
+          1.21875,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_binary_search",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 9.461320161819458,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint interpolation_search(const vector<int>& arr, int target) {\n    int low = 0, high = arr.size() - 1;\n    while (low <= high && target >= arr[low] && target <= arr[high]) {\n        if (arr[low] == arr[high]) {\n            if (arr[low] == target) return low;\n            else break;\n        }\n        // Estimate the position\n        int pos = low + (int)((long long)(high - low) * (target - arr[low]) / (arr[high] - arr[low]));\n        if (arr[pos] == target)\n            return pos;\n        if (arr[pos] < target)\n            low = pos + 1;\n        else\n            high = pos - 1;\n    }\n    return -1;\n}\n\nint main() {\n    int n, target;\n    cin >> n >> target;\n    vector<int> arr(n);\n    for (int i = 0; i < n; ++i) {\n        cin >> arr[i];\n    }\n    int idx = interpolation_search(arr, target);\n    cout << idx << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_binary_search_seed42_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:04:56.981212+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          220.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          70.0,
+          150.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.96875,
+          1.0625,
+          1.21875,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_binary_search",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 9.008070230484009,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint interpolation_search(const vector<int>& arr, int target) {\n    int low = 0, high = arr.size() - 1;\n    while (low <= high && target >= arr[low] && target <= arr[high]) {\n        if (arr[low] == arr[high]) {\n            if (arr[low] == target) return low;\n            else break;\n        }\n        int pos = low + (int)((long long)(high - low) * (target - arr[low]) / (arr[high] - arr[low]));\n        if (pos < low || pos > high) break;\n        if (arr[pos] == target)\n            return pos;\n        if (arr[pos] < target)\n            low = pos + 1;\n        else\n            high = pos - 1;\n    }\n    return -1;\n}\n\nint main() {\n    int n, target;\n    cin >> n >> target;\n    vector<int> arr(n);\n    for (int i = 0; i < n; ++i) {\n        cin >> arr[i];\n    }\n    cout << interpolation_search(arr, target) << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_binary_search_seed42_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:05:05.944002+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          290.0,
+          0.01,
+          0.01,
+          10.0,
+          10.0,
+          70.0,
+          360.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          1.015625,
+          0.953125,
+          1.0,
+          1.0625,
+          1.21875,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_linear_scan",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 8.5112886428833,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for(int i = 0; i < n; ++i) {\n        cin >> a[i];\n    }\n    int mx = a[0];\n    for(int i = 1; i < n; ++i) {\n        if(a[i] > mx) mx = a[i];\n    }\n    cout << mx << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_linear_scan_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:05:14.698110+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          630.0,
+          0.01,
+          0.01,
+          20.0,
+          30.0,
+          150.0,
+          190.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          1.046875,
+          1.046875,
+          1.15625,
+          1.09375,
+          1.25,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_linear_scan",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 7.20573091506958,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int &x : a) cin >> x;\n\n    // Parallel max finding simulation: reduce in log(n) steps\n    int step = 1;\n    while (step < n) {\n        for (int i = 0; i + step < n; i += 2 * step) {\n            a[i] = max(a[i], a[i + step]);\n        }\n        step *= 2;\n    }\n    cout << a[0] << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_linear_scan_seed42_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:05:21.894358+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          10000000000,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          70.0,
+          140.0
+        ],
+        "peak_memory_mb": [
+          10000000000,
+          0.953125,
+          0.953125,
+          1.0,
+          1.0625,
+          1.1875,
+          1.375
+        ],
+        "hotspots": {
+          "_crash": "Execution failed: Binary exited with code 139: Command terminated by signal 11\n\tCommand being timed: \"/tmp/swiftsolve_binaries/main_4994392544.out\"\n\tUser time (seconds): 0.00\n\tSystem time (seconds): 0.00\n\tPercent of CPU this job got: 0%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:00.27\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 1008\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 1\n\tMinor (reclaiming a frame) page faults: 167\n\tVoluntary context switches: 0\n\tInvoluntary context switches: 6\n\tSwaps: 0\n\tFile system inputs: 0\n\tFile system outputs: 0\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 16384\n\tExit status: 0\n"
+        }
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 1,
+        "tle_rate": 0.14285714285714285,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 1,
+        "mle_rate": 0.14285714285714285,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_linear_scan",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 8.85299015045166,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int &x : a) cin >> x;\n\n    // Parallel reduction simulation: iteratively reduce the array size by comparing pairs\n    while (a.size() > 1) {\n        vector<int> next;\n        int sz = a.size();\n        for (int i = 0; i + 1 < sz; i += 2) {\n            next.push_back(max(a[i], a[i+1]));\n        }\n        if (sz % 2 == 1) next.push_back(a.back());\n        a = move(next);\n    }\n    cout << a[0] << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_linear_scan_seed42_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:05:30.597799+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          10000000000,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          70.0,
+          150.0
+        ],
+        "peak_memory_mb": [
+          10000000000,
+          0.953125,
+          1.015625,
+          1.046875,
+          1.140625,
+          1.5,
+          1.90625
+        ],
+        "hotspots": {
+          "_crash": "Execution failed: Binary exited with code 139: Command terminated by signal 11\n\tCommand being timed: \"/tmp/swiftsolve_binaries/main_4434464272.out\"\n\tUser time (seconds): 0.00\n\tSystem time (seconds): 0.00\n\tPercent of CPU this job got: 1%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:00.27\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 1008\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 2\n\tMinor (reclaiming a frame) page faults: 174\n\tVoluntary context switches: 2\n\tInvoluntary context switches: 8\n\tSwaps: 0\n\tFile system inputs: 0\n\tFile system outputs: 0\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 16384\n\tExit status: 0\n"
+        }
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 1,
+        "tle_rate": 0.14285714285714285,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 1,
+        "mle_rate": 0.14285714285714285,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_two_pointers",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 6.299107074737549,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    long long target;\n    cin >> n >> target;\n    vector<long long> a(n);\n    for (int i = 0; i < n; ++i) {\n        cin >> a[i];\n    }\n\n    int l = 0, r = n - 1;\n    bool found = false;\n    while (l < r) {\n        long long sum = a[l] + a[r];\n        if (sum == target) {\n            found = true;\n            break;\n        } else if (sum < target) {\n            ++l;\n        } else {\n            --r;\n        }\n    }\n\n    cout << (found ? \"YES\" : \"NO\") << endl;\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_two_pointers_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:05:37.239677+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          210.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          70.0,
+          150.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          1.078125,
+          1.03125,
+          1.09375,
+          1.40625,
+          1.8125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_two_pointers",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 6.809042930603027,
+      "final_code": "#include <iostream>\n#include <unordered_set>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n, target;\n    cin >> n >> target;\n    int* arr = new int[n];\n    for (int i = 0; i < n; ++i) {\n        cin >> arr[i];\n    }\n\n    unordered_set<int> seen;\n    bool found = false;\n    for (int i = 0; i < n; ++i) {\n        if (seen.count(target - arr[i])) {\n            found = true;\n            break;\n        }\n        seen.insert(arr[i]);\n    }\n\n    cout << (found ? \"YES\" : \"NO\") << endl;\n\n    delete[] arr;\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_two_pointers_seed42_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:05:43.914746+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          210.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          70.0,
+          150.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          1.03125,
+          0.953125,
+          1.03125,
+          1.140625,
+          1.375,
+          1.515625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_two_pointers",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 6.602682113647461,
+      "final_code": "#include <iostream>\n#include <unordered_set>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    long long target;\n    cin >> n >> target;\n    long long* arr = new long long[n];\n    for (int i = 0; i < n; ++i) {\n        cin >> arr[i];\n    }\n\n    unordered_set<long long> seen;\n    bool found = false;\n    for (int i = 0; i < n; ++i) {\n        if (seen.count(target - arr[i])) {\n            found = true;\n            break;\n        }\n        seen.insert(arr[i]);\n    }\n\n    cout << (found ? \"YES\" : \"NO\") << endl;\n    delete[] arr;\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_two_pointers_seed42_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:05:50.203390+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          220.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          70.0,
+          150.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.09375,
+          1.171875,
+          1.5625,
+          1.890625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_hash_lookup",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 7.407965898513794,
+      "final_code": "#include <iostream>\n#include <unordered_set>\nusing namespace std;\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int n, q;\n    cin >> n >> q;\n    unordered_set<int> s;\n    for (int i = 0; i < n; ++i) {\n        int x;\n        cin >> x;\n        s.insert(x);\n    }\n    for (int i = 0; i < q; ++i) {\n        int y;\n        cin >> y;\n        if (s.count(y)) {\n            cout << \"YES\\n\";\n        } else {\n            cout << \"NO\\n\";\n        }\n    }\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_hash_lookup_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:05:57.854353+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          220.0,
+          0.01,
+          0.01,
+          10.0,
+          10.0,
+          80.0,
+          160.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          1.109375,
+          1.0625,
+          1.375,
+          1.46875,
+          3.03125,
+          4.765625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_hash_lookup",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 6.0652971267700195,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int n, q;\n    cin >> n >> q;\n    vector<int> a(n);\n    for (int i = 0; i < n; ++i) cin >> a[i];\n    sort(a.begin(), a.end());\n    while (q--) {\n        int x;\n        cin >> x;\n        bool found = binary_search(a.begin(), a.end(), x);\n        cout << (found ? \"YES\\n\" : \"NO\\n\");\n    }\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_hash_lookup_seed42_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:06:04.062724+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          220.0,
+          0.01,
+          0.01,
+          10.0,
+          10.0,
+          80.0,
+          160.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.984375,
+          1.125,
+          1.0625,
+          1.28125,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_hash_lookup",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 6.606081008911133,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n, q;\n    cin >> n >> q;\n    vector<int> a(n);\n    for (int i = 0; i < n; ++i) {\n        cin >> a[i];\n    }\n    sort(a.begin(), a.end());\n    while (q--) {\n        int x;\n        cin >> x;\n        bool found = binary_search(a.begin(), a.end(), x);\n        cout << (found ? \"YES\" : \"NO\") << endl;\n    }\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_hash_lookup_seed42_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:06:10.261052+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          210.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          70.0,
+          160.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.0,
+          1.0625,
+          1.1875,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_prefix_sum",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 7.252129077911377,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int n, q;\n    cin >> n >> q;\n    vector<long long> a(n+1, 0);\n    for (int i = 1; i <= n; ++i) {\n        cin >> a[i];\n        a[i] += a[i-1];\n    }\n    while (q--) {\n        int l, r;\n        cin >> l >> r;\n        // Assuming 1-based indexing for queries\n        cout << a[r] - a[l-1] << endl;\n    }\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_prefix_sum_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:06:17.827709+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          210.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          70.0,
+          140.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.0625,
+          1.09375,
+          1.375,
+          1.78125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_prefix_sum",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 7.410782814025879,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nstruct FenwickTree {\n    vector<long long> bit;\n    int n;\n    FenwickTree(int size) : n(size), bit(size + 1, 0) {}\n    void add(int idx, long long val) {\n        for (++idx; idx <= n; idx += idx & -idx)\n            bit[idx] += val;\n    }\n    long long sum(int idx) {\n        long long res = 0;\n        for (++idx; idx > 0; idx -= idx & -idx)\n            res += bit[idx];\n        return res;\n    }\n    long long range_sum(int l, int r) {\n        return sum(r) - sum(l - 1);\n    }\n};\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n, q;\n    cin >> n >> q;\n    vector<int> a(n);\n    FenwickTree ft(n);\n    for (int i = 0; i < n; ++i) {\n        cin >> a[i];\n        ft.add(i, a[i]);\n    }\n    for (int i = 0; i < q; ++i) {\n        int l, r;\n        cin >> l >> r;\n        // assuming 1-based input for queries\n        cout << ft.range_sum(l - 1, r - 1) << endl;\n    }\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_prefix_sum_seed42_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:06:25.331658+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          210.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          70.0,
+          150.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.078125,
+          1.109375,
+          1.609375,
+          2.140625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_prefix_sum",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 6.113180875778198,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n, q;\n    cin >> n >> q;\n    vector<long long> a(n + 1, 0); // 1-based indexing for prefix sums\n\n    for (int i = 1; i <= n; ++i) {\n        cin >> a[i];\n        a[i] += a[i - 1];\n    }\n\n    while (q--) {\n        int l, r;\n        cin >> l >> r;\n        // Assuming queries are 1-based inclusive: sum from l to r\n        cout << a[r] - a[l - 1] << endl;\n    }\n\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_prefix_sum_seed42_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:06:31.476792+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          220.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          70.0,
+          140.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.0625,
+          1.09375,
+          1.375,
+          1.75
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_sliding_window",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "agent_failure",
+      "duration_seconds": 9.634145021438599,
+      "final_code": null,
+      "iterations_used": 2,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 2,
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      }
+    },
+    {
+      "task_id": "bigobench_sliding_window",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "agent_failure",
+      "duration_seconds": 9.289223909378052,
+      "final_code": null,
+      "iterations_used": 2,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 2,
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      }
+    },
+    {
+      "task_id": "bigobench_sliding_window",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 8.192647218704224,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nstruct SegmentTree {\n    int n;\n    vector<int> tree;\n    SegmentTree(const vector<int>& a) {\n        n = a.size();\n        tree.resize(4 * n);\n        build(a, 1, 0, n - 1);\n    }\n    void build(const vector<int>& a, int v, int tl, int tr) {\n        if (tl == tr) {\n            tree[v] = a[tl];\n        } else {\n            int tm = (tl + tr) / 2;\n            build(a, v * 2, tl, tm);\n            build(a, v * 2 + 1, tm + 1, tr);\n            tree[v] = max(tree[v * 2], tree[v * 2 + 1]);\n        }\n    }\n    int query(int v, int tl, int tr, int l, int r) {\n        if (l > r) return INT_MIN;\n        if (l == tl && r == tr) {\n            return tree[v];\n        }\n        int tm = (tl + tr) / 2;\n        return max(\n            query(v * 2, tl, tm, l, min(r, tm)),\n            query(v * 2 + 1, tm + 1, tr, max(l, tm + 1), r)\n        );\n    }\n    int range_max(int l, int r) {\n        return query(1, 0, n - 1, l, r);\n    }\n};\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int n, k;\n    cin >> n >> k;\n    vector<int> a(n);\n    for (int i = 0; i < n; ++i) cin >> a[i];\n    SegmentTree st(a);\n    for (int i = 0; i <= n - k; ++i) {\n        cout << st.range_max(i, i + k - 1);\n        if (i != n - k) cout << ' ';\n    }\n    cout << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_sliding_window_seed42_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:06:58.219019+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          10000000000,
+          0.01,
+          0.01,
+          10.0,
+          10.0,
+          90.0,
+          190.0
+        ],
+        "peak_memory_mb": [
+          10000000000,
+          0.953125,
+          0.96875,
+          1.125,
+          1.265625,
+          1.96875,
+          2.984375
+        ],
+        "hotspots": {
+          "_crash": "Execution failed: Binary exited with code 139: Command terminated by signal 11\n\tCommand being timed: \"/tmp/swiftsolve_binaries/main_5016436224.out\"\n\tUser time (seconds): 0.00\n\tSystem time (seconds): 0.00\n\tPercent of CPU this job got: 1%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:00.25\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 1008\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 1\n\tMinor (reclaiming a frame) page faults: 168\n\tVoluntary context switches: 0\n\tInvoluntary context switches: 8\n\tSwaps: 0\n\tFile system inputs: 0\n\tFile system outputs: 0\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 16384\n\tExit status: 0\n"
+        }
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 1,
+        "tle_rate": 0.14285714285714285,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 1,
+        "mle_rate": 0.14285714285714285,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_merge_sort",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "agent_failure",
+      "duration_seconds": 11.02222990989685,
+      "final_code": null,
+      "iterations_used": 2,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 2,
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      }
+    },
+    {
+      "task_id": "bigobench_merge_sort",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "agent_failure",
+      "duration_seconds": 12.381852149963379,
+      "final_code": null,
+      "iterations_used": 2,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 2,
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      }
+    },
+    {
+      "task_id": "bigobench_merge_sort",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "agent_failure",
+      "duration_seconds": 18.321367979049683,
+      "final_code": null,
+      "iterations_used": 2,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 2,
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      }
+    },
+    {
+      "task_id": "bigobench_quick_sort",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "agent_failure",
+      "duration_seconds": 9.640046119689941,
+      "final_code": null,
+      "iterations_used": 2,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 2,
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      }
+    },
+    {
+      "task_id": "bigobench_quick_sort",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 8.17871904373169,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid heapify(vector<int>& a, int n, int i) {\n    int largest = i;\n    int l = 2*i + 1;\n    int r = 2*i + 2;\n    if (l < n && a[l] > a[largest]) largest = l;\n    if (r < n && a[r] > a[largest]) largest = r;\n    if (largest != i) {\n        swap(a[i], a[largest]);\n        heapify(a, n, largest);\n    }\n}\n\nvoid heapsort(vector<int>& a) {\n    int n = a.size();\n    for (int i = n/2 - 1; i >= 0; --i)\n        heapify(a, n, i);\n    for (int i = n-1; i > 0; --i) {\n        swap(a[0], a[i]);\n        heapify(a, i, 0);\n    }\n}\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int i = 0; i < n; ++i) cin >> a[i];\n    heapsort(a);\n    for (int i = 0; i < n; ++i) {\n        cout << a[i];\n        if (i + 1 < n) cout << ' ';\n    }\n    cout << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_quick_sort_seed42_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:07:58.105148+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          270.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          80.0,
+          170.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.984375,
+          1.015625,
+          1.046875,
+          1.234375,
+          1.390625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_quick_sort",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 6.925808906555176,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid heapify(vector<int>& a, int n, int i) {\n    int largest = i;\n    int l = 2*i + 1;\n    int r = 2*i + 2;\n    if (l < n && a[l] > a[largest]) largest = l;\n    if (r < n && a[r] > a[largest]) largest = r;\n    if (largest != i) {\n        swap(a[i], a[largest]);\n        heapify(a, n, largest);\n    }\n}\n\nvoid heapsort(vector<int>& a) {\n    int n = a.size();\n    for (int i = n/2 - 1; i >= 0; --i)\n        heapify(a, n, i);\n    for (int i = n-1; i > 0; --i) {\n        swap(a[0], a[i]);\n        heapify(a, i, 0);\n    }\n}\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int i = 0; i < n; ++i) cin >> a[i];\n    heapsort(a);\n    for (int i = 0; i < n; ++i) {\n        cout << a[i];\n        if (i + 1 < n) cout << ' ';\n    }\n    cout << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_quick_sort_seed42_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:08:05.078273+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          210.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          80.0,
+          170.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          1.078125,
+          1.234375,
+          1.421875
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_heap_operations",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 8.670482873916626,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\n\nclass BinaryHeap {\n    vector<int> heap;\npublic:\n    void insert(int x) {\n        heap.push_back(x);\n        int i = heap.size() - 1;\n        while (i > 0) {\n            int p = (i - 1) / 2;\n            if (heap[p] < heap[i]) {\n                swap(heap[p], heap[i]);\n                i = p;\n            } else break;\n        }\n    }\n    int extract_max() {\n        int n = heap.size();\n        int res = heap[0];\n        heap[0] = heap[n - 1];\n        heap.pop_back();\n        int i = 0;\n        while (true) {\n            int l = 2 * i + 1, r = 2 * i + 2, largest = i;\n            if (l < heap.size() && heap[l] > heap[largest]) largest = l;\n            if (r < heap.size() && heap[r] > heap[largest]) largest = r;\n            if (largest != i) {\n                swap(heap[i], heap[largest]);\n                i = largest;\n            } else break;\n        }\n        return res;\n    }\n    bool empty() {\n        return heap.empty();\n    }\n};\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int n;\n    cin >> n;\n    BinaryHeap pq;\n    for (int i = 0; i < n; ++i) {\n        string op;\n        cin >> op;\n        if (op == \"insert\") {\n            int x;\n            cin >> x;\n            pq.insert(x);\n        } else if (op == \"extract-max\") {\n            if (!pq.empty())\n                cout << pq.extract_max() << endl;\n        }\n    }\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_heap_operations_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:08:13.744355+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          210.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.9375,
+          0.9375,
+          1.0,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_heap_operations",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "agent_failure",
+      "duration_seconds": 0.0,
+      "final_code": null,
+      "iterations_used": 0,
+      "agent_failures": 0,
+      "error_details": "Object of type datetime is not JSON serializable",
+      "actual_iterations": 0,
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      }
+    },
+    {
+      "task_id": "bigobench_heap_operations",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 25.713165283203125,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <cstdio>\n#include <cstring>\n#include <cassert>\nusing namespace std;\n\n// Fibonacci Heap Node\nstruct Node {\n    int key;\n    int degree;\n    bool mark;\n    Node *parent, *child, *left, *right;\n    Node(int k) : key(k), degree(0), mark(false), parent(nullptr), child(nullptr), left(this), right(this) {}\n};\n\nclass FibonacciHeap {\n    Node* maxNode;\n    int nNodes;\npublic:\n    FibonacciHeap() : maxNode(nullptr), nNodes(0) {}\n\n    void insert(int key) {\n        Node* node = new Node(key);\n        if (!maxNode) {\n            maxNode = node;\n        } else {\n            // Insert node into root list\n            node->left = maxNode;\n            node->right = maxNode->right;\n            maxNode->right->left = node;\n            maxNode->right = node;\n            if (node->key > maxNode->key) maxNode = node;\n        }\n        nNodes++;\n    }\n\n    int extractMax() {\n        Node* z = maxNode;\n        if (z) {\n            // Add children to root list\n            if (z->child) {\n                Node* c = z->child;\n                do {\n                    Node* next = c->right;\n                    // Remove c from child list\n                    c->left->right = c->right;\n                    c->right->left = c->left;\n                    // Add c to root list\n                    c->left = maxNode;\n                    c->right = maxNode->right;\n                    maxNode->right->left = c;\n                    maxNode->right = c;\n                    c->parent = nullptr;\n                    c = next;\n                } while (c != z->child);\n            }\n            // Remove z from root list\n            z->left->right = z->right;\n            z->right->left = z->left;\n            if (z == z->right) {\n                maxNode = nullptr;\n            } else {\n                maxNode = z->right;\n                consolidate();\n            }\n            nNodes--;\n            int ret = z->key;\n            delete z;\n            return ret;\n        }\n        return -1; // Should not happen\n    }\n\nprivate:\n    void consolidate() {\n        int D = 50; // log2(1e5) < 20, but for safety\n        vector<Node*> A(D, nullptr);\n        vector<Node*> rootList;\n        Node* w = maxNode;\n        if (!w) return;\n        do {\n            rootList.push_back(w);\n            w = w->right;\n        } while (w != maxNode);\n        for (Node* w : rootList) {\n            Node* x = w;\n            int d = x->degree;\n            while (A[d]) {\n                Node* y = A[d];\n                if (x->key < y->key) swap(x, y);\n                link(y, x);\n                A[d] = nullptr;\n                d++;\n            }\n            A[d] = x;\n        }\n        maxNode = nullptr;\n        for (Node* y : A) {\n            if (y) {\n                if (!maxNode) {\n                    y->left = y->right = y;\n                    maxNode = y;\n                } else {\n                    // Insert y into root list\n                    y->left = maxNode;\n                    y->right = maxNode->right;\n                    maxNode->right->left = y;\n                    maxNode->right = y;\n                    if (y->key > maxNode->key) maxNode = y;\n                }\n            }\n        }\n    }\n\n    void link(Node* y, Node* x) {\n        // Remove y from root list\n        y->left->right = y->right;\n        y->right->left = y->left;\n        // Make y a child of x\n        y->parent = x;\n        if (!x->child) {\n            y->left = y->right = y;\n            x->child = y;\n        } else {\n            y->left = x->child;\n            y->right = x->child->right;\n            x->child->right->left = y;\n            x->child->right = y;\n        }\n        x->degree++;\n        y->mark = false;\n    }\n};\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int q;\n    cin >> q;\n    FibonacciHeap heap;\n    while (q--) {\n        string op;\n        cin >> op;\n        if (op == \"insert\") {\n            int x;\n            cin >> x;\n            heap.insert(x);\n        } else if (op == \"extract-max\") {\n            int res = heap.extractMax();\n            cout << res << endl;\n        }\n    }\n    return 0;\n}",
+      "iterations_used": 2,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 2,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_heap_operations_seed42_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:08:39.370381+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          210.0,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.9375,
+          0.9375,
+          0.9375,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_heap_operations",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 16.609126091003418,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <cstdio>\n#include <cstring>\n#include <cassert>\nusing namespace std;\n\nstruct Node {\n    int key, degree;\n    bool mark;\n    Node *parent, *child, *left, *right;\n    Node(int k) : key(k), degree(0), mark(false), parent(nullptr), child(nullptr), left(this), right(this) {}\n};\n\nclass FibonacciHeap {\n    Node* maxNode;\n    int nNodes;\npublic:\n    FibonacciHeap() : maxNode(nullptr), nNodes(0) {}\n\n    void insert(int key) {\n        Node* node = new Node(key);\n        if (!maxNode) {\n            maxNode = node;\n        } else {\n            // Insert node into root list\n            node->left = maxNode;\n            node->right = maxNode->right;\n            maxNode->right->left = node;\n            maxNode->right = node;\n            if (node->key > maxNode->key)\n                maxNode = node;\n        }\n        nNodes++;\n    }\n\n    int extractMax() {\n        Node* z = maxNode;\n        if (z) {\n            // For each child of z, add to root list\n            if (z->child) {\n                Node* c = z->child;\n                do {\n                    Node* next = c->right;\n                    // Remove c from child list\n                    c->left->right = c->right;\n                    c->right->left = c->left;\n                    // Add c to root list\n                    c->left = maxNode;\n                    c->right = maxNode->right;\n                    maxNode->right->left = c;\n                    maxNode->right = c;\n                    c->parent = nullptr;\n                    c = next;\n                } while (c != z->child);\n            }\n            // Remove z from root list\n            z->left->right = z->right;\n            z->right->left = z->left;\n            if (z == z->right) {\n                maxNode = nullptr;\n            } else {\n                maxNode = z->right;\n                consolidate();\n            }\n            nNodes--;\n            int ret = z->key;\n            delete z;\n            return ret;\n        }\n        return -1; // Should not happen\n    }\n\nprivate:\n    void consolidate() {\n        int D = 20; // log2(1e5) < 20\n        vector<Node*> A(D, nullptr);\n        vector<Node*> rootList;\n        Node* w = maxNode;\n        if (!w) return;\n        do {\n            rootList.push_back(w);\n            w = w->right;\n        } while (w != maxNode);\n        for (Node* w : rootList) {\n            Node* x = w;\n            int d = x->degree;\n            while (A[d]) {\n                Node* y = A[d];\n                if (x->key < y->key) swap(x, y);\n                link(y, x);\n                A[d] = nullptr;\n                d++;\n            }\n            A[d] = x;\n        }\n        maxNode = nullptr;\n        for (Node* y : A) {\n            if (y) {\n                if (!maxNode) {\n                    y->left = y->right = y;\n                    maxNode = y;\n                } else {\n                    // Insert y into root list\n                    y->left = maxNode;\n                    y->right = maxNode->right;\n                    maxNode->right->left = y;\n                    maxNode->right = y;\n                    if (y->key > maxNode->key)\n                        maxNode = y;\n                }\n            }\n        }\n    }\n\n    void link(Node* y, Node* x) {\n        // Remove y from root list\n        y->left->right = y->right;\n        y->right->left = y->left;\n        // Make y a child of x\n        y->parent = x;\n        if (!x->child) {\n            y->left = y->right = y;\n            x->child = y;\n        } else {\n            y->left = x->child;\n            y->right = x->child->right;\n            x->child->right->left = y;\n            x->child->right = y;\n        }\n        x->degree++;\n        y->mark = false;\n    }\n};\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int q;\n    cin >> q;\n    FibonacciHeap heap;\n    while (q--) {\n        string op;\n        cin >> op;\n        if (op == \"insert\") {\n            int x;\n            cin >> x;\n            heap.insert(x);\n        } else if (op == \"extract-max\") {\n            int res = heap.extractMax();\n            cout << res << endl;\n        }\n    }\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_heap_operations_seed42_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:08:55.974718+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          210.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.9375,
+          0.9375,
+          0.9375,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_bfs_graph",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 7.430513858795166,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <queue>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n, m;\n    cin >> n >> m;\n    vector<vector<int>> adj(n + 1);\n    for (int i = 0; i < m; ++i) {\n        int u, v;\n        cin >> u >> v;\n        adj[u].push_back(v);\n        adj[v].push_back(u);\n    }\n    int s, t;\n    cin >> s >> t;\n\n    vector<int> dist(n + 1, -1);\n    vector<int> prev(n + 1, -1);\n    queue<int> q;\n    dist[s] = 0;\n    q.push(s);\n\n    while (!q.empty()) {\n        int u = q.front(); q.pop();\n        for (int v : adj[u]) {\n            if (dist[v] == -1) {\n                dist[v] = dist[u] + 1;\n                prev[v] = u;\n                q.push(v);\n            }\n        }\n    }\n\n    if (dist[t] == -1) {\n        cout << -1 << endl;\n    } else {\n        vector<int> path;\n        for (int v = t; v != -1; v = prev[v])\n            path.push_back(v);\n        for (int i = path.size() - 1; i >= 0; --i) {\n            cout << path[i];\n            if (i > 0) cout << ' ';\n        }\n        cout << endl;\n    }\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_bfs_graph_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:09:03.375014+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          10000000000,
+          10000000000,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01
+        ],
+        "peak_memory_mb": [
+          10000000000,
+          10000000000,
+          0.984375,
+          1.140625,
+          1.3125,
+          2.546875,
+          4.125
+        ],
+        "hotspots": {
+          "_crash": "Execution failed: Binary exited with code 139: Command terminated by signal 11\n\tCommand being timed: \"/tmp/swiftsolve_binaries/main_4976153088.out\"\n\tUser time (seconds): 0.00\n\tSystem time (seconds): 0.00\n\tPercent of CPU this job got: 0%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:00.01\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 1024\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 1\n\tMinor (reclaiming a frame) page faults: 169\n\tVoluntary context switches: 0\n\tInvoluntary context switches: 3\n\tSwaps: 0\n\tFile system inputs: 0\n\tFile system outputs: 0\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 16384\n\tExit status: 0\n"
+        }
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 2,
+        "tle_rate": 0.2857142857142857,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 2,
+        "mle_rate": 0.2857142857142857,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_bfs_graph",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 9.244745016098022,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <queue>\n#include <algorithm>\nusing namespace std;\n\nconst int INF = 1e9+7;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n, m;\n    cin >> n >> m;\n    vector<vector<int>> adj(n+1);\n    for (int i = 0; i < m; ++i) {\n        int u, v;\n        cin >> u >> v;\n        adj[u].push_back(v);\n        adj[v].push_back(u);\n    }\n    int s, t;\n    cin >> s >> t;\n\n    if (s == t) {\n        cout << 0 << endl;\n        return 0;\n    }\n\n    vector<int> dist_s(n+1, INF), dist_t(n+1, INF);\n    vector<bool> vis_s(n+1, false), vis_t(n+1, false);\n    queue<int> qs, qt;\n\n    dist_s[s] = 0; vis_s[s] = true; qs.push(s);\n    dist_t[t] = 0; vis_t[t] = true; qt.push(t);\n\n    int answer = INF;\n\n    while (!qs.empty() || !qt.empty()) {\n        // Expand from source side\n        if (!qs.empty()) {\n            int sz = qs.size();\n            while (sz--) {\n                int u = qs.front(); qs.pop();\n                for (int v : adj[u]) {\n                    if (!vis_s[v]) {\n                        dist_s[v] = dist_s[u] + 1;\n                        vis_s[v] = true;\n                        qs.push(v);\n                        if (vis_t[v]) {\n                            answer = min(answer, dist_s[v] + dist_t[v]);\n                        }\n                    }\n                }\n            }\n        }\n        // Expand from target side\n        if (!qt.empty()) {\n            int sz = qt.size();\n            while (sz--) {\n                int u = qt.front(); qt.pop();\n                for (int v : adj[u]) {\n                    if (!vis_t[v]) {\n                        dist_t[v] = dist_t[u] + 1;\n                        vis_t[v] = true;\n                        qt.push(v);\n                        if (vis_s[v]) {\n                            answer = min(answer, dist_s[v] + dist_t[v]);\n                        }\n                    }\n                }\n            }\n        }\n        if (answer != INF) break;\n    }\n\n    if (answer == INF) cout << -1 << endl;\n    else cout << answer << endl;\n\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_bfs_graph_seed42_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:09:12.611528+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          10000000000,
+          10000000000,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01
+        ],
+        "peak_memory_mb": [
+          10000000000,
+          10000000000,
+          0.984375,
+          1.15625,
+          1.3125,
+          2.5625,
+          4.09375
+        ],
+        "hotspots": {
+          "_crash": "Execution failed: Binary exited with code 139: Command terminated by signal 11\n\tCommand being timed: \"/tmp/swiftsolve_binaries/main_5024830976.out\"\n\tUser time (seconds): 0.00\n\tSystem time (seconds): 0.00\n\tPercent of CPU this job got: 0%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:00.01\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 1024\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 1\n\tMinor (reclaiming a frame) page faults: 169\n\tVoluntary context switches: 0\n\tInvoluntary context switches: 3\n\tSwaps: 0\n\tFile system inputs: 0\n\tFile system outputs: 0\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 16384\n\tExit status: 0\n"
+        }
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 2,
+        "tle_rate": 0.2857142857142857,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 2,
+        "mle_rate": 0.2857142857142857,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_bfs_graph",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 7.703212022781372,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <queue>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n, m;\n    cin >> n >> m;\n    vector<vector<int>> adj(n + 1);\n    for (int i = 0; i < m; ++i) {\n        int u, v;\n        cin >> u >> v;\n        adj[u].push_back(v);\n        adj[v].push_back(u);\n    }\n    int s, t;\n    cin >> s >> t;\n\n    if (s == t) {\n        cout << \"0\\n\";\n        return 0;\n    }\n\n    vector<int> dist_s(n + 1, -1), dist_t(n + 1, -1);\n    queue<int> qs, qt;\n    dist_s[s] = 0;\n    dist_t[t] = 0;\n    qs.push(s);\n    qt.push(t);\n\n    int answer = -1;\n\n    while (!qs.empty() || !qt.empty()) {\n        // Expand from source side\n        if (!qs.empty()) {\n            int u = qs.front(); qs.pop();\n            for (int v : adj[u]) {\n                if (dist_s[v] == -1) {\n                    dist_s[v] = dist_s[u] + 1;\n                    qs.push(v);\n                    if (dist_t[v] != -1) {\n                        answer = dist_s[v] + dist_t[v];\n                        cout << answer << endl;\n                        return 0;\n                    }\n                }\n            }\n        }\n        // Expand from target side\n        if (!qt.empty()) {\n            int u = qt.front(); qt.pop();\n            for (int v : adj[u]) {\n                if (dist_t[v] == -1) {\n                    dist_t[v] = dist_t[u] + 1;\n                    qt.push(v);\n                    if (dist_s[v] != -1) {\n                        answer = dist_s[v] + dist_t[v];\n                        cout << answer << endl;\n                        return 0;\n                    }\n                }\n            }\n        }\n    }\n    cout << \"-1\\n\";\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_bfs_graph_seed42_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:09:20.388872+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          10000000000,
+          10000000000,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01
+        ],
+        "peak_memory_mb": [
+          10000000000,
+          10000000000,
+          0.984375,
+          1.15625,
+          1.3125,
+          2.546875,
+          4.0625
+        ],
+        "hotspots": {
+          "_crash": "Execution failed: Binary exited with code 139: Command terminated by signal 11\n\tCommand being timed: \"/tmp/swiftsolve_binaries/main_5016445952.out\"\n\tUser time (seconds): 0.00\n\tSystem time (seconds): 0.00\n\tPercent of CPU this job got: 0%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:00.01\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 1008\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 1\n\tMinor (reclaiming a frame) page faults: 170\n\tVoluntary context switches: 0\n\tInvoluntary context switches: 5\n\tSwaps: 0\n\tFile system inputs: 0\n\tFile system outputs: 0\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 16384\n\tExit status: 0\n"
+        }
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 2,
+        "tle_rate": 0.2857142857142857,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 2,
+        "mle_rate": 0.2857142857142857,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_dfs_graph",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 10.018975019454956,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nconst int MAXN = 100005;\n\nvector<int> adj[MAXN];\nvector<bool> visited(MAXN, false);\n\nbool found = false;\n\nvoid dfs(int u, int target) {\n    if (u == target) {\n        found = true;\n        return;\n    }\n    visited[u] = true;\n    for (int v : adj[u]) {\n        if (!visited[v]) {\n            dfs(v, target);\n            if (found) return;\n        }\n    }\n}\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n, m;\n    cin >> n >> m;\n    for (int i = 0; i < m; ++i) {\n        int u, v;\n        cin >> u >> v;\n        adj[u].push_back(v);\n        adj[v].push_back(u);\n    }\n    int start, end;\n    cin >> start >> end;\n\n    dfs(start, end);\n\n    if (found) {\n        cout << \"YES\\n\";\n    } else {\n        cout << \"NO\\n\";\n    }\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_dfs_graph_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:09:30.388982+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          220.0,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01
+        ],
+        "peak_memory_mb": [
+          3.25,
+          3.3125,
+          3.25,
+          3.25,
+          3.25,
+          3.25,
+          3.25
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_dfs_graph",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 6.538543701171875,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <stack>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n, m;\n    cin >> n >> m;\n    vector<vector<int>> adj(n + 1);\n    for (int i = 0; i < m; ++i) {\n        int u, v;\n        cin >> u >> v;\n        adj[u].push_back(v);\n        adj[v].push_back(u);\n    }\n    int start, target;\n    cin >> start >> target;\n\n    vector<bool> visited(n + 1, false);\n    stack<int> s;\n    s.push(start);\n    visited[start] = true;\n    bool found = false;\n\n    while (!s.empty()) {\n        int u = s.top();\n        s.pop();\n        if (u == target) {\n            found = true;\n            break;\n        }\n        for (int v : adj[u]) {\n            if (!visited[v]) {\n                visited[v] = true;\n                s.push(v);\n            }\n        }\n    }\n\n    cout << (found ? \"YES\" : \"NO\") << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_dfs_graph_seed42_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:09:36.894692+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          210.0,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01
+        ],
+        "peak_memory_mb": [
+          1.015625,
+          0.953125,
+          0.96875,
+          1.109375,
+          1.21875,
+          2.140625,
+          3.296875
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_dfs_graph",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 6.572813034057617,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <stack>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n, m;\n    cin >> n >> m;\n    vector<vector<int>> adj(n + 1);\n    for (int i = 0; i < m; ++i) {\n        int u, v;\n        cin >> u >> v;\n        adj[u].push_back(v);\n        adj[v].push_back(u);\n    }\n    int start, target;\n    cin >> start >> target;\n\n    vector<bool> visited(n + 1, false);\n    stack<int> stk;\n    stk.push(start);\n    visited[start] = true;\n    bool found = false;\n\n    while (!stk.empty()) {\n        int u = stk.top();\n        stk.pop();\n        if (u == target) {\n            found = true;\n            break;\n        }\n        for (int v : adj[u]) {\n            if (!visited[v]) {\n                visited[v] = true;\n                stk.push(v);\n            }\n        }\n    }\n\n    cout << (found ? \"YES\" : \"NO\") << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_dfs_graph_seed42_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:09:43.537018+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          210.0,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.96875,
+          1.109375,
+          1.28125,
+          2.296875,
+          3.296875
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_dijkstra",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 12.990870952606201,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <queue>\n#include <limits>\nusing namespace std;\n\ntypedef long long ll;\ntypedef pair<ll, int> pli;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n, m;\n    cin >> n >> m;\n    vector<vector<pair<int, ll>>> adj(n + 1);\n    for (int i = 0; i < m; ++i) {\n        int u, v;\n        ll w;\n        cin >> u >> v >> w;\n        adj[u].emplace_back(v, w);\n        // If the graph is undirected, uncomment the next line:\n        // adj[v].emplace_back(u, w);\n    }\n    int src, dest;\n    cin >> src >> dest;\n\n    vector<ll> dist(n + 1, numeric_limits<ll>::max());\n    vector<bool> visited(n + 1, false);\n    priority_queue<pli, vector<pli>, greater<pli>> pq;\n    dist[src] = 0;\n    pq.emplace(0, src);\n\n    while (!pq.empty()) {\n        ll d = pq.top().first;\n        int u = pq.top().second;\n        pq.pop();\n        if (visited[u]) continue;\n        visited[u] = true;\n        for (auto &edge : adj[u]) {\n            int v = edge.first;\n            ll w = edge.second;\n            if (dist[v] > d + w) {\n                dist[v] = d + w;\n                pq.emplace(dist[v], v);\n            }\n        }\n    }\n\n    if (dist[dest] == numeric_limits<ll>::max()) {\n        cout << \"-1\\n\";\n    } else {\n        cout << dist[dest] << endl;\n    }\n}",
+      "iterations_used": 2,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 2,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_dijkstra_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:09:56.301173+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          10000000000,
+          10000000000,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01
+        ],
+        "peak_memory_mb": [
+          10000000000,
+          10000000000,
+          0.984375,
+          1.15625,
+          1.296875,
+          2.53125,
+          4.046875
+        ],
+        "hotspots": {
+          "_crash": "Execution failed: Binary exited with code 139: Command terminated by signal 11\n\tCommand being timed: \"/tmp/swiftsolve_binaries/main_5008050688.out\"\n\tUser time (seconds): 0.00\n\tSystem time (seconds): 0.00\n\tPercent of CPU this job got: 0%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:00.01\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 1024\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 1\n\tMinor (reclaiming a frame) page faults: 169\n\tVoluntary context switches: 0\n\tInvoluntary context switches: 3\n\tSwaps: 0\n\tFile system inputs: 0\n\tFile system outputs: 0\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 16384\n\tExit status: 0\n"
+        }
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 2,
+        "tle_rate": 0.2857142857142857,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 2,
+        "mle_rate": 0.2857142857142857,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_dijkstra",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 10.203284978866577,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <queue>\n#include <limits>\nusing namespace std;\n\ntypedef long long ll;\nconst ll INF = 1e18;\n\nstruct Edge {\n    int to;\n    ll weight;\n};\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n, m;\n    cin >> n >> m;\n    vector<vector<Edge>> adj(n), radj(n);\n    for (int i = 0; i < m; ++i) {\n        int u, v;\n        ll w;\n        cin >> u >> v >> w;\n        --u; --v;\n        adj[u].push_back({v, w});\n        radj[v].push_back({u, w});\n    }\n    int s, t;\n    cin >> s >> t;\n    --s; --t;\n\n    vector<ll> dist_f(n, INF), dist_b(n, INF);\n    vector<bool> vis_f(n, false), vis_b(n, false);\n\n    priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<pair<ll, int>>> pq_f, pq_b;\n\n    dist_f[s] = 0;\n    dist_b[t] = 0;\n    pq_f.push({0, s});\n    pq_b.push({0, t});\n\n    ll ans = INF;\n\n    while (!pq_f.empty() || !pq_b.empty()) {\n        // Forward step\n        if (!pq_f.empty()) {\n            auto [d, u] = pq_f.top(); pq_f.pop();\n            if (vis_f[u]) continue;\n            vis_f[u] = true;\n            if (vis_b[u]) ans = min(ans, dist_f[u] + dist_b[u]);\n            for (auto &e : adj[u]) {\n                if (dist_f[e.to] > dist_f[u] + e.weight) {\n                    dist_f[e.to] = dist_f[u] + e.weight;\n                    pq_f.push({dist_f[e.to], e.to});\n                }\n            }\n        }\n        // Backward step\n        if (!pq_b.empty()) {\n            auto [d, u] = pq_b.top(); pq_b.pop();\n            if (vis_b[u]) continue;\n            vis_b[u] = true;\n            if (vis_f[u]) ans = min(ans, dist_f[u] + dist_b[u]);\n            for (auto &e : radj[u]) {\n                if (dist_b[e.to] > dist_b[u] + e.weight) {\n                    dist_b[e.to] = dist_b[u] + e.weight;\n                    pq_b.push({dist_b[e.to], e.to});\n                }\n            }\n        }\n    }\n\n    for (int u = 0; u < n; ++u) {\n        if (dist_f[u] < INF && dist_b[u] < INF) {\n            ans = min(ans, dist_f[u] + dist_b[u]);\n        }\n    }\n\n    if (ans == INF) cout << -1 << endl;\n    else cout << ans << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_dijkstra_seed42_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:10:07.285850+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          10000000000,
+          10000000000,
+          0.01,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000
+        ],
+        "peak_memory_mb": [
+          10000000000,
+          10000000000,
+          1.015625,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000
+        ],
+        "hotspots": {
+          "_crash": "Execution failed: Binary exited with code 139: Command terminated by signal 11\n\tCommand being timed: \"/tmp/swiftsolve_binaries/main_5016440832.out\"\n\tUser time (seconds): 0.00\n\tSystem time (seconds): 0.00\n\tPercent of CPU this job got: 0%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:00.01\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 5760\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 1\n\tMinor (reclaiming a frame) page faults: 465\n\tVoluntary context switches: 0\n\tInvoluntary context switches: 3\n\tSwaps: 0\n\tFile system inputs: 0\n\tFile system outputs: 0\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 16384\n\tExit status: 0\n"
+        }
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          true,
+          true,
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "tle_count": 6,
+        "tle_rate": 0.8571428571428571,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          true,
+          true,
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "mle_count": 6,
+        "mle_rate": 0.8571428571428571,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_dijkstra",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 8.112321138381958,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <queue>\n#include <limits>\nusing namespace std;\n\ntypedef long long ll;\nconst ll INF = 1e18;\n\nstruct Edge {\n    int to;\n    ll weight;\n};\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n, m;\n    cin >> n >> m;\n    vector<vector<Edge>> adj(n), radj(n);\n    for (int i = 0; i < m; ++i) {\n        int u, v;\n        ll w;\n        cin >> u >> v >> w;\n        --u; --v;\n        adj[u].push_back({v, w});\n        radj[v].push_back({u, w});\n    }\n    int s, t;\n    cin >> s >> t;\n    --s; --t;\n\n    vector<ll> dist_f(n, INF), dist_b(n, INF);\n    vector<bool> vis_f(n, false), vis_b(n, false);\n\n    priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<pair<ll, int>>> pq_f, pq_b;\n    dist_f[s] = 0;\n    dist_b[t] = 0;\n    pq_f.push({0, s});\n    pq_b.push({0, t});\n\n    ll ans = INF;\n\n    while (!pq_f.empty() || !pq_b.empty()) {\n        // Forward step\n        if (!pq_f.empty()) {\n            auto [d, u] = pq_f.top(); pq_f.pop();\n            if (vis_f[u]) continue;\n            vis_f[u] = true;\n            if (vis_b[u]) ans = min(ans, dist_f[u] + dist_b[u]);\n            for (auto &e : adj[u]) {\n                if (dist_f[e.to] > dist_f[u] + e.weight) {\n                    dist_f[e.to] = dist_f[u] + e.weight;\n                    pq_f.push({dist_f[e.to], e.to});\n                }\n            }\n        }\n        // Backward step\n        if (!pq_b.empty()) {\n            auto [d, u] = pq_b.top(); pq_b.pop();\n            if (vis_b[u]) continue;\n            vis_b[u] = true;\n            if (vis_f[u]) ans = min(ans, dist_f[u] + dist_b[u]);\n            for (auto &e : radj[u]) {\n                if (dist_b[e.to] > dist_b[u] + e.weight) {\n                    dist_b[e.to] = dist_b[u] + e.weight;\n                    pq_b.push({dist_b[e.to], e.to});\n                }\n            }\n        }\n    }\n\n    if (ans == INF) cout << -1 << endl;\n    else cout << ans << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_dijkstra_seed42_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:10:15.398089+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          10000000000,
+          10000000000,
+          0.01,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000
+        ],
+        "peak_memory_mb": [
+          10000000000,
+          10000000000,
+          1.015625,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000
+        ],
+        "hotspots": {
+          "_crash": "Execution failed: Binary exited with code 139: Command terminated by signal 11\n\tCommand being timed: \"/tmp/swiftsolve_binaries/main_4976137728.out\"\n\tUser time (seconds): 0.00\n\tSystem time (seconds): 0.00\n\tPercent of CPU this job got: 0%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:00.01\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 5760\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 1\n\tMinor (reclaiming a frame) page faults: 465\n\tVoluntary context switches: 0\n\tInvoluntary context switches: 3\n\tSwaps: 0\n\tFile system inputs: 0\n\tFile system outputs: 0\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 16384\n\tExit status: 0\n"
+        }
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          true,
+          true,
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "tle_count": 6,
+        "tle_rate": 0.8571428571428571,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          true,
+          true,
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "mle_count": 6,
+        "mle_rate": 0.8571428571428571,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_dynamic_programming",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 9.27220106124878,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\nint main() {\n    string a, b;\n    cin >> a >> b;\n    int n = a.size(), m = b.size();\n    vector<vector<int>> dp(n+1, vector<int>(m+1, 0));\n    for (int i = 1; i <= n; ++i) {\n        for (int j = 1; j <= m; ++j) {\n            if (a[i-1] == b[j-1])\n                dp[i][j] = dp[i-1][j-1] + 1;\n            else\n                dp[i][j] = max(dp[i-1][j], dp[i][j-1]);\n        }\n    }\n    cout << dp[n][m] << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_dynamic_programming_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:10:24.097078+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          210.0,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_dynamic_programming",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 6.9529430866241455,
+      "final_code": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint main() {\n    string s, t;\n    cin >> s >> t;\n    int n = s.size(), m = t.size();\n    vector<int> prev(m + 1, 0), curr(m + 1, 0);\n\n    for (int i = 1; i <= n; ++i) {\n        curr[0] = 0;\n        for (int j = 1; j <= m; ++j) {\n            if (s[i - 1] == t[j - 1])\n                curr[j] = prev[j - 1] + 1;\n            else\n                curr[j] = max(prev[j], curr[j - 1]);\n        }\n        swap(prev, curr);\n    }\n    cout << prev[m] << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_dynamic_programming_seed42_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:10:30.976164+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          210.0,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_dynamic_programming",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 7.295906066894531,
+      "final_code": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint main() {\n    string a, b;\n    cin >> a >> b;\n    int n = a.size(), m = b.size();\n    vector<int> prev(m + 1, 0), curr(m + 1, 0);\n    for (int i = 1; i <= n; ++i) {\n        curr[0] = 0;\n        for (int j = 1; j <= m; ++j) {\n            if (a[i - 1] == b[j - 1])\n                curr[j] = prev[j - 1] + 1;\n            else\n                curr[j] = max(prev[j], curr[j - 1]);\n        }\n        swap(prev, curr);\n    }\n    cout << prev[m] << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_dynamic_programming_seed42_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:10:38.353280+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          210.0,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          1.015625,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_backtracking",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "agent_failure",
+      "duration_seconds": 8.764994144439697,
+      "final_code": null,
+      "iterations_used": 2,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 2,
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      }
+    },
+    {
+      "task_id": "bigobench_backtracking",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 16.247851133346558,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for(int i = 0; i < n; ++i) cin >> a[i];\n    sort(a.begin(), a.end());\n    do {\n        for(int i = 0; i < n; ++i) {\n            cout << a[i];\n            if(i + 1 < n) cout << ' ';\n        }\n        cout << endl;\n    } while(next_permutation(a.begin(), a.end()));\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_backtracking_seed42_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:11:03.933100+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          220.0,
+          0.01,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000
+        ],
+        "peak_memory_mb": [
+          1.046875,
+          0.953125,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000
+        ],
+        "hotspots": {
+          "_crash": "Execution timed out after 2s"
+        }
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "tle_count": 5,
+        "tle_rate": 0.7142857142857143,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "mle_count": 5,
+        "mle_rate": 0.7142857142857143,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_backtracking",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 15.717191934585571,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for(int i = 0; i < n; ++i) cin >> a[i];\n    sort(a.begin(), a.end());\n    do {\n        for(int i = 0; i < n; ++i) {\n            cout << a[i];\n            if(i + 1 < n) cout << ' ';\n        }\n        cout << endl;\n    } while(next_permutation(a.begin(), a.end()));\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_backtracking_seed42_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:11:19.650244+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          210.0,
+          0.01,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000
+        ],
+        "hotspots": {
+          "_crash": "Execution timed out after 2s"
+        }
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "tle_count": 5,
+        "tle_rate": 0.7142857142857143,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "mle_count": 5,
+        "mle_rate": 0.7142857142857143,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_matrix_multiplication",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "agent_failure",
+      "duration_seconds": 21.10249900817871,
+      "final_code": null,
+      "iterations_used": 2,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 2,
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      }
+    },
+    {
+      "task_id": "bigobench_matrix_multiplication",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "agent_failure",
+      "duration_seconds": 22.0761661529541,
+      "final_code": null,
+      "iterations_used": 2,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 2,
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      }
+    },
+    {
+      "task_id": "bigobench_matrix_multiplication",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "agent_failure",
+      "duration_seconds": 23.563169956207275,
+      "final_code": null,
+      "iterations_used": 2,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 2,
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      }
+    },
+    {
+      "task_id": "bigobench_segment_tree",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 8.645114183425903,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nconst int INF = 1e9+7;\n\nstruct SegmentTree {\n    int n;\n    vector<int> tree;\n    SegmentTree(int size) {\n        n = 1;\n        while (n < size) n <<= 1;\n        tree.assign(2 * n, INF);\n    }\n    void build(const vector<int>& a) {\n        for (int i = 0; i < (int)a.size(); ++i) tree[n + i] = a[i];\n        for (int i = n - 1; i > 0; --i)\n            tree[i] = min(tree[2 * i], tree[2 * i + 1]);\n    }\n    void update(int pos, int value) {\n        pos += n;\n        tree[pos] = value;\n        for (pos /= 2; pos > 0; pos /= 2)\n            tree[pos] = min(tree[2 * pos], tree[2 * pos + 1]);\n    }\n    int query(int l, int r) { // [l, r)\n        int res = INF;\n        l += n; r += n;\n        while (l < r) {\n            if (l & 1) res = min(res, tree[l++]);\n            if (r & 1) res = min(res, tree[--r]);\n            l >>= 1; r >>= 1;\n        }\n        return res;\n    }\n};\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int n, q;\n    cin >> n >> q;\n    vector<int> a(n);\n    for (int i = 0; i < n; ++i) cin >> a[i];\n    SegmentTree st(n);\n    st.build(a);\n    for (int i = 0; i < q; ++i) {\n        int type;\n        cin >> type;\n        if (type == 1) {\n            int pos, value;\n            cin >> pos >> value;\n            --pos;\n            st.update(pos, value);\n        } else if (type == 2) {\n            int l, r;\n            cin >> l >> r;\n            --l;\n            cout << st.query(l, r) << endl;\n        }\n    }\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_segment_tree_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:12:35.038645+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000
+        ],
+        "peak_memory_mb": [
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000
+        ],
+        "hotspots": {
+          "_crash": "Execution failed: Binary exited with code 139: Command terminated by signal 11\n\tCommand being timed: \"/tmp/swiftsolve_binaries/main_4713117696.out\"\n\tUser time (seconds): 0.14\n\tSystem time (seconds): 0.00\n\tPercent of CPU this job got: 89%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:00.16\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 2480\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 1\n\tMinor (reclaiming a frame) page faults: 260\n\tVoluntary context switches: 0\n\tInvoluntary context switches: 14\n\tSwaps: 0\n\tFile system inputs: 0\n\tFile system outputs: 0\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 16384\n\tExit status: 0\n"
+        }
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "tle_count": 7,
+        "tle_rate": 1.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "mle_count": 7,
+        "mle_rate": 1.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_segment_tree",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 10.570854902267456,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nconst int INF = 1e9+7;\n\nstruct SegmentTree {\n    int n;\n    vector<int> tree, lazy;\n\n    SegmentTree(int size) {\n        n = size;\n        tree.assign(4*n, INF);\n        lazy.assign(4*n, 0);\n    }\n\n    void push(int v, int tl, int tr) {\n        if (lazy[v] != 0) {\n            tree[v] += lazy[v];\n            if (tl != tr) {\n                lazy[2*v] += lazy[v];\n                lazy[2*v+1] += lazy[v];\n            }\n            lazy[v] = 0;\n        }\n    }\n\n    void build(const vector<int>& a, int v, int tl, int tr) {\n        if (tl == tr) {\n            tree[v] = a[tl];\n        } else {\n            int tm = (tl + tr) / 2;\n            build(a, v*2, tl, tm);\n            build(a, v*2+1, tm+1, tr);\n            tree[v] = min(tree[v*2], tree[v*2+1]);\n        }\n    }\n\n    void point_update(int v, int tl, int tr, int pos, int new_val) {\n        push(v, tl, tr);\n        if (tl == tr) {\n            tree[v] = new_val;\n        } else {\n            int tm = (tl + tr) / 2;\n            if (pos <= tm)\n                point_update(v*2, tl, tm, pos, new_val);\n            else\n                point_update(v*2+1, tm+1, tr, pos, new_val);\n            tree[v] = min(tree[v*2], tree[v*2+1]);\n        }\n    }\n\n    int range_min(int v, int tl, int tr, int l, int r) {\n        push(v, tl, tr);\n        if (l > r) return INF;\n        if (l == tl && r == tr) {\n            return tree[v];\n        }\n        int tm = (tl + tr) / 2;\n        return min(\n            range_min(v*2, tl, tm, l, min(r, tm)),\n            range_min(v*2+1, tm+1, tr, max(l, tm+1), r)\n        );\n    }\n};\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n, q;\n    cin >> n >> q;\n    vector<int> a(n);\n    for (int i = 0; i < n; ++i) cin >> a[i];\n\n    SegmentTree st(n);\n    st.build(a, 1, 0, n-1);\n\n    for (int i = 0; i < q; ++i) {\n        int type;\n        cin >> type;\n        if (type == 1) {\n            int pos, val;\n            cin >> pos >> val;\n            --pos;\n            st.point_update(1, 0, n-1, pos, val);\n        } else if (type == 2) {\n            int l, r;\n            cin >> l >> r;\n            --l; --r;\n            cout << st.range_min(1, 0, n-1, l, r) << endl;\n        }\n    }\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_segment_tree_seed42_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:12:44.970970+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          10000000000,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          70.0,
+          140.0
+        ],
+        "peak_memory_mb": [
+          10000000000,
+          0.9375,
+          1.015625,
+          1.15625,
+          1.375,
+          2.75,
+          4.46875
+        ],
+        "hotspots": {
+          "_crash": "Execution failed: Binary exited with code 139: Command terminated by signal 11\n\tCommand being timed: \"/tmp/swiftsolve_binaries/main_5024833536.out\"\n\tUser time (seconds): 0.00\n\tSystem time (seconds): 0.00\n\tPercent of CPU this job got: 1%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:00.23\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 1008\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 1\n\tMinor (reclaiming a frame) page faults: 168\n\tVoluntary context switches: 0\n\tInvoluntary context switches: 5\n\tSwaps: 0\n\tFile system inputs: 0\n\tFile system outputs: 0\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 16384\n\tExit status: 0\n"
+        }
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 1,
+        "tle_rate": 0.14285714285714285,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 1,
+        "mle_rate": 0.14285714285714285,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_segment_tree",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 9.087407112121582,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <cmath>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n, q;\n    cin >> n >> q;\n    vector<int> a(n);\n    for (int i = 0; i < n; ++i) cin >> a[i];\n\n    int B = (int)sqrt(n) + 1;\n    vector<int> block_min(B, INT_MAX);\n\n    for (int i = 0; i < n; ++i) {\n        block_min[i / B] = min(block_min[i / B], a[i]);\n    }\n\n    while (q--) {\n        int type;\n        cin >> type;\n        if (type == 1) {\n            // point update: set a[p] = x\n            int p, x;\n            cin >> p >> x;\n            --p;\n            a[p] = x;\n            int b = p / B;\n            block_min[b] = INT_MAX;\n            int l = b * B, r = min(n, (b + 1) * B);\n            for (int i = l; i < r; ++i) {\n                block_min[b] = min(block_min[b], a[i]);\n            }\n        } else if (type == 2) {\n            // range min query: [l, r)\n            int l, r;\n            cin >> l >> r;\n            --l;\n            int ans = INT_MAX;\n            int start_block = l / B, end_block = (r - 1) / B;\n            if (start_block == end_block) {\n                for (int i = l; i < r; ++i) ans = min(ans, a[i]);\n            } else {\n                int end_l = (start_block + 1) * B;\n                for (int i = l; i < end_l; ++i) ans = min(ans, a[i]);\n                for (int b = start_block + 1; b < end_block; ++b) ans = min(ans, block_min[b]);\n                int start_r = end_block * B;\n                for (int i = start_r; i < r; ++i) ans = min(ans, a[i]);\n            }\n            cout << ans << endl;\n        }\n    }\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_segment_tree_seed42_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:12:54.042554+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          220.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          70.0,
+          140.0
+        ],
+        "peak_memory_mb": [
+          0.9375,
+          0.9375,
+          0.953125,
+          1.0,
+          1.03125,
+          1.21875,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285a_meximum_array",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 10.913524150848389,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <unordered_set>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int &x : a) cin >> x;\n\n    vector<int> res;\n    vector<int> freq(n + 2, 0);\n    int cnt = 0, mex = 0, l = 0;\n\n    for (int i = 0; i < n; ++i) {\n        if (a[i] <= n) {\n            if (freq[a[i]] == 0) cnt++;\n            freq[a[i]]++;\n        }\n        while (freq[mex]) ++mex;\n        if (cnt == mex) {\n            res.push_back(mex);\n            // reset for next subarray\n            for (int j = l; j <= i; ++j) {\n                if (a[j] <= n) {\n                    freq[a[j]]--;\n                    if (freq[a[j]] == 0) cnt--;\n                }\n            }\n            l = i + 1;\n            mex = 0;\n        }\n    }\n\n    cout << res.size() << endl;\n    for (int x : res) cout << x << ' ';\n    cout << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285a_meximum_array_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:13:05.003361+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          240.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          70.0,
+          140.0
+        ],
+        "peak_memory_mb": [
+          1.015625,
+          0.953125,
+          0.953125,
+          1.015625,
+          1.140625,
+          1.390625,
+          1.796875
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285a_meximum_array",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 10.06365180015564,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <unordered_map>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int &x : a) cin >> x;\n\n    vector<int> res;\n    unordered_map<int, int> freq;\n    int l = 0;\n    while (l < n) {\n        freq.clear();\n        int mex = 0, cnt = 0, r = l;\n        // Track how many unique numbers we have in [l, r)\n        while (r < n) {\n            freq[a[r]]++;\n            // Update mex\n            while (freq.count(mex)) ++mex;\n            ++cnt;\n            // If we have all numbers from 0 to mex-1, we can split here\n            if ((int)freq.size() == mex) {\n                res.push_back(mex);\n                ++r;\n                break;\n            }\n            ++r;\n        }\n        l = r;\n    }\n\n    cout << res.size() << endl;\n    for (int x : res) cout << x << ' ';\n    cout << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285a_meximum_array_seed42_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:13:15.132418+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          220.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          70.0,
+          160.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          1.03125,
+          1.171875,
+          1.421875,
+          3.078125,
+          5.015625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285a_meximum_array",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "agent_failure",
+      "duration_seconds": 0.0,
+      "final_code": null,
+      "iterations_used": 0,
+      "agent_failures": 0,
+      "error_details": "Object of type datetime is not JSON serializable",
+      "actual_iterations": 0,
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      }
+    },
+    {
+      "task_id": "cf_1285a_meximum_array",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 9.620731830596924,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <unordered_set>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int &x : a) cin >> x;\n\n    vector<int> res;\n    unordered_set<int> seen;\n    int cnt = 0;\n    int mex = 0;\n\n    for (int i = 0; i < n; ++i) {\n        seen.insert(a[i]);\n        while (seen.count(mex)) ++mex;\n        if ((int)seen.size() == mex) {\n            res.push_back(mex);\n            seen.clear();\n            mex = 0;\n        }\n    }\n\n    cout << res.size() << endl;\n    int idx = 0;\n    for (int x : res) {\n        if (idx++) cout << ' ';\n        cout << x;\n    }\n    cout << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285a_meximum_array_seed42_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:13:24.799888+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          210.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          70.0,
+          160.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.984375,
+          1.234375,
+          1.40625,
+          3.078125,
+          5.09375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285b_just_eat_it",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 10.19022011756897,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<long long> a(n);\n    long long total = 0;\n    for (int i = 0; i < n; ++i) {\n        cin >> a[i];\n        total += a[i];\n    }\n\n    // Find maximum subarray sum (Kadane's algorithm)\n    long long max_sum = a[0], curr = a[0];\n    for (int i = 1; i < n; ++i) {\n        curr = max(a[i], curr + a[i]);\n        max_sum = max(max_sum, curr);\n    }\n\n    // Check if there exists a subarray with sum > total - sum\n    // i.e., sum > total - sum => 2*sum > total => sum > total/2\n    if (max_sum > total / 2.0) {\n        cout << \"YES\\n\";\n    } else {\n        cout << \"NO\\n\";\n    }\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285b_just_eat_it_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:13:34.893854+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          210.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          70.0,
+          140.0
+        ],
+        "peak_memory_mb": [
+          1.015625,
+          0.953125,
+          1.015625,
+          1.0625,
+          1.09375,
+          1.40625,
+          1.75
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285b_just_eat_it",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 9.276639223098755,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<long long> a(n);\n    long long total = 0;\n    for (int i = 0; i < n; ++i) {\n        cin >> a[i];\n        total += a[i];\n    }\n\n    // We want to find if there exists a subarray with sum > total - sum\n    // That is, sum > total/2\n\n    long long target = total / 2;\n    // If total is odd, sum > target (since target is floor(total/2))\n\n    // Use prefix sums and binary search for subarrays\n    vector<long long> prefix(n + 1, 0);\n    for (int i = 0; i < n; ++i) {\n        prefix[i + 1] = prefix[i] + a[i];\n    }\n\n    bool found = false;\n    // For each possible starting point, binary search for the minimal end point\n    // such that subarray sum > target\n    for (int i = 0; i < n; ++i) {\n        int lo = i + 1, hi = n, pos = -1;\n        while (lo <= hi) {\n            int mid = (lo + hi) / 2;\n            long long sub_sum = prefix[mid] - prefix[i];\n            if (sub_sum > target) {\n                pos = mid;\n                hi = mid - 1;\n            } else {\n                lo = mid + 1;\n            }\n        }\n        if (pos != -1) {\n            found = true;\n            break;\n        }\n    }\n\n    cout << (found ? \"YES\" : \"NO\") << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285b_just_eat_it_seed42_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:13:44.215771+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          220.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          70.0,
+          140.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          1.0625,
+          1.140625,
+          1.203125,
+          1.828125,
+          2.578125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285b_just_eat_it",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 9.909795045852661,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<long long> a(n);\n    long long total = 0;\n    for (int i = 0; i < n; ++i) {\n        cin >> a[i];\n        total += a[i];\n    }\n\n    // We need to check if there exists a subarray with sum > total - sum\n    // i.e., subarray sum > total/2\n\n    // Find the maximum subarray sum using Kadane's algorithm\n    long long max_sum = a[0], curr = a[0];\n    for (int i = 1; i < n; ++i) {\n        curr = max(a[i], curr + a[i]);\n        max_sum = max(max_sum, curr);\n    }\n\n    if (max_sum > total - max_sum) {\n        cout << \"YES\\n\";\n    } else {\n        cout << \"NO\\n\";\n    }\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285b_just_eat_it_seed42_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:13:54.125870+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          210.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          70.0,
+          140.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          1.046875,
+          0.953125,
+          1.125,
+          1.09375,
+          1.40625,
+          1.78125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285c_fadi_and_lcm",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 9.854676008224487,
+      "final_code": "#include <iostream>\n#include <cmath>\nusing namespace std;\n\ntypedef long long ll;\n\nll gcd(ll a, ll b) {\n    while (b) {\n        ll t = b;\n        b = a % b;\n        a = t;\n    }\n    return a;\n}\n\nint main() {\n    ll x;\n    cin >> x;\n    ll a = 1, b = x;\n    ll min_diff = x - 1;\n    for (ll i = 1; i * i <= x; ++i) {\n        if (x % i == 0) {\n            ll j = x / i;\n            if (gcd(i, j) == 1) {\n                ll diff = abs(i - j);\n                if (diff < min_diff) {\n                    min_diff = diff;\n                    a = i;\n                    b = j;\n                }\n            }\n        }\n    }\n    cout << a << \" \" << b << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285c_fadi_and_lcm_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:14:03.988287+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          210.0,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          1.015625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285c_fadi_and_lcm",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "agent_failure",
+      "duration_seconds": 13.692415952682495,
+      "final_code": null,
+      "iterations_used": 2,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 2,
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      }
+    },
+    {
+      "task_id": "cf_1285c_fadi_and_lcm",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "agent_failure",
+      "duration_seconds": 13.491261959075928,
+      "final_code": null,
+      "iterations_used": 2,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 2,
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      }
+    },
+    {
+      "task_id": "cf_1285d_dr_evil_underscores",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "agent_failure",
+      "duration_seconds": 29.00425410270691,
+      "final_code": null,
+      "iterations_used": 2,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 2,
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      }
+    },
+    {
+      "task_id": "cf_1285d_dr_evil_underscores",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 24.650829076766968,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nstruct TrieNode {\n    TrieNode* child[2];\n    TrieNode() {\n        child[0] = child[1] = nullptr;\n    }\n};\n\nclass Trie {\npublic:\n    TrieNode* root;\n    Trie() {\n        root = new TrieNode();\n    }\n    void insert(int num) {\n        TrieNode* node = root;\n        for (int i = 30; i >= 0; --i) {\n            int b = (num >> i) & 1;\n            if (!node->child[b]) node->child[b] = new TrieNode();\n            node = node->child[b];\n        }\n    }\n    int maxXor(int num) {\n        TrieNode* node = root;\n        int res = 0;\n        for (int i = 30; i >= 0; --i) {\n            int b = (num >> i) & 1;\n            if (node->child[1-b]) {\n                res |= (1 << i);\n                node = node->child[1-b];\n            } else {\n                node = node->child[b];\n            }\n        }\n        return res;\n    }\n    void clear(TrieNode* node) {\n        if (!node) return;\n        clear(node->child[0]);\n        clear(node->child[1]);\n        delete node;\n    }\n    ~Trie() {\n        clear(root);\n    }\n};\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(0);\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int &x : a) cin >> x;\n\n    // Step 1: Compute original max XOR\n    Trie trie;\n    int orig_max = 0;\n    for (int i = 0; i < n; ++i) trie.insert(a[i]);\n    for (int i = 0; i < n; ++i) {\n        orig_max = max(orig_max, trie.maxXor(a[i]));\n    }\n\n    int ans = orig_max;\n\n    // Step 2: Try changing each element to any other value in the array\n    // For each a[i], try replacing it with a[j] (j != i)\n    for (int i = 0; i < n; ++i) {\n        // Remove a[i] from trie\n        Trie tempTrie;\n        for (int k = 0; k < n; ++k) {\n            if (k != i) tempTrie.insert(a[k]);\n        }\n        for (int j = 0; j < n; ++j) {\n            if (i == j) continue;\n            int max_xor = 0;\n            for (int k = 0; k < n; ++k) {\n                if (k == i) {\n                    max_xor = max(max_xor, tempTrie.maxXor(a[j]));\n                } else {\n                    max_xor = max(max_xor, tempTrie.maxXor(a[k]));\n                }\n            }\n            ans = min(ans, max_xor);\n        }\n    }\n\n    cout << ans << endl;\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285d_dr_evil_underscores_seed42_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:15:25.367908+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          220.0,
+          0.01,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          1.015625,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000
+        ],
+        "hotspots": {
+          "_crash": "Execution timed out after 2s"
+        }
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "tle_count": 5,
+        "tle_rate": 0.7142857142857143,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "mle_count": 5,
+        "mle_rate": 0.7142857142857143,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285d_dr_evil_underscores",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 26.710822820663452,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nstruct TrieNode {\n    TrieNode* child[2];\n    TrieNode() {\n        child[0] = child[1] = nullptr;\n    }\n};\n\nclass Trie {\npublic:\n    TrieNode* root;\n    Trie() {\n        root = new TrieNode();\n    }\n    void insert(int num) {\n        TrieNode* node = root;\n        for (int i = 30; i >= 0; --i) {\n            int b = (num >> i) & 1;\n            if (!node->child[b]) node->child[b] = new TrieNode();\n            node = node->child[b];\n        }\n    }\n    int query(int num) {\n        TrieNode* node = root;\n        int res = 0;\n        for (int i = 30; i >= 0; --i) {\n            int b = (num >> i) & 1;\n            if (node->child[b]) {\n                node = node->child[b];\n            } else {\n                node = node->child[b ^ 1];\n                res |= (1 << i);\n            }\n        }\n        return res;\n    }\n    void clear(TrieNode* node) {\n        if (!node) return;\n        clear(node->child[0]);\n        clear(node->child[1]);\n        delete node;\n    }\n    ~Trie() {\n        clear(root);\n    }\n};\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(0);\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int &x : a) cin >> x;\n\n    // Step 1: Compute initial maximum XOR\n    Trie trie;\n    int max_xor = 0;\n    for (int i = 0; i < n; ++i) trie.insert(a[i]);\n    for (int i = 0; i < n; ++i) {\n        int cur = trie.query(a[i]);\n        if (cur > max_xor) max_xor = cur;\n    }\n\n    // Step 2: Try changing each element to any other value in the array (at most one operation)\n    // Since n is large, we try changing to 0 or to a value close to a[i] (e.g., a[i]^max_xor)\n    // But for efficiency, try changing a[i] to a[j] for all j (brute force is too slow)\n    // Instead, try changing a[i] to 0 and to a[i]^max_xor\n\n    int answer = max_xor;\n    for (int i = 0; i < n; ++i) {\n        // Remove a[i] from trie\n        Trie temp_trie;\n        for (int j = 0; j < n; ++j) if (j != i) temp_trie.insert(a[j]);\n        // Try changing a[i] to 0\n        int cur_max = 0;\n        for (int j = 0; j < n; ++j) if (j != i) {\n            int q = temp_trie.query(a[j]);\n            if (q > cur_max) cur_max = q;\n        }\n        int q0 = temp_trie.query(0);\n        if (q0 > cur_max) cur_max = q0;\n        answer = min(answer, cur_max);\n\n        // Try changing a[i] to a[i]^max_xor\n        int new_val = a[i] ^ max_xor;\n        cur_max = 0;\n        for (int j = 0; j < n; ++j) if (j != i) {\n            int q = temp_trie.query(a[j]);\n            if (q > cur_max) cur_max = q;\n        }\n        int q1 = temp_trie.query(new_val);\n        if (q1 > cur_max) cur_max = q1;\n        answer = min(answer, cur_max);\n    }\n\n    cout << answer << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285d_dr_evil_underscores_seed42_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:15:52.081038+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          350.0,
+          10000000000,
+          400.0,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000
+        ],
+        "peak_memory_mb": [
+          1.015625,
+          10000000000,
+          1.3125,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000
+        ],
+        "hotspots": {
+          "_crash": "Execution timed out after 2s"
+        }
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          true,
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "tle_count": 5,
+        "tle_rate": 0.7142857142857143,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          true,
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "mle_count": 5,
+        "mle_rate": 0.7142857142857143,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285e_delete_a_segment",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 14.751874685287476,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nstruct Event {\n    int x, type, idx;\n    // type: 1 = start, -1 = end\n    bool operator<(const Event& other) const {\n        if (x != other.x) return x < other.x;\n        return type > other.type; // start before end at same x\n    }\n};\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<pair<int, int>> seg(n);\n    vector<Event> events;\n    for (int i = 0; i < n; ++i) {\n        int l, r;\n        cin >> l >> r;\n        seg[i] = {l, r};\n        events.push_back({l, 1, i});\n        events.push_back({r, -1, i});\n    }\n    sort(events.begin(), events.end());\n\n    vector<int> cnt(n, 0); // cnt[i]: how many times seg i is the unique topmost\n    int active = 0;\n    int last_x = 0;\n    int unique_idx = -1;\n    for (size_t i = 0; i < events.size(); ++i) {\n        int x = events[i].x;\n        if (i > 0 && x > last_x && active == 1 && unique_idx != -1) {\n            cnt[unique_idx] += x - last_x;\n        }\n        if (events[i].type == 1) {\n            ++active;\n            unique_idx = events[i].idx;\n        } else {\n            --active;\n            if (active == 1) {\n                // find the only active segment\n                // scan forward to next start or end\n                for (size_t j = i + 1; j < events.size(); ++j) {\n                    if (events[j].x != x) break;\n                    if (events[j].type == 1) {\n                        unique_idx = events[j].idx;\n                        break;\n                    }\n                }\n            } else {\n                unique_idx = -1;\n            }\n        }\n        last_x = x;\n    }\n\n    int ans = 0;\n    for (int i = 0; i < n; ++i) {\n        if (cnt[i] > 0) ++ans;\n    }\n    cout << ans << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285e_delete_a_segment_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:16:06.273953+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          330.0,
+          0.01,
+          0.01,
+          10.0,
+          20.0,
+          130.0,
+          280.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          1.0,
+          1.46875,
+          1.84375,
+          4.125,
+          7.671875
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285e_delete_a_segment",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 16.070296049118042,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <set>\nusing namespace std;\n\nstruct Segment {\n    int l, r, idx;\n};\n\nstruct Event {\n    int x, type, idx;\n    bool operator<(const Event& o) const {\n        if (x != o.x) return x < o.x;\n        return type > o.type; // start (+1) before end (-1)\n    }\n};\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<Segment> segs(n);\n    vector<Event> events;\n    for (int i = 0; i < n; ++i) {\n        int l, r;\n        cin >> l >> r;\n        segs[i] = {l, r, i};\n        events.push_back({l, 1, i});\n        events.push_back({r, -1, i});\n    }\n    sort(events.begin(), events.end());\n\n    vector<int> topmost_count(n, 0);\n    set<int> active;\n    int prev_x = events[0].x;\n    for (size_t i = 0; i < events.size(); ++i) {\n        int x = events[i].x;\n        if (!active.empty() && x > prev_x) {\n            // The topmost is the segment with the largest idx (last inserted)\n            int top = *active.rbegin();\n            topmost_count[top] += x - prev_x;\n        }\n        if (events[i].type == 1) {\n            active.insert(events[i].idx);\n        } else {\n            active.erase(events[i].idx);\n        }\n        prev_x = x;\n    }\n\n    // Now, for each segment, check if after removing it, the set of topmost segments changes\n    // A segment is \"topmost\" if it covers at least one point where it is the last inserted (top)\n    int result = 0;\n    for (int i = 0; i < n; ++i) {\n        if (topmost_count[i] > 0) result++;\n    }\n    cout << result << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285e_delete_a_segment_seed42_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:16:22.346183+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          320.0,
+          10.0,
+          10.0,
+          10.0,
+          30.0,
+          150.0,
+          360.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          1.015625,
+          1.078125,
+          1.5625,
+          2.125,
+          6.234375,
+          10.828125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285e_delete_a_segment",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 22.082697868347168,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <set>\nusing namespace std;\n\nstruct Segment {\n    int l, r, idx;\n};\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(0);\n\n    int n;\n    cin >> n;\n    vector<Segment> segs(n);\n    vector<pair<int, int>> events; // {pos, type: +idx for start, -idx for end}\n    for (int i = 0; i < n; ++i) {\n        cin >> segs[i].l >> segs[i].r;\n        segs[i].idx = i;\n        events.emplace_back(segs[i].l, i + 1); // start event\n        events.emplace_back(segs[i].r + 1, -(i + 1)); // end event\n    }\n    sort(events.begin(), events.end());\n\n    vector<int> topmost_count(n, 0); // how many times each segment is topmost\n    set<int> active; // indices of active segments\n    int prev = events[0].first;\n    int top = -1;\n    for (size_t i = 0; i < events.size(); ++i) {\n        int pos = events[i].first;\n        // For all positions between prev and pos-1, the topmost is the last inserted\n        if (top != -1 && pos > prev) {\n            topmost_count[top] += pos - prev;\n        }\n        // Process all events at this position\n        while (i < events.size() && events[i].first == pos) {\n            int idx = abs(events[i].second) - 1;\n            if (events[i].second > 0) {\n                active.insert(idx);\n            } else {\n                active.erase(idx);\n            }\n            ++i;\n        }\n        --i;\n        // Update top\n        if (!active.empty()) {\n            top = *active.rbegin();\n        } else {\n            top = -1;\n        }\n        prev = pos;\n    }\n\n    // Now, for each segment, check if after removing it, it ever becomes topmost\n    // A segment is \"topmost after removing one\" if it was ever topmost before\n    int ans = 0;\n    for (int i = 0; i < n; ++i) {\n        if (topmost_count[i] > 0) ++ans;\n    }\n    cout << ans << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285e_delete_a_segment_seed42_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:16:44.300189+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          320.0,
+          0.01,
+          10.0,
+          20.0,
+          30.0,
+          180.0,
+          350.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          1.015625,
+          1.0,
+          1.5,
+          1.8125,
+          4.796875,
+          9.125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1286a_garland",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 13.949403047561646,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <set>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n, k;\n    cin >> n >> k;\n    vector<int> pos(k), val(k);\n    vector<bool> is_fixed(n, false);\n    vector<int> fixed_val(n, -1);\n\n    for (int i = 0; i < k; ++i) {\n        cin >> pos[i];\n    }\n    for (int i = 0; i < k; ++i) {\n        cin >> val[i];\n    }\n    for (int i = 0; i < k; ++i) {\n        --pos[i];\n        is_fixed[pos[i]] = true;\n        fixed_val[pos[i]] = val[i];\n    }\n\n    set<int> unused;\n    for (int i = 1; i <= n; ++i) unused.insert(i);\n    for (int i = 0; i < n; ++i) {\n        if (is_fixed[i]) unused.erase(fixed_val[i]);\n    }\n\n    vector<int> res(n, -1);\n    for (int i = 0; i < n; ++i) {\n        if (is_fixed[i]) res[i] = fixed_val[i];\n    }\n\n    // Fill unfixed positions greedily\n    for (int i = 0; i < n; ++i) {\n        if (!is_fixed[i]) {\n            int left = -1, right = -1;\n            for (int l = i - 1; l >= 0; --l) {\n                if (res[l] != -1) {\n                    left = res[l];\n                    break;\n                }\n            }\n            for (int r = i + 1; r < n; ++r) {\n                if (res[r] != -1) {\n                    right = res[r];\n                    break;\n                }\n            }\n            int target;\n            if (left != -1 && right != -1) {\n                target = (left + right) / 2;\n            } else if (left != -1) {\n                target = left;\n            } else if (right != -1) {\n                target = right;\n            } else {\n                target = (n + 1) / 2;\n            }\n            // Find closest unused number to target\n            auto it = unused.lower_bound(target);\n            int pick;\n            if (it == unused.end()) {\n                pick = *prev(it);\n            } else if (it == unused.begin()) {\n                pick = *it;\n            } else {\n                int a = *it;\n                int b = *prev(it);\n                if (abs(a - target) < abs(b - target)) pick = a;\n                else pick = b;\n            }\n            res[i] = pick;\n            unused.erase(pick);\n        }\n    }\n\n    for (int i = 0; i < n; ++i) {\n        cout << res[i] << \" \\n\"[i == n - 1];\n    }\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1286a_garland_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:16:58.271822+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          10000000000,
+          0.01,
+          10.0,
+          50.0,
+          10000000000,
+          130.0,
+          10000000000
+        ],
+        "peak_memory_mb": [
+          10000000000,
+          0.953125,
+          0.984375,
+          1.1875,
+          10000000000,
+          3.125,
+          10000000000
+        ],
+        "hotspots": {
+          "_crash": "Execution failed: Binary exited with code 134: Command terminated by signal 6\n\tCommand being timed: \"/tmp/swiftsolve_binaries/main_5008060928.out\"\n\tUser time (seconds): 0.01\n\tSystem time (seconds): 0.00\n\tPercent of CPU this job got: 19%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:00.07\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 4688\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 1\n\tMinor (reclaiming a frame) page faults: 398\n\tVoluntary context switches: 0\n\tInvoluntary context switches: 21\n\tSwaps: 0\n\tFile system inputs: 0\n\tFile system outputs: 0\n\tSocket messages sent: 1\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 16384\n\tExit status: 0\n"
+        }
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          true,
+          false,
+          false,
+          false,
+          true,
+          false,
+          true
+        ],
+        "tle_count": 3,
+        "tle_rate": 0.42857142857142855,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          true,
+          false,
+          false,
+          false,
+          true,
+          false,
+          true
+        ],
+        "mle_count": 3,
+        "mle_rate": 0.42857142857142855,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1286a_garland",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "agent_failure",
+      "duration_seconds": 27.116811990737915,
+      "final_code": null,
+      "iterations_used": 2,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 2,
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      }
+    },
+    {
+      "task_id": "cf_1286a_garland",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "agent_failure",
+      "duration_seconds": 30.693159818649292,
+      "final_code": null,
+      "iterations_used": 2,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 2,
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      }
+    },
+    {
+      "task_id": "cf_1286b_numbers_on_tree",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "agent_failure",
+      "duration_seconds": 26.717200994491577,
+      "final_code": null,
+      "iterations_used": 3,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 3,
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      }
+    },
+    {
+      "task_id": "cf_1286b_numbers_on_tree",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 16.78703284263611,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\n// For each node, store its children\nvector<vector<int>> tree;\nvector<int> inorder;\nint n, idx = 0;\nbool possible = true;\n\n// DFS to simulate in-order traversal and check matching\nvoid dfs(int u, int parent) {\n    int children = 0;\n    int left = -1, right = -1;\n    for (int v : tree[u]) {\n        if (v != parent) {\n            if (children == 0) left = v;\n            else right = v;\n            ++children;\n        }\n    }\n    if (left != -1) dfs(left, u);\n    // Visit current node: check if we have enough inorder elements\n    if (idx >= n) {\n        possible = false;\n        return;\n    }\n    // We don't care about actual values, just structure\n    ++idx;\n    if (right != -1) dfs(right, u);\n}\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    cin >> n;\n    tree.assign(n, vector<int>());\n    for (int i = 0; i < n - 1; ++i) {\n        int u, v;\n        cin >> u >> v;\n        --u; --v;\n        tree[u].push_back(v);\n        tree[v].push_back(u);\n    }\n    inorder.resize(n);\n    for (int i = 0; i < n; ++i) cin >> inorder[i];\n\n    // Check if the tree is a binary tree (each node has at most 2 children)\n    for (int i = 0; i < n; ++i) {\n        if (tree[i].size() > 3) { // parent + 2 children\n            cout << \"NO\\n\";\n            return 0;\n        }\n    }\n\n    // Find a root (any node)\n    dfs(0, -1);\n\n    if (possible && idx == n) cout << \"YES\\n\";\n    else cout << \"NO\\n\";\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1286b_numbers_on_tree_seed42_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:18:40.257126+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          10000000000,
+          0.01,
+          0.01,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000
+        ],
+        "peak_memory_mb": [
+          10000000000,
+          0.96875,
+          1.125,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000
+        ],
+        "hotspots": {
+          "_crash": "Execution failed: Binary exited with code 139: Command terminated by signal 11\n\tCommand being timed: \"/tmp/swiftsolve_binaries/main_5024836096.out\"\n\tUser time (seconds): 0.00\n\tSystem time (seconds): 0.00\n\tPercent of CPU this job got: 1%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:00.10\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 3488\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 1\n\tMinor (reclaiming a frame) page faults: 322\n\tVoluntary context switches: 0\n\tInvoluntary context switches: 13\n\tSwaps: 0\n\tFile system inputs: 0\n\tFile system outputs: 0\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 16384\n\tExit status: 0\n"
+        }
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          true,
+          false,
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "tle_count": 5,
+        "tle_rate": 0.7142857142857143,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          true,
+          false,
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "mle_count": 5,
+        "mle_rate": 0.7142857142857143,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1286b_numbers_on_tree",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 16.952577114105225,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <queue>\nusing namespace std;\n\n// Function to check if the given in-order sequence can be assigned to the tree\nbool inorder_traversal_matching(int n, const vector<vector<int>>& tree, const vector<int>& inorder) {\n    vector<int> left(n, -1), right(n, -1), parent(n, -1);\n    // Build left/right child arrays and parent array\n    for (int u = 0; u < n; ++u) {\n        for (int v : tree[u]) {\n            if (left[u] == -1) left[u] = v;\n            else right[u] = v;\n            parent[v] = u;\n        }\n    }\n    // Find root\n    int root = 0;\n    while (parent[root] != -1) root = parent[root];\n\n    // Simulate in-order traversal and check structure\n    int idx = 0;\n    bool ok = true;\n    function<void(int)> dfs = [&](int u) {\n        if (u == -1) return;\n        dfs(left[u]);\n        if (idx >= n) { ok = false; return; }\n        // No need to check value, just structure\n        ++idx;\n        dfs(right[u]);\n    };\n    dfs(root);\n    if (idx != n) ok = false;\n    return ok;\n}\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<vector<int>> tree(n);\n    for (int i = 0; i < n - 1; ++i) {\n        int u, v;\n        cin >> u >> v;\n        --u; --v;\n        tree[u].push_back(v);\n        tree[v].push_back(u);\n    }\n    vector<int> inorder(n);\n    for (int i = 0; i < n; ++i) {\n        cin >> inorder[i];\n    }\n\n    // Build a rooted binary tree from the undirected tree\n    // If any node has degree > 3, impossible\n    bool possible = true;\n    for (int i = 0; i < n; ++i) {\n        if (tree[i].size() > 3) {\n            possible = false;\n            break;\n        }\n    }\n    if (!possible) {\n        cout << \"NO\\n\";\n        return 0;\n    }\n\n    // Root the tree at any node (say, 0)\n    vector<vector<int>> bin_tree(n);\n    vector<bool> vis(n, false);\n    queue<int> q;\n    q.push(0);\n    vis[0] = true;\n    while (!q.empty()) {\n        int u = q.front(); q.pop();\n        for (int v : tree[u]) {\n            if (!vis[v]) {\n                bin_tree[u].push_back(v);\n                vis[v] = true;\n                q.push(v);\n            }\n        }\n    }\n\n    if (inorder_traversal_matching(n, bin_tree, inorder)) {\n        cout << \"YES\\n\";\n    } else {\n        cout << \"NO\\n\";\n    }\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1286b_numbers_on_tree_seed42_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:18:57.205778+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          10000000000,
+          0.01,
+          0.01,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000
+        ],
+        "peak_memory_mb": [
+          10000000000,
+          0.953125,
+          1.078125,
+          10000000000,
+          10000000000,
+          10000000000,
+          10000000000
+        ],
+        "hotspots": {
+          "_crash": "Execution failed: Binary exited with code 139: Command terminated by signal 11\n\tCommand being timed: \"/tmp/swiftsolve_binaries/main_5008056832.out\"\n\tUser time (seconds): 0.00\n\tSystem time (seconds): 0.00\n\tPercent of CPU this job got: 1%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:00.05\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 3440\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 1\n\tMinor (reclaiming a frame) page faults: 320\n\tVoluntary context switches: 0\n\tInvoluntary context switches: 10\n\tSwaps: 0\n\tFile system inputs: 0\n\tFile system outputs: 0\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 16384\n\tExit status: 0\n"
+        }
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          true,
+          false,
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "tle_count": 5,
+        "tle_rate": 0.7142857142857143,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          true,
+          false,
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "mle_count": 5,
+        "mle_rate": 0.7142857142857143,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1286c1_madness_easy",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "agent_failure",
+      "duration_seconds": 13.226119041442871,
+      "final_code": null,
+      "iterations_used": 2,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 2,
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      }
+    },
+    {
+      "task_id": "cf_1286c1_madness_easy",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 22.510026931762695,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <functional>\nusing namespace std;\n\n// Interactive comparison: returns true if a < b in the hidden permutation\nbool ask(int a, int b) {\n    cout << \"? \" << a + 1 << \" \" << b + 1 << endl;\n    string res;\n    cin >> res;\n    return res == \"<\";\n}\n\n// Merge sort with interactive comparisons\nvoid merge_sort(vector<int>& arr, int l, int r, vector<int>& tmp) {\n    if (r - l <= 1) return;\n    int m = (l + r) / 2;\n    merge_sort(arr, l, m, tmp);\n    merge_sort(arr, m, r, tmp);\n    int i = l, j = m, k = l;\n    while (i < m && j < r) {\n        if (ask(arr[i], arr[j])) {\n            tmp[k++] = arr[i++];\n        } else {\n            tmp[k++] = arr[j++];\n        }\n    }\n    while (i < m) tmp[k++] = arr[i++];\n    while (j < r) tmp[k++] = arr[j++];\n    for (int x = l; x < r; ++x) arr[x] = tmp[x];\n}\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<int> arr(n), tmp(n);\n    for (int i = 0; i < n; ++i) arr[i] = i;\n\n    merge_sort(arr, 0, n, tmp);\n\n    vector<int> pos(n);\n    for (int i = 0; i < n; ++i) pos[arr[i]] = i + 1;\n\n    cout << \"! \";\n    for (int i = 0; i < n; ++i) cout << pos[i] << \" \";\n    cout << endl;\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1286c1_madness_easy_seed42_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:19:32.251694+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          320.0,
+          0.01,
+          10.0,
+          70.0,
+          150.0,
+          800.0,
+          1850.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          1.015625,
+          1.03125,
+          1.046875,
+          1.171875,
+          1.609375,
+          2.203125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1286c1_madness_easy",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 17.85821533203125,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <functional>\nusing namespace std;\n\n// Interactive comparison: returns true if a < b in the hidden permutation\nbool compare(int a, int b) {\n    cout << \"? \" << a + 1 << \" \" << b + 1 << endl;\n    string res;\n    cin >> res;\n    return res == \"<\";\n}\n\n// Merge sort with interactive comparisons\nvoid merge_sort(vector<int>& arr, int l, int r, vector<int>& temp) {\n    if (r - l <= 1) return;\n    int m = (l + r) / 2;\n    merge_sort(arr, l, m, temp);\n    merge_sort(arr, m, r, temp);\n    int i = l, j = m, k = l;\n    while (i < m && j < r) {\n        if (compare(arr[i], arr[j])) {\n            temp[k++] = arr[i++];\n        } else {\n            temp[k++] = arr[j++];\n        }\n    }\n    while (i < m) temp[k++] = arr[i++];\n    while (j < r) temp[k++] = arr[j++];\n    for (int x = l; x < r; ++x) arr[x] = temp[x];\n}\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    int n;\n    cin >> n;\n    vector<int> arr(n), temp(n);\n    for (int i = 0; i < n; ++i) arr[i] = i;\n    merge_sort(arr, 0, n, temp);\n\n    // Output the permutation (1-based)\n    vector<int> pos(n);\n    for (int i = 0; i < n; ++i) pos[arr[i]] = i + 1;\n    cout << \"! \";\n    for (int i = 0; i < n; ++i) cout << pos[i] << \" \";\n    cout << endl;\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1286c1_madness_easy_seed42_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:19:50.245269+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          320.0,
+          0.01,
+          20.0,
+          80.0,
+          140.0,
+          920.0,
+          1970.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.984375,
+          1.046875,
+          1.171875,
+          1.640625,
+          2.203125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1286c2_madness_hard",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "agent_failure",
+      "duration_seconds": 17.132524013519287,
+      "final_code": null,
+      "iterations_used": 2,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 2,
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      }
+    },
+    {
+      "task_id": "cf_1286c2_madness_hard",
+      "seed": 42,
+      "replan_id": 1,
+      "status": "success",
+      "duration_seconds": 12.674950122833252,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\n// Interactive comparison: returns true if a < b in the hidden permutation\nbool compare(int a, int b) {\n    cout << \"? \" << a + 1 << \" \" << b + 1 << endl;\n    string res;\n    cin >> res;\n    return res == \"<\";\n}\n\n// Merge sort with interactive comparisons\nvoid merge_sort(vector<int>& arr, int l, int r, vector<int>& temp) {\n    if (r - l <= 1) return;\n    int m = (l + r) / 2;\n    merge_sort(arr, l, m, temp);\n    merge_sort(arr, m, r, temp);\n    int i = l, j = m, k = l;\n    while (i < m && j < r) {\n        if (compare(arr[i], arr[j])) {\n            temp[k++] = arr[i++];\n        } else {\n            temp[k++] = arr[j++];\n        }\n    }\n    while (i < m) temp[k++] = arr[i++];\n    while (j < r) temp[k++] = arr[j++];\n    for (int x = l; x < r; ++x) arr[x] = temp[x];\n}\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(0);\n\n    int n;\n    cin >> n;\n    vector<int> arr(n), temp(n);\n    for (int i = 0; i < n; ++i) arr[i] = i;\n\n    merge_sort(arr, 0, n, temp);\n\n    vector<int> pos(n);\n    for (int i = 0; i < n; ++i) pos[arr[i]] = i + 1;\n\n    cout << \"! \";\n    for (int i = 0; i < n; ++i) cout << pos[i] << \" \";\n    cout << endl;\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1286c2_madness_hard_seed42_replan1",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:20:19.991899+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          340.0,
+          10.0,
+          10.0,
+          80.0,
+          160.0,
+          840.0,
+          1760.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.984375,
+          1.046875,
+          1.171875,
+          1.671875,
+          2.203125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1286c2_madness_hard",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "success",
+      "duration_seconds": 16.550601959228516,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\n// Interactive query: returns true if perm[i] < perm[j]\nbool ask(int i, int j) {\n    cout << \"? \" << i+1 << \" \" << j+1 << endl;\n    string res;\n    cin >> res;\n    return res == \"<\";\n}\n\nvoid answer(const vector<int>& perm) {\n    cout << \"! \";\n    for (int x : perm) cout << x << \" \";\n    cout << endl;\n}\n\nvoid merge_sort(vector<int>& idx, vector<int>& tmp, int l, int r) {\n    if (r - l <= 1) return;\n    int m = (l + r) / 2;\n    merge_sort(idx, tmp, l, m);\n    merge_sort(idx, tmp, m, r);\n    int i = l, j = m, k = l;\n    while (i < m && j < r) {\n        if (ask(idx[i], idx[j])) tmp[k++] = idx[i++];\n        else tmp[k++] = idx[j++];\n    }\n    while (i < m) tmp[k++] = idx[i++];\n    while (j < r) tmp[k++] = idx[j++];\n    for (int t = l; t < r; ++t) idx[t] = tmp[t];\n}\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(0);\n    int n;\n    cin >> n;\n    vector<int> idx(n), tmp(n);\n    for (int i = 0; i < n; ++i) idx[i] = i;\n    merge_sort(idx, tmp, 0, n);\n    vector<int> perm(n);\n    for (int i = 0; i < n; ++i) perm[idx[i]] = i+1;\n    answer(perm);\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1286c2_madness_hard_seed42_replan2",
+        "iteration": 0,
+        "timestamp_utc": "2025-08-25 02:20:36.560969+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          360.0,
+          0.01,
+          10.0,
+          70.0,
+          150.0,
+          870.0,
+          1760.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          1.046875,
+          1.046875,
+          1.140625,
+          1.671875,
+          2.234375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1286c2_madness_hard",
+      "seed": 42,
+      "replan_id": 2,
+      "status": "agent_failure",
+      "duration_seconds": 0.0,
+      "final_code": null,
+      "iterations_used": 0,
+      "agent_failures": 0,
+      "error_details": "Object of type datetime is not JSON serializable",
+      "actual_iterations": 0,
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      }
+    }
+  ]
+}

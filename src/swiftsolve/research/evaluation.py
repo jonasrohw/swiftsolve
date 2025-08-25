@@ -46,6 +46,20 @@ class ResearchRunResult:
     actual_iterations: int = 0                       # Real iteration count from controller
 
 
+@dataclass
+class EvaluationCheckpoint:
+    """Checkpoint data for resuming interrupted evaluations."""
+    evaluation_id: str
+    total_jobs: int
+    completed_jobs: int
+    last_completed_job_id: Optional[str]
+    start_time: float
+    checkpoint_time: float
+    results: List[ResearchRunResult]
+    seeds: List[int]
+    mini_run: bool
+
+
 class ResearchDatasetCurator:
     """Curates the specific dataset mix for research evaluation."""
     
@@ -320,28 +334,160 @@ class ResearchEvaluationRunner:
         log.info(f"📁 Output directory: {self.output_dir}")
         log.info(f"⚡ Max workers: {self.max_workers}")
     
-    def run_full_evaluation(self, seeds: List[int] = [42, 123, 456], mini_run: bool = False) -> Dict[str, Any]:
+    def _is_credit_error(self, error: Exception) -> bool:
+        """Detect if error is related to API credit/quota exhaustion."""
+        error_str = str(error).lower()
+        credit_indicators = [
+            "rate limit",
+            "quota exceeded", 
+            "insufficient credits",
+            "billing",
+            "usage limit",
+            "429",  # HTTP 429 Too Many Requests
+            "rate_limit_exceeded",
+            "insufficient_quota",
+            "credit"
+        ]
+        return any(indicator in error_str for indicator in credit_indicators)
+    
+    def _save_checkpoint(self, evaluation_id: str, jobs: List[Dict], completed_idx: int, 
+                        results: List[ResearchRunResult], seeds: List[int], 
+                        mini_run: bool, start_time: float) -> Path:
+        """Save checkpoint for resuming interrupted evaluation."""
+        checkpoint = EvaluationCheckpoint(
+            evaluation_id=evaluation_id,
+            total_jobs=len(jobs),
+            completed_jobs=completed_idx,
+            last_completed_job_id=jobs[completed_idx-1]['job_id'] if completed_idx > 0 else None,
+            start_time=start_time,
+            checkpoint_time=time.time(),
+            results=results,
+            seeds=seeds,
+            mini_run=mini_run
+        )
+        
+        checkpoint_file = self.output_dir / f"CHECKPOINT_{evaluation_id}.json"
+        checkpoint_data = {
+            "evaluation_id": checkpoint.evaluation_id,
+            "total_jobs": checkpoint.total_jobs,
+            "completed_jobs": checkpoint.completed_jobs,
+            "last_completed_job_id": checkpoint.last_completed_job_id,
+            "start_time": checkpoint.start_time,
+            "checkpoint_time": checkpoint.checkpoint_time,
+            "seeds": checkpoint.seeds,
+            "mini_run": checkpoint.mini_run,
+            "results": [self._serialize_result(r) for r in checkpoint.results]
+        }
+        
+        with open(checkpoint_file, 'w') as f:
+            json.dump(checkpoint_data, f, indent=2)
+        
+        log.info(f"💾 Checkpoint saved: {checkpoint_file}")
+        log.info(f"   Progress: {completed_idx}/{len(jobs)} jobs completed")
+        return checkpoint_file
+    
+    def _load_checkpoint(self, evaluation_id: str) -> Optional[EvaluationCheckpoint]:
+        """Load checkpoint for resuming evaluation."""
+        checkpoint_file = self.output_dir / f"CHECKPOINT_{evaluation_id}.json"
+        if not checkpoint_file.exists():
+            return None
+        
+        try:
+            with open(checkpoint_file, 'r') as f:
+                data = json.load(f)
+            
+            # Reconstruct ResearchRunResult objects
+            results = []
+            for result_data in data['results']:
+                result = ResearchRunResult(
+                    task_id=result_data['task_id'],
+                    seed=result_data['seed'],
+                    replan_id=result_data['replan_id'],
+                    status=result_data['status'],
+                    duration_seconds=result_data['duration_seconds'],
+                    final_code=result_data.get('final_code'),
+                    iterations_used=result_data.get('iterations_used', 0),
+                    agent_failures=result_data.get('agent_failures', 0),
+                    error_details=result_data.get('error_details'),
+                    profile_report=result_data.get('profile_report'),
+                    constraints=result_data.get('constraints'),
+                    tle_flags=result_data.get('tle_analysis', {}).get('tle_flags'),
+                    mle_flags=result_data.get('mle_analysis', {}).get('mle_flags'),
+                    actual_iterations=result_data.get('actual_iterations', 0)
+                )
+                results.append(result)
+            
+            checkpoint = EvaluationCheckpoint(
+                evaluation_id=data['evaluation_id'],
+                total_jobs=data['total_jobs'],
+                completed_jobs=data['completed_jobs'],
+                last_completed_job_id=data.get('last_completed_job_id'),
+                start_time=data['start_time'],
+                checkpoint_time=data['checkpoint_time'],
+                results=results,
+                seeds=data['seeds'],
+                mini_run=data['mini_run']
+            )
+            
+            log.info(f"📂 Loaded checkpoint: {checkpoint_file}")
+            log.info(f"   Resuming from job {checkpoint.completed_jobs}/{checkpoint.total_jobs}")
+            return checkpoint
+            
+        except Exception as e:
+            log.error(f"Failed to load checkpoint {checkpoint_file}: {e}")
+            return None
+    
+    def run_full_evaluation(self, seeds: List[int] = [42, 123, 456], mini_run: bool = False, 
+                           evaluation_id: Optional[str] = None) -> Dict[str, Any]:
         """
         Run the research evaluation.
         
         Args:
             seeds: List of random seeds (default: 3 seeds)
             mini_run: If True, run mini version with 2 tasks (18 total runs)
+            evaluation_id: Optional evaluation ID for resuming from checkpoint
             
         Returns:
             Comprehensive evaluation results and statistics
         """
-        if mini_run:
-            log.info("🚀 Starting 18-iteration MINI research evaluation")
+        # Generate evaluation ID if not provided
+        if not evaluation_id:
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            prefix = "mini_research_eval" if mini_run else "research_eval"
+            evaluation_id = f"{prefix}_{timestamp}"
+        
+        # Check for existing checkpoint (FULL pipeline only)
+        checkpoint = None
+        if not mini_run:
+            checkpoint = self._load_checkpoint(evaluation_id)
+        
+        if checkpoint:
+            log.info("🔄 RESUMING from checkpoint")
             log.info("=" * 60)
-            # Create mini dataset (1 BigO + 1 Codeforces)
-            tasks = ResearchDatasetCurator.create_mini_dataset()
+            log.info(f"📂 Loaded {checkpoint.completed_jobs}/{checkpoint.total_jobs} completed jobs")
+            log.info(f"⏱️ Original start: {datetime.fromtimestamp(checkpoint.start_time)}")
+            seeds = checkpoint.seeds
+            mini_run = checkpoint.mini_run
+            results = checkpoint.results
+            start_time = checkpoint.start_time
+            # Regenerate dataset for job creation
+            if mini_run:
+                tasks = ResearchDatasetCurator.create_mini_dataset()
+            else:
+                tasks = ResearchDatasetCurator.create_curated_dataset()
         else:
-            log.info("🚀 Starting 225-iteration research evaluation")
-            log.info("=" * 60)
-            # Create curated dataset
-            tasks = ResearchDatasetCurator.create_curated_dataset()
+            if mini_run:
+                log.info("🚀 Starting 18-iteration MINI research evaluation")
+                log.info("=" * 60)
+                tasks = ResearchDatasetCurator.create_mini_dataset()
+            else:
+                log.info("🚀 Starting 225-iteration FULL research evaluation")
+                log.info("=" * 60)
+                tasks = ResearchDatasetCurator.create_curated_dataset()
             
+            results = []
+            start_time = time.time()
+                
         log.info(f"📊 Dataset: {len(tasks)} tasks × {len(seeds)} seeds × 3 replans = {len(tasks) * len(seeds) * 3} total runs")
         
         # Generate all job specifications
@@ -360,24 +506,27 @@ class ResearchEvaluationRunner:
         total_jobs = len(jobs)
         log.info(f"🎯 Total jobs to execute: {total_jobs}")
         
-        # Execute jobs sequentially for API context (no multiprocessing)
-        results = []
-        start_time = time.time()
+        # Determine starting point
+        start_idx = checkpoint.completed_jobs if checkpoint else 0
+        if start_idx > 0:
+            log.info(f"⏭️ Skipping first {start_idx} completed jobs")
         
         log.info("🔄 Starting sequential execution...")
         
-        for i, job in enumerate(jobs, 1):
+        for i in range(start_idx, total_jobs):
+            job = jobs[i]
             try:
                 result = self._run_single_job(job)
                 results.append(result)
                 
                 # Progress logging
-                if i % 10 == 0 or i == total_jobs:
+                completed = i + 1
+                if completed % 10 == 0 or completed == total_jobs:
                     elapsed = time.time() - start_time
-                    rate = i / elapsed if elapsed > 0 else 0
-                    eta = (total_jobs - i) / rate if rate > 0 else 0
+                    rate = completed / elapsed if elapsed > 0 else 0
+                    eta = (total_jobs - completed) / rate if rate > 0 else 0
                     
-                    log.info(f"📈 Progress: {i}/{total_jobs} ({i/total_jobs*100:.1f}%) "
+                    log.info(f"📈 Progress: {completed}/{total_jobs} ({completed/total_jobs*100:.1f}%) "
                            f"| Rate: {rate:.1f} jobs/min | ETA: {eta/60:.1f}min")
                     
                     # Status breakdown for recent jobs
@@ -386,16 +535,49 @@ class ResearchEvaluationRunner:
                     success_rate = success_count / len(recent_results) * 100
                     log.info(f"   Recent success rate: {success_rate:.1f}%")
                 
+                # Save checkpoint every 25 jobs (FULL pipeline only)
+                if not mini_run and (completed % 25 == 0 or completed == total_jobs):
+                    self._save_checkpoint(evaluation_id, jobs, completed, results, seeds, mini_run, start_time)
+                
             except Exception as e:
                 log.error(f"❌ Job {job['job_id']} failed: {e}")
-                # Create failure result
+                
+                # Check if this is a credit/API error (FULL pipeline only)
+                if not mini_run and self._is_credit_error(e):
+                    log.error("💳 CREDIT/API LIMIT ERROR DETECTED!")
+                    log.error("🛑 Saving checkpoint and stopping evaluation...")
+                    
+                    # Save checkpoint immediately
+                    checkpoint_file = self._save_checkpoint(evaluation_id, jobs, i, results, seeds, mini_run, start_time)
+                    
+                    # Save incomplete results with special prefix
+                    incomplete_analysis = self._analyze_results(results, time.time() - start_time)
+                    incomplete_analysis["evaluation_status"] = "INCOMPLETE_CREDIT_ERROR"
+                    incomplete_analysis["jobs_completed"] = i
+                    incomplete_analysis["jobs_total"] = total_jobs
+                    incomplete_analysis["checkpoint_file"] = str(checkpoint_file)
+                    incomplete_analysis["resume_instructions"] = f"To resume: call run_full_evaluation with evaluation_id='{evaluation_id}'"
+                    
+                    self._save_results(results, incomplete_analysis, prefix="INCOMPLETE_")
+                    
+                    log.error("🔄 TO RESUME: Refill your API credits, then call:")
+                    log.error(f"   runner.run_full_evaluation(evaluation_id='{evaluation_id}')")
+                    
+                    return incomplete_analysis
+                
+                # Create failure result for non-credit errors
                 error_result = ResearchRunResult(
                     task_id=job['task'].task_id,
                     seed=job['seed'],
                     replan_id=job['replan_id'],
                     status="agent_failure",
                     duration_seconds=0.0,
-                    error_details=str(e)
+                    error_details=str(e),
+                    constraints={
+                        "runtime_limit": job['task'].time_limit_ms,
+                        "memory_limit": job['task'].memory_limit_mb
+                    },
+                    actual_iterations=0
                 )
                 results.append(error_result)
         
@@ -642,17 +824,18 @@ class ResearchEvaluationRunner:
             "codeforces": calc_stats(codeforces_results)
         }
     
-    def _save_results(self, results: List[ResearchRunResult], analysis: Dict[str, Any]):
+    def _save_results(self, results: List[ResearchRunResult], analysis: Dict[str, Any], prefix: str = ""):
         """Save evaluation results and analysis to files."""
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         
         # Save detailed results
-        results_file = self.output_dir / f"research_results_{timestamp}.json"
+        results_file = self.output_dir / f"{prefix}research_results_{timestamp}.json"
         results_data = {
             "metadata": {
                 "timestamp": datetime.now().isoformat(),
                 "total_runs": len(results),
-                "evaluation_type": "research_225_iterations"
+                "evaluation_type": "research_225_iterations",
+                "status": "incomplete" if prefix else "complete"
             },
             "results": [self._serialize_result(r) for r in results]
         }
@@ -661,13 +844,18 @@ class ResearchEvaluationRunner:
             json.dump(results_data, f, indent=2, default=str)
         
         # Save analysis
-        analysis_file = self.output_dir / f"research_analysis_{timestamp}.json"
+        analysis_file = self.output_dir / f"{prefix}research_analysis_{timestamp}.json"
         with open(analysis_file, 'w') as f:
             json.dump(analysis, f, indent=2, default=str)
         
-        log.info(f"💾 Results saved:")
+        status_msg = "💾 Results saved:" if not prefix else "⚠️ INCOMPLETE results saved:"
+        log.info(status_msg)
         log.info(f"   📊 Detailed results: {results_file}")
         log.info(f"   📈 Analysis: {analysis_file}")
+        
+        if prefix:
+            log.warning(f"🚨 Files prefixed with '{prefix}' indicate incomplete evaluation!")
+            log.warning("🔄 Resume evaluation after resolving the issue to get complete results.")
     
     def _serialize_result(self, result: ResearchRunResult) -> Dict[str, Any]:
         """Serialize a result for JSON storage."""

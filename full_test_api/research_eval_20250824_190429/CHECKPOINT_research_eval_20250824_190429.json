@@ -1,0 +1,28 @@
+{
+  "evaluation_id": "research_eval_20250824_190429",
+  "total_jobs": 75,
+  "completed_jobs": 75,
+  "last_completed_job_id": "cf_1286c2_madness_hard_seed42_replan2",
+  "start_time": 1756087469.835391,
+  "checkpoint_time": 1756088437.169693,
+  "seeds": [
+    42
+  ],
+  "mini_run": false,
+  "results": [
+    {
+      "task_id": "bigobench_binary_search",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 18.542819023132324,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int n, target;\n    cin >> n >> target;\n    vector<int> a(n);\n    for (int i = 0; i < n; ++i) {\n        cin >> a[i];\n    }\n    int left = 0, right = n - 1, ans = -1;\n    while (left <= right) {\n        int mid = left + (right - left) / 2;\n        if (a[mid] == target) {\n            ans = mid;\n            break;\n        } else if (a[mid] < target) {\n            left = mid + 1;\n        } else {\n            right = mid - 1;\n        }\n    }\n    cout << ans << endl;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_binary_search_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": 
