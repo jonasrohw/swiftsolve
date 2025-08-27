@@ -1,0 +1,42 @@
+{
+  "task_id": "BIGOBENCH_578",
+  "title": "Card Constructions",
+  "source": "bigobench",
+  "difficulty": "easy",
+  "description": "You start with n cards and build the tallest pyramid that you can. If there are some cards remaining, you build the tallest pyramid possible with the remaining cards. You repeat this process until it is impossible to build another pyramid. In the end, how many pyramids will you have constructed?",
+  "input_format": "The first line contains a single integer t (1 ≤ t ≤ 1000) — the number of test cases. Each test case consists of a single integer n (1 ≤ n ≤ 10^9) — the number of cards.",
+  "output_format": "For each test case, output a single integer — the number of pyramids you will have constructed in the end.",
+  "input_bounds": {
+    "t": {
+      "min": 1,
+      "max": 1000
+    },
+    "n": {
+      "min": 1,
+      "max": 1000000000
+    }
+  },
+  "time_limit_ms": 1000,
+  "memory_limit_mb": 256,
+  "expected_complexity": "O(1)",
+  "expected_approach": "To solve this problem, we need to determine how many pyramids can be constructed with the given number of cards. A pyramid of height h requires 3h - 1 cards. We can use a greedy approach to construct the tallest pyramid possible with the available cards, then subtract the used cards and repeat the process until no more pyramids can be constructed.",
+  "test_cases": [
+    {
+      "input": "5\n3\n14\n15\n24\n1\n",
+      "output": "1\n2\n1\n3\n0\n",
+      "explanation": [
+        "In the first test case, we can construct a pyramid of height 1 using 2 cards, leaving 1 card remaining, which is not enough to construct another pyramid.",
+        "In the second test case, we can construct two pyramids of height 2 using 6 cards, leaving 2 cards remaining, which is not enough to construct another pyramid.",
+        "In the third test case, we can construct a pyramid of height 3 using 9 cards, leaving 6 cards remaining, which is not enough to construct another pyramid.",
+        "In the fourth test case, we can construct a pyramid of height 3 using 9 cards, leaving 15 cards remaining. Then, we can construct a pyramid of height 2 using 6 cards, leaving 9 cards remaining. Finally, we can construct a pyramid of height 1 using 2 cards, leaving 7 cards remaining, which is not enough to construct another pyramid.",
+        "In the fifth test case, we have only 1 card, which is not enough to construct any pyramid."
+      ]
+    }
+  ],
+  "source_url": "https://codeforces.com/problemset/problem/1345/B",
+  "source_rating": 1100,
+  "tags": [
+    "greedy",
+    "math"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "task_id": "BIGOBENCH_1821",
+  "title": "City Day",
+  "source": "bigobench",
+  "difficulty": "easy",
+  "description": "Given the forecasted rainfall a_i over n days (distinct values), find the earliest day d such that the rainfall on day d is strictly less than that of each of the previous x days and each of the following y days.",
+  "input_format": "First line: n, x, y. Second line: n distinct integers a_i — rain amounts.",
+  "output_format": "Print a single integer — the 1-based index of the earliest \"not-so-rainy\" day.",
+  "input_bounds": {
+    "n": {
+      "min": 1,
+      "max": 100000
+    },
+    "x": {
+      "min": 0,
+      "max": 7
+    },
+    "y": {
+      "min": 0,
+      "max": 7
+    },
+    "a_i": {
+      "min": 1,
+      "max": 1000000000
+    }
+  },
+  "time_limit_ms": 1000,
+  "memory_limit_mb": 256,
+  "expected_complexity": "O(n * (x + y))",
+  "expected_approach": "For each day d from 1 to n, check the previous x days and next y days to see if all their rain amounts are greater than a[d]; output the first day satisfying this.",
+  "test_cases": [
+    {
+      "input": "10 2 2\n10 9 6 7 8 3 2 1 4 5\n",
+      "output": "3",
+      "explanation": "Day 3 (rain=6) is less than days 1–2 and 4–5."
+    },
+    {
+      "input": "10 2 3\n10 9 6 7 8 3 2 1 4 5\n",
+      "output": "8",
+      "explanation": "Day 3 fails the > following y=3 days test; day 8 (rain=1) passes."
+    },
+    {
+      "input": "5 5 5\n100000 10000 1000 100 10\n",
+      "output": "5",
+      "explanation": "On day 5 (rain=10), the ranges extend beyond bounds, and it’s the smallest."
+    }
+  ],
+  "source_url": "https://codeforces.com/problemset/problem/1199/A",
+  "source_rating": 1000,
+  "tags": [
+    "implementation"
+  ]
+}

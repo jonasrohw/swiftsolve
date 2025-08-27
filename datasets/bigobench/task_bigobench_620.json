@@ -1,0 +1,41 @@
+{
+  "task_id": "BIGOBENCH_620",
+  "title": "Aramic Script",
+  "source": "bigobench",
+  "difficulty": "easy",
+  "description": "You have an ancient script in Aramic. What is the number of different objects mentioned in the script?",
+  "input_format": "The first line contains one integer n (1 ≤ n ≤ 10^3) — the number of words in the script. The second line contains n words s_1, s_2, ..., s_n — the content of the script. The length of each word does not exceed 10^3.",
+  "output_format": "Output one integer — the number of different objects mentioned in the ancient Aramic script.",
+  "input_bounds": {
+    "n": {
+      "min": 1,
+      "max": 1000
+    },
+    "word_length": {
+      "min": 1,
+      "max": 1000
+    }
+  },
+  "time_limit_ms": 1000,
+  "memory_limit_mb": 256,
+  "expected_complexity": "O(n)",
+  "expected_approach": "To determine the number of different objects, we need to find the number of distinct roots of the words. A root is defined as the lexicographically smallest string that can be obtained by rearranging the letters of the word. By finding the roots of all words and counting the distinct ones, we can determine the number of different objects mentioned in the script.",
+  "test_cases": [
+    {
+      "input": "5\na aa aaa ab abb\n",
+      "output": "2\n",
+      "explanation": "The roots of the words are: 'a', 'a', 'a', 'ab', 'ab'. The distinct roots are 'a' and 'ab', so the number of different objects is 2."
+    },
+    {
+      "input": "3\namer arem mrea\n",
+      "output": "1\n",
+      "explanation": "The roots of the words are: 'amer', 'amer', 'amer'. All words have the same root 'amer', so the number of different objects is 1."
+    }
+  ],
+  "source_url": "https://codeforces.com/problemset/problem/975/A",
+  "source_rating": 1100,
+  "tags": [
+    "strings",
+    "sorting"
+  ]
+}

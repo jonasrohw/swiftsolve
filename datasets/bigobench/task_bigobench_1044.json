@@ -1,0 +1,36 @@
+{
+  "task_id": "BIGOBENCH_1044",
+  "title": "Bad Ugly Numbers",
+  "source": "bigobench",
+  "difficulty": "easy",
+  "description": "Given a positive integer n (number of digits), construct any positive n-digit number s (with no zero digits) that is not divisible by any of its digits, or output –1 if none exists.",
+  "input_format": "First line: t — number of test cases. Next t lines: single integer n (number of digits for s).",
+  "output_format": "For each test case, print any valid integer s, or -1 if impossible.",
+  "input_bounds": {
+    "t": {
+      "min": 1,
+      "max": 400
+    },
+    "n": {
+      "min": 1,
+      "max": 100000
+    }
+  },
+  "time_limit_ms": 1000,
+  "memory_limit_mb": 256,
+  "expected_complexity": "O(1) per test case, O(sum of n)",
+  "expected_approach": "If n=1, print -1. Otherwise, print n-1 copies of '9' followed by '8' (i.e. a number like \"999...98\"); that ensures no digit is zero and s is not divisible by any digit.",
+  "test_cases": [
+    {
+      "input": "4\n1\n2\n3\n4\n",
+      "output": "-1\n98\n998\n9998\n",
+      "explanation": "For n=1 output -1; for n>1, construct by '9' repeated n-1 times and ending with '8' as per the approach."
+    }
+  ],
+  "source_url": "https://codeforces.com/problemset/problem/1326/A",
+  "source_rating": 1000,
+  "tags": [
+    "constructive algorithms",
+    "number theory"
+  ]
+}

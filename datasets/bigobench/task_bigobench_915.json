@@ -1,0 +1,42 @@
+{
+  "task_id": "BIGOBENCH_915",
+  "title": "Elimination",
+  "source": "bigobench",
+  "difficulty": "easy",
+  "description": "Given only the cut-off scores and minimal scores of the top 100 participants in two elimination contests, find the minimal possible total score of the 100th place after summing both contest scores.",
+  "input_format": "Four space-separated integers: a, b, c, d.",
+  "output_format": "Print a single integer — the minimal possible total score of the 100th participant.",
+  "input_bounds": {
+    "a": { "min": 0, "max": null },
+    "b": { "min": 0, "max": null },
+    "c": { "min": 0, "max": null },
+    "d": { "min": 0, "max": null }
+  },
+  "time_limit_ms": 1000,
+  "memory_limit_mb": 512,
+  "expected_complexity": "O(1)",
+  "expected_approach": "Compute max(a + b, c + d); the 100th score is the larger of these two sums.",
+  "test_cases": [
+    {
+      "input": "1 1 1 1\n",
+      "output": "2",
+      "explanation": "Both sums are 2."
+    },
+    {
+      "input": "5 3 4 2\n",
+      "output": "8",
+      "explanation": "a+b=8, c+d=6 → answer is 8."
+    },
+    {
+      "input": "0 0 10 0\n",
+      "output": "10",
+      "explanation": "a+b=0, c+d=10 → answer is 10."
+    }
+  ],
+  "source_url": "https://codeforces.com/problemset/problem/1445/B",
+  "source_rating": 900,
+  "tags": [
+    "greedy",
+    "math"
+  ]
+}

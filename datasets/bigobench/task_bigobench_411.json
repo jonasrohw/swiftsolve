@@ -1,0 +1,41 @@
+{
+  "task_id": "BIGOBENCH_411",
+  "title": "Jumping Ball",
+  "source": "bigobench",
+  "difficulty": "easy",
+  "description": "Given a row of bumpers represented by '<' and '>', determine how many starting positions will cause a ball to eventually fall off the game field.",
+  "input_format": "First line: n — length of bumper sequence. Second line: a string of length n with characters '<' and '>'.",
+  "output_format": "Print a single integer — the number of starting positions from which the ball will fall off eventually.",
+  "input_bounds": {
+    "n": {
+      "min": 1,
+      "max": 200000
+    }
+  },
+  "time_limit_ms": 2000,
+  "memory_limit_mb": 256,
+  "expected_complexity": "O(n)",
+  "expected_approach": "Count leading '<' characters and trailing '>' characters in the string; the result is the sum of their lengths.",
+  "test_cases": [
+    {
+      "input": "4\n<<><\n",
+      "output": "2",
+      "explanation": "Only starting positions 1 and 2 (both '<') lead to falling off the left end."
+    },
+    {
+      "input": "5\n>>>>>\n",
+      "output": "5",
+      "explanation": "Every position immediately moves right off the field."
+    },
+    {
+      "input": "4\n>><<\n",
+      "output": "0",
+      "explanation": "No starting position leads immediately off the field."
+    }
+  ],
+  "source_url": "https://codeforces.com/problemset/problem/725/A",
+  "source_rating": 1000,
+  "tags": [
+    "implementation"
+  ]
+}

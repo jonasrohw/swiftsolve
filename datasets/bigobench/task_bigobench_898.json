@@ -1,0 +1,42 @@
+{
+  "task_id": "BIGOBENCH_898",
+  "title": "Elephant",
+  "source": "bigobench",
+  "difficulty": "easy",
+  "description": "An elephant wants to visit his friend located at point x on the coordinate line. In one step, the elephant can move 1, 2, 3, 4, or 5 positions forward. Determine the minimum number of steps required to reach point x from point 0.",
+  "input_format": "The first line contains a single integer x (1 ≤ x ≤ 1,000,000) — the coordinate of the friend's house.",
+  "output_format": "Output a single integer — the minimum number of steps the elephant needs to make to reach point x.",
+  "input_bounds": {
+    "x": {
+      "min": 1,
+      "max": 1000000
+    }
+  },
+  "time_limit_ms": 1000,
+  "memory_limit_mb": 256,
+  "expected_complexity": "O(1)",
+  "expected_approach": "To minimize the number of steps, the elephant should take as many steps of length 5 as possible. The remaining distance can be covered with one additional step if it's non-zero.",
+  "test_cases": [
+    {
+      "input": "5\n",
+      "output": "1\n",
+      "explanation": "The elephant can reach point 5 in one step of length 5."
+    },
+    {
+      "input": "12\n",
+      "output": "3\n",
+      "explanation": "The elephant can take two steps of length 5 and one step of length 2 to reach point 12."
+    },
+    {
+      "input": "1\n",
+      "output": "1\n",
+      "explanation": "The elephant can reach point 1 in one step of length 1."
+    }
+  ],
+  "source_url": "https://codeforces.com/problemset/problem/617/A",
+  "source_rating": 800,
+  "tags": [
+    "math",
+    "greedy"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "task_id": "BIGOBENCH_1139",
+  "title": "Watching a Movie",
+  "source": "bigobench",
+  "difficulty": "easy",
+  "description": "You have n intervals representing best moments of a movie. You may skip exactly x minutes at a time. Determine the minimum number of minutes you must actually watch to cover all intervals.",
+  "input_format": "First line: n, x. Next n lines: two integers l_i and r_i for each interval.",
+  "output_format": "Print a single integer — the minimum total minutes watched.",
+  "input_bounds": {
+    "n": {
+      "min": 1,
+      "max": 50
+    },
+    "x": {
+      "min": 1,
+      "max": 100000
+    },
+    "l_i, r_i": {
+      "min": 1,
+      "max": 100000
+    }
+  },
+  "time_limit_ms": 1000,
+  "memory_limit_mb": 256,
+  "expected_complexity": "O(n)",
+  "expected_approach": "Greedy: for each segment, if the gap from current time to start of segment ≥ x, skip via the skip button; else, watch minute-by-minute, adding (r_i — l_i + 1) to your total, and update current time to r_i + 1.",
+  "test_cases": [
+    {
+      "input": "2 3\n5 6\n10 12\n",
+      "output": "6",
+      "explanation": "Skip to minute 4, watch minutes 5–6 (2 mins), skip to 9, watch 10–12 (3 mins), total 6."
+    },
+    {
+      "input": "1 1\n1 100000\n",
+      "output": "100000",
+      "explanation": "No beneficial skips available; must watch all minutes."
+    }
+  ],
+  "source_url": "https://codeforces.com/problemset/problem/499/A",
+  "source_rating": 1000,
+  "tags": [
+    "greedy",
+    "implementation"
+  ]
+}

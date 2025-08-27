@@ -1,0 +1,45 @@
+{
+  "task_id": "BIGOBENCH_1414",
+  "title": "Permutation",
+  "source": "bigobench",
+  "difficulty": "easy",
+  "description": "Given a sequence of n integers, each between 1 and 5000, determine the minimum number of elements to change so that the sequence becomes a permutation of 1 through n.",
+  "input_format": "First line: n (number of elements). Second line: a sequence of n integers a_i.",
+  "output_format": "Print a single integer — the minimum number of changes needed to make the sequence a permutation.",
+  "input_bounds": {
+    "n": {
+      "min": 1,
+      "max": 5000
+    },
+    "a_i": {
+      "min": 1,
+      "max": 5000
+    }
+  },
+  "time_limit_ms": 2000,
+  "memory_limit_mb": 256,
+  "expected_complexity": "O(n)",
+  "expected_approach": "Track which numbers from 1 to n are missing and count them — the answer is the number of missing distinct numbers.",
+  "test_cases": [
+    {
+      "input": "3\n3 1 2\n",
+      "output": "0",
+      "explanation": "Sequence is already a permutation."
+    },
+    {
+      "input": "2\n2 2\n",
+      "output": "1",
+      "explanation": "Need to change one element to 1 to get permutation [1,2]."
+    },
+    {
+      "input": "5\n5 3 3 3 1\n",
+      "output": "2",
+      "explanation": "Missing numbers are 2 and 4; replace two of the repeated 3's."
+    }
+  ],
+  "source_url": "https://codeforces.com/problemset/problem/137/B",
+  "source_rating": 1000,
+  "tags": [
+    "greedy"
+  ]
+}
