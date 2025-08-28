@@ -7,6 +7,7 @@ from ..schemas import ProblemInput
 from ..controller.solve_loop import run_pipeline
 from ..research.evaluation import ResearchEvaluationRunner
 from ..research.data_export import ResearchDataExporter
+from ..baseline.evaluation import BaselineEvaluationRunner
 from ..utils.logger import get_logger
 
 log = get_logger("API")
@@ -361,3 +362,205 @@ async def get_runtime_curves(evaluation_id: str):
     except Exception as e:
         log.error(f"Failed to get runtime curves for {evaluation_id}: {e}")
         return {"error": f"Failed to load runtime curves: {str(e)}"}
+
+
+# ================================================================================
+# BASELINE EVALUATION ENDPOINTS
+# ================================================================================
+
+class BaselineEvalRequest(BaseModel):
+    """Request model for baseline evaluation."""
+    seeds: Optional[List[int]] = [42, 123, 456]
+    max_workers: Optional[int] = 4
+    output_dir: Optional[str] = "baseline_test_api"
+
+
+class BaselineEvalResponse(BaseModel):
+    """Response model for baseline evaluation."""
+    message: str
+    evaluation_id: str
+    estimated_duration_minutes: float
+    total_runs: int
+
+
+class MiniBaselineEvalRequest(BaseModel):
+    """Request model for mini baseline evaluation."""
+    seeds: Optional[List[int]] = [42, 123, 456]
+    max_workers: Optional[int] = 2
+    output_dir: Optional[str] = "mini_baseline_results"
+
+
+class MiniBaselineEvalResponse(BaseModel):
+    """Response model for mini baseline evaluation."""
+    message: str
+    evaluation_id: str
+    estimated_duration_minutes: float
+    total_runs: int
+
+
+@router.post("/baseline/evaluate", response_model=BaselineEvalResponse)
+async def start_baseline_evaluation(request: BaselineEvalRequest, background_tasks: BackgroundTasks):
+    """
+    Start a comprehensive 75-iteration baseline evaluation using GPT-4 directly.
+    
+    This serves as a robust baseline for comparing against SwiftSolve.
+    Uses GPT-4 directly (single attempt per problem) instead of the planner+coder+analyst pipeline.
+    
+    Returns immediately with evaluation ID and estimates.
+    The actual evaluation runs in the background.
+    """
+    log.info(f"=== Baseline Evaluation Request Received ===")
+    log.info(f"Request: {request.model_dump_json(indent=2)}")
+    
+    # Calculate estimates
+    total_runs = 25 * len(request.seeds)  # 25 tasks × seeds (no replanning)
+    estimated_duration = total_runs * 30 / request.max_workers / 60  # Assume 30 seconds per run (single attempt)
+    
+    # Generate evaluation ID
+    from datetime import datetime
+    evaluation_id = f"baseline_eval_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    log.info(f"🚀 Starting BASELINE evaluation with ID: {evaluation_id}")
+    
+    # Start evaluation in background
+    def run_baseline_evaluation():
+        try:
+            output_dir = Path(request.output_dir) / evaluation_id
+            runner = BaselineEvaluationRunner(output_dir, max_workers=request.max_workers)
+            analysis = runner.run_full_evaluation(seeds=request.seeds)
+            log.info(f"✅ Baseline evaluation {evaluation_id} completed successfully")
+            log.info(f"Final success rate: {analysis['evaluation_summary']['success_rate_percent']:.1f}%")
+        except Exception as e:
+            log.error(f"❌ Baseline evaluation {evaluation_id} failed: {e}")
+    
+    background_tasks.add_task(run_baseline_evaluation)
+    
+    response = BaselineEvalResponse(
+        message=f"Baseline evaluation started with ID: {evaluation_id}",
+        evaluation_id=evaluation_id,
+        estimated_duration_minutes=estimated_duration,
+        total_runs=total_runs
+    )
+    
+    log.info(f"🚀 Baseline evaluation {evaluation_id} started in background")
+    log.info(f"Response: {response.model_dump_json(indent=2)}")
+    
+    return response
+
+
+@router.post("/mini-baseline/evaluate", response_model=MiniBaselineEvalResponse)
+async def start_mini_baseline_evaluation(request: MiniBaselineEvalRequest, background_tasks: BackgroundTasks):
+    """
+    Start a mini baseline evaluation using GPT-4 directly (6 iterations instead of 75).
+    
+    Mini evaluation: 2 tasks × 3 seeds = 6 iterations total (single attempt per problem).
+    Perfect for testing the baseline setup before running the full benchmark.
+    
+    Returns immediately with evaluation ID and estimates.
+    The actual evaluation runs in the background.
+    """
+    log.info(f"=== Mini Baseline Evaluation Request Received ===")
+    log.info(f"Request: {request.model_dump_json(indent=2)}")
+    
+    # Calculate estimates for mini run
+    total_runs = 2 * len(request.seeds)  # 2 tasks × seeds (no replanning)
+    estimated_duration = total_runs * 30 / request.max_workers / 60  # Assume 30 seconds per run
+    
+    # Generate evaluation ID
+    from datetime import datetime
+    evaluation_id = f"mini_baseline_eval_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    
+    # Start mini evaluation in background
+    def run_mini_baseline_evaluation():
+        try:
+            output_dir = Path(request.output_dir) / evaluation_id
+            runner = BaselineEvaluationRunner(output_dir, max_workers=request.max_workers)
+            analysis = runner.run_full_evaluation(seeds=request.seeds, mini_run=True)
+            log.info(f"✅ Mini baseline evaluation {evaluation_id} completed successfully")
+            log.info(f"Final success rate: {analysis['evaluation_summary']['success_rate_percent']:.1f}%")
+        except Exception as e:
+            log.error(f"❌ Mini baseline evaluation {evaluation_id} failed: {e}")
+    
+    background_tasks.add_task(run_mini_baseline_evaluation)
+    
+    response = MiniBaselineEvalResponse(
+        message=f"Mini baseline evaluation started with ID: {evaluation_id}",
+        evaluation_id=evaluation_id,
+        estimated_duration_minutes=estimated_duration,
+        total_runs=total_runs
+    )
+    
+    log.info(f"🚀 Mini baseline evaluation {evaluation_id} started in background")
+    log.info(f"Response: {response.model_dump_json(indent=2)}")
+    
+    return response
+
+
+@router.get("/baseline/status/{evaluation_id}")
+async def get_baseline_status(evaluation_id: str):
+    """
+    Get the status of a baseline evaluation.
+    
+    Checks for result files to determine completion status.
+    """
+    log.info(f"Status check for baseline evaluation: {evaluation_id}")
+    
+    # Look for result files - check multiple possible base directories
+    possible_dirs = [
+        Path("baseline_test_api") / evaluation_id,
+        Path("mini_baseline_results") / evaluation_id,
+        Path("baseline_results") / evaluation_id  # fallback
+    ]
+    
+    base_dir = None
+    for dir_path in possible_dirs:
+        if dir_path.exists():
+            base_dir = dir_path
+            break
+    
+    if base_dir is None:
+        base_dir = Path("baseline_test_api") / evaluation_id  # Default for error message
+    
+    if not base_dir.exists():
+        return {
+            "evaluation_id": evaluation_id,
+            "status": "not_found",
+            "message": "Baseline evaluation not found"
+        }
+    
+    # Check for completion files
+    result_files = list(base_dir.glob("baseline_results_*.json"))
+    analysis_files = list(base_dir.glob("baseline_analysis_*.json"))
+    
+    if result_files and analysis_files:
+        # Evaluation completed
+        try:
+            # Load the most recent analysis
+            latest_analysis = max(analysis_files, key=lambda p: p.stat().st_mtime)
+            with open(latest_analysis, 'r') as f:
+                import json
+                analysis = json.load(f)
+            
+            return {
+                "evaluation_id": evaluation_id,
+                "status": "completed",
+                "message": "Baseline evaluation completed successfully",
+                "summary": analysis["evaluation_summary"],
+                "results_files": {
+                    "detailed_results": str(result_files[-1]),
+                    "analysis": str(analysis_files[-1])
+                }
+            }
+        except Exception as e:
+            return {
+                "evaluation_id": evaluation_id,
+                "status": "completed_with_errors",
+                "message": f"Baseline evaluation completed but failed to parse results: {e}"
+            }
+    else:
+        # Still running
+        return {
+            "evaluation_id": evaluation_id,
+            "status": "running",
+            "message": "Baseline evaluation is still in progress",
+            "output_directory": str(base_dir)
+        }
