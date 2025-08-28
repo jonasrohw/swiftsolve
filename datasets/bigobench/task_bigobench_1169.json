@@ -1,0 +1,80 @@
+{
+  "task_id": "BIGOBENCH_1169",
+  "title": "Exercising Walk",
+  "source": "bigobench",
+  "difficulty": "easy",
+  "description": "Alice wants to design an exercising walk for her cat on an infinite grid. The cat starts at position (x, y) and needs to move exactly 'a' steps left, 'b' steps right, 'c' steps down, and 'd' steps up. Determine if it's possible for the cat to complete the walk without moving outside the specified rectangular area defined by (x1, y1) and (x2, y2).",
+  "input_format": "The first line contains a single integer t (1 ≤ t ≤ 1000) — the number of test cases. Each test case consists of two lines. The first line contains four integers a, b, c, d (0 ≤ a, b, c, d ≤ 10^8, a + b + c + d ≥ 1). The second line contains six integers x, y, x1, y1, x2, y2 (−10^8 ≤ x1 ≤ x ≤ x2 ≤ 10^8, −10^8 ≤ y1 ≤ y ≤ y2 ≤ 10^8).",
+  "output_format": "For each test case, output 'YES' if there exists a walk satisfying Alice's wishes, otherwise output 'NO'.",
+  "input_bounds": {
+    "t": {
+      "min": 1,
+      "max": 1000
+    },
+    "a": {
+      "min": 0,
+      "max": 100000000
+    },
+    "b": {
+      "min": 0,
+      "max": 100000000
+    },
+    "c": {
+      "min": 0,
+      "max": 100000000
+    },
+    "d": {
+      "min": 0,
+      "max": 100000000
+    },
+    "x": {
+      "min": -100000000,
+      "max": 100000000
+    },
+    "y": {
+      "min": -100000000,
+      "max": 100000000
+    },
+    "x1": {
+      "min": -100000000,
+      "max": 100000000
+    },
+    "y1": {
+      "min": -100000000,
+      "max": 100000000
+    },
+    "x2": {
+      "min": -100000000,
+      "max": 100000000
+    },
+    "y2": {
+      "min": -100000000,
+      "max": 100000000
+    }
+  },
+  "time_limit_ms": 1000,
+  "memory_limit_mb": 256,
+  "expected_complexity": "O(t)",
+  "expected_approach": "To determine if the cat can complete the walk within the specified area, check if the following conditions hold: 1. The total number of steps left (a) is less than or equal to the initial x-coordinate minus the minimum x-bound (x - x1). 2. The total number of steps right (b) is less than or equal to the maximum x-bound minus the initial x-coordinate (x2 - x). 3. The total number of steps down (c) is less than or equal to the initial y-coordinate minus the minimum y-bound (y - y1). 4. The total number of steps up (d) is less than or equal to the maximum y-bound minus the initial y-coordinate (y2 - y). If all these conditions are satisfied, output 'YES', otherwise output 'NO'.",
+  "test_cases": [
+    {
+      "input": "6\n3 2 2 2\n0 0 -2 -2 2 2\n3 1 4 1\n0 0 -1 -1 1 1\n1 1 1 1\n1 1 1 1 1 1\n0 0 0 1\n0 0 0 0 0 1\n5 1 1 1\n0 0 -100 -100 0 100\n1 1 5 1\n0 0 -100 -100 100 0",
+      "output": "YES\nNO\nNO\nYES\nYES\nYES\n",
+      "explanation": [
+        "In the first test case, the cat can move 3 steps left, 2 steps right, 2 steps down, and 2 steps up without moving outside the specified area.",
+        "In the second test case, the cat cannot move 3 steps left and 1 step right without exceeding the x-boundaries.",
+        "In the third test case, the cat cannot move 4 steps down and 1 step up without exceeding the y-boundaries.",
+        "In the fourth test case, the cat can move 1 step left, 1 step right, 1 step down, and 1 step up without moving outside the specified area.",
+        "In the fifth test case, the cat can move 5 steps left, 1 step right, 1 step down, and 1 step up without moving outside the specified area.",
+        "In the sixth test case, the cat can move 1 step left, 1 step right, 5 steps down, and 1 step up without moving outside the specified area."
+      ]
+    }
+  ],
+  "source_url": "https://codeforces.com/problemset/problem/1332/A",
+  "source_rating": 1100,
+  "tags": [
+    "greedy",
+    "implementation",
+    "math"
+  ]
+}

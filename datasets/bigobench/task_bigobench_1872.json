@@ -1,0 +1,41 @@
+{
+  "task_id": "BIGOBENCH_1872",
+  "title": "Orac and LCM",
+  "source": "bigobench",
+  "difficulty": "easy",
+  "description": "Given a sequence of integers, construct a multiset of LCMs of all pairs of elements and compute the GCD of this multiset.",
+  "input_format": "First line: integer n (2 ≤ n ≤ 100,000), the number of elements in the sequence. Second line: n integers a_1, a_2, ..., a_n (1 ≤ a_i ≤ 200,000).",
+  "output_format": "Print a single integer: the GCD of the LCMs of all pairs of elements in the sequence.",
+  "input_bounds": {
+    "n": {
+      "min": 2,
+      "max": 100000
+    },
+    "a_i": {
+      "min": 1,
+      "max": 200000
+    }
+  },
+  "time_limit_ms": 3000,
+  "memory_limit_mb": 256,
+  "expected_complexity": "O(n)",
+  "expected_approach": "Use the property that gcd(lcm(A,B), lcm(A,C)) = lcm(A, gcd(B,C)) to compute the result efficiently.",
+  "test_cases": [
+    {
+      "input": "2\n1 1\n",
+      "output": "1\n",
+      "explanation": "The only pair is (1, 1), and lcm(1, 1) = 1, so the GCD is 1."
+    },
+    {
+      "input": "4\n10 24 40 80\n",
+      "output": "40\n",
+      "explanation": "The LCMs of all pairs are: 120, 200, 240, 400, 800, 960. The GCD of these values is 40."
+    }
+  ],
+  "source_url": "https://codeforces.com/problemset/problem/1349/A",
+  "source_rating": 1600,
+  "tags": [
+    "math",
+    "number theory"
+  ]
+}

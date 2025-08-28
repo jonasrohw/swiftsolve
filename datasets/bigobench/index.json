@@ -4,25 +4,109 @@
   "task_count": 3,
   "tasks": [
     {
-      "task_id": "BIGOBENCH_001",
-      "title": "Maximum Element",
-      "difficulty": "easy",
+      "task_id": "BIGOBENCH_1718",
+      "title": "300_A. Array",
+      "difficulty": "unknown",
       "complexity": "O(n)",
-      "file": "task_bigobench_001.json"
+      "file": "task_bigobench_1718.json"
     },
     {
-      "task_id": "BIGOBENCH_002",
-      "title": "Binary Search",
-      "difficulty": "easy",
-      "complexity": "O(log n)",
-      "file": "task_bigobench_002.json"
+      "task_id": "BIGOBENCH_1414",
+      "title": "137_B. Permutation",
+      "difficulty": "unknown",
+      "complexity": "O(n**2)",
+      "file": "task_bigobench_1414.json"
     },
     {
-      "task_id": "BIGOBENCH_003",
-      "title": "Bubble Sort",
-      "difficulty": "medium",
-      "complexity": "O(n^2)",
-      "file": "task_bigobench_003.json"
+      "task_id": "BIGOBENCH_2983",
+      "title": "1102_C. Doors Breaking and Repairing",
+      "difficulty": "unknown",
+      "complexity": "O(n)",
+      "file": "task_bigobench_2983.json"
+    },
+    {
+      "task_id": "BIGOBENCH_1139",
+      "title": "499_A. Watching a movie",
+      "difficulty": "unknown",
+      "complexity": "O(n*m)",
+      "file": "task_bigobench_1139.json"
+    },
+    {
+      "task_id": "BIGOBENCH_411",
+      "title": "725_A. Jumping Ball",
+      "difficulty": "unknown",
+      "complexity": "O(n)",
+      "file": "task_bigobench_411.json"
+    },
+    {
+      "task_id": "BIGOBENCH_1821",
+      "title": "1199_A. City Day",
+      "difficulty": "unknown",
+      "complexity": "O(n**2)",
+      "file": "task_bigobench_1821.json"
+    },
+    {
+      "task_id": "BIGOBENCH_915",
+      "title": "1445_B. Elimination",
+      "difficulty": "unknown",
+      "complexity": "O(n*m)",
+      "file": "task_bigobench_915.json"
+    },
+    {
+      "task_id": "BIGOBENCH_1044",
+      "title": "1326_A. Bad Ugly Numbers",
+      "difficulty": "unknown",
+      "complexity": "O(n**2)",
+      "file": "task_bigobench_1044.json"
+    },
+    {
+      "task_id": "BIGOBENCH_2218",
+      "title": "501_B. Misha and Changing Handles",
+      "difficulty": "unknown",
+      "complexity": "O(n**2)",
+      "file": "task_bigobench_2218.json"
+    },
+    {
+      "task_id": "BIGOBENCH_1872",
+      "title": "1349_A. Orac and LCM",
+      "difficulty": "unknown",
+      "complexity": "O(n)",
+      "file": "task_bigobench_1872.json"
+    },
+    {
+      "task_id": "BIGOBENCH_1169",
+      "title": "1322_A. Unusual Competitions",
+      "difficulty": "unknown",
+      "complexity": "O(n**2)",
+      "file": "task_bigobench_1169.json"
+    },
+    {
+      "task_id": "BIGOBENCH_620",
+      "title": "975_A. Aramic script",
+      "difficulty": "unknown",
+      "complexity": "O(n**2)",
+      "file": "task_bigobench_620.json"
+    },
+    {
+      "task_id": "BIGOBENCH_898",
+      "title": "617_A. Elephant",
+      "difficulty": "unknown",
+      "complexity": "O(n)",
+      "file": "task_bigobench_898.json"
+    },
+    {
+      "task_id": "BIGOBENCH_578",
+      "title": "1345_B. Card Constructions",
+      "difficulty": "unknown",
+      "complexity": "O(n**2)",
+      "file": "task_bigobench_578.json"
+    },
+    {
+      "task_id": "BIGOBENCH_1334",
+      "title": "1029_C. Maximal Intersection",
+      "difficulty": "unknown",
+      "complexity": "O(n)",
+      "file": "task_bigobench_1334.json"
     }
   ]
 }

@@ -1,0 +1,55 @@
+{
+  "task_id": "BIGOBENCH_2983",
+  "title": "Doors Breaking and Repairing",
+  "source": "bigobench",
+  "difficulty": "easy",
+  "description": "You are a policeman trying to break doors (reducing durability by x) while Slavik repairs one door each turn (increasing durability by y). The game lasts virtually forever, and you aim to maximize the number of doors broken (durability zero) while Slavik aims to minimize it.",
+  "input_format": "First line: n, x, y. Second line: n integers a_i — initial durability of each door.",
+  "output_format": "Print a single integer — the maximum number of doors broken (durability zero) at the end under optimal play.",
+  "input_bounds": {
+    "n": {
+      "min": 1,
+      "max": 100
+    },
+    "x": {
+      "min": 1,
+      "max": 100000
+    },
+    "y": {
+      "min": 1,
+      "max": 100000
+    },
+    "a_i": {
+      "min": 1,
+      "max": 100000
+    }
+  },
+  "time_limit_ms": 1000,
+  "memory_limit_mb": 256,
+  "expected_complexity": "O(n log n) or O(n)",
+  "expected_approach": "Greedy counting: if x > y, all doors can be broken. Else (x ≤ y), count doors with durability ≤ x — Slavik can only save at most ~half of them, resulting in ⌈cnt/2⌉ broken doors.",
+  "test_cases": [
+    {
+      "input": "6 3 2\n2 3 1 3 4 2\n",
+      "output": "6",
+      "explanation": "Since x>y, all doors end broken."
+    },
+    {
+      "input": "5 3 3\n1 2 4 2 3\n",
+      "output": "2",
+      "explanation": "x ≤ y; only doors with durability ≤3 matter: count=4, so broken = ceil(4/2)=2."
+    },
+    {
+      "input": "5 5 6\n1 2 6 10 3\n",
+      "output": "2",
+      "explanation": "x ≤ y; doors with durability ≤5 are [1,2,3] → count=3 → broken = ceil(3/2)=2."
+    }
+  ],
+  "source_url": "https://codeforces.com/problemset/problem/1102/C",
+  "source_rating": 1200,
+  "tags": [
+    "greedy",
+    "games",
+    "implementation"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "task_id": "BIGOBENCH_2218",
+  "title": "Misha and Changing Handles",
+  "source": "bigobench",
+  "difficulty": "easy",
+  "description": "Misha has a list of handle change requests. After completing the requests, he wants to understand the relation between the original and the new handles of the users. Help him to do that.",
+  "input_format": "First line: integer q (1 ≤ q ≤ 1000), the number of handle change requests. Next q lines: each line contains two distinct non-empty strings old and new, separated by a space. The strings consist of lowercase and uppercase Latin letters and digits. The lengths of the strings do not exceed 20.",
+  "output_format": "First line: integer n — the number of users that changed their handles at least once. Next n lines: each line contains two strings old and new, separated by a space, meaning that before the user had handle old, and after all the requests are completed, his handle is new.",
+  "input_bounds": {
+    "q": {
+      "min": 1,
+      "max": 1000
+    },
+    "old": {
+      "length": {
+        "min": 1,
+        "max": 20
+      }
+    },
+    "new": {
+      "length": {
+        "min": 1,
+        "max": 20
+      }
+    }
+  },
+  "time_limit_ms": 1000,
+  "memory_limit_mb": 256,
+  "expected_complexity": "O(q)",
+  "expected_approach": "Model the problem as a directed graph where each handle change is an edge from the old handle to the new handle. Use a map to track the original handle of each user and the final handle after all changes.",
+  "test_cases": [
+    {
+      "input": "5\nMisha ILoveCodeforces\nVasya Petrov\nPetrov VasyaPetrov123\nILoveCodeforces MikeMirzayanov\nPetya Ivanov\n",
+      "output": "3\nMisha MikeMirzayanov\nVasya VasyaPetrov123\nPetya Ivanov\n",
+      "explanation": "After processing all requests, Misha's original handle was 'Misha' and his final handle is 'MikeMirzayanov'. Vasya's original handle was 'Vasya' and his final handle is 'VasyaPetrov123'. Petya's original handle was 'Petya' and his final handle is 'Ivanov'."
+    }
+  ],
+  "source_url": "https://codeforces.com/problemset/problem/501/B",
+  "source_rating": 1100,
+  "tags": [
+    "data structures",
+    "strings"
+  ]
+}

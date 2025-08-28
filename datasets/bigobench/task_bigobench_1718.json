@@ -1,0 +1,42 @@
+{
+  "task_id": "BIGOBENCH_1718",
+  "title": "Array",
+  "source": "bigobench",
+  "difficulty": "easy",
+  "description": "Divide an array of distinct integers into three non-empty sets such that one set’s product is negative, another’s is positive, and the third’s is zero.",
+  "input_format": "First line: n (number of elements). Second line: n distinct integers a_i.",
+  "output_format": "Print three lines—each starts with the size of the set followed by its elements—for sets with product < 0, > 0, and = 0 respectively.",
+  "input_bounds": {
+    "n": {
+      "min": 3,
+      "max": 100
+    },
+    "a_i": {
+      "min": -1000,
+      "max": 1000
+    }
+  },
+  "time_limit_ms": 2000,
+  "memory_limit_mb": 256,
+  "expected_complexity": "O(n)",
+  "expected_approach": "Pick one negative (if any) for the negative-product set, one positive for the positive-product set; place zeroes and remaining numbers appropriately to satisfy the conditions.",
+  "test_cases": [
+    {
+      "input": "3\n-1 2 0\n",
+      "output": "1 -1\n1 2\n1 0\n",
+      "explanation": "One negative, one positive, one zero."
+    },
+    {
+      "input": "4\n-1 -2 -3 0\n",
+      "output": "1 -1\n2 -2 -3\n1 0\n",
+      "explanation": "One negative in first set; two negatives (product positive) in second; zero in third."
+    }
+  ],
+  "source_url": "https://codeforces.com/problemset/problem/300/A",
+  "source_rating": 1100,
+  "tags": [
+    "brute force",
+    "constructive algorithms",
+    "implementation"
+  ]
+}
