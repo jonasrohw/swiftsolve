@@ -1,0 +1,182 @@
+{
+  "evaluation_summary": {
+    "total_runs": 75,
+    "successful_runs": 41,
+    "success_rate_percent": 54.666666666666664,
+    "total_duration_minutes": 8.483452030022939,
+    "avg_duration_per_run_seconds": 6.785397631327311
+  },
+  "status_breakdown": {
+    "success": 41,
+    "agent_failure": 34
+  },
+  "task_analysis": {
+    "cf_1286b_numbers_on_tree": {
+      "total_runs": 3,
+      "successful_runs": 1,
+      "success_rate": 33.33333333333333,
+      "avg_duration": 8.861289421717325
+    },
+    "bigobench_dynamic_programming": {
+      "total_runs": 3,
+      "successful_runs": 2,
+      "success_rate": 66.66666666666667,
+      "avg_duration": 2.841362953186035
+    },
+    "bigobench_two_pointers": {
+      "total_runs": 3,
+      "successful_runs": 3,
+      "success_rate": 100.0,
+      "avg_duration": 3.5954932371775308
+    },
+    "bigobench_hash_lookup": {
+      "total_runs": 3,
+      "successful_runs": 3,
+      "success_rate": 100.0,
+      "avg_duration": 2.8181210358937583
+    },
+    "cf_1285a_meximum_array": {
+      "total_runs": 3,
+      "successful_runs": 2,
+      "success_rate": 66.66666666666667,
+      "avg_duration": 5.967733065287272
+    },
+    "cf_1286a_garland": {
+      "total_runs": 3,
+      "successful_runs": 1,
+      "success_rate": 33.33333333333333,
+      "avg_duration": 10.598172108332315
+    },
+    "bigobench_merge_sort": {
+      "total_runs": 3,
+      "successful_runs": 2,
+      "success_rate": 66.66666666666667,
+      "avg_duration": 2.568537394205729
+    },
+    "bigobench_segment_tree": {
+      "total_runs": 3,
+      "successful_runs": 1,
+      "success_rate": 33.33333333333333,
+      "avg_duration": 9.155545075734457
+    },
+    "bigobench_matrix_multiplication": {
+      "total_runs": 3,
+      "successful_runs": 1,
+      "success_rate": 33.33333333333333,
+      "avg_duration": 13.148446083068848
+    },
+    "cf_1285c_fadi_and_lcm": {
+      "total_runs": 3,
+      "successful_runs": 0,
+      "success_rate": 0.0,
+      "avg_duration": 8.476232290267944
+    },
+    "bigobench_dfs_graph": {
+      "total_runs": 3,
+      "successful_runs": 2,
+      "success_rate": 66.66666666666667,
+      "avg_duration": 3.4593987464904785
+    },
+    "cf_1285d_dr_evil_underscores": {
+      "total_runs": 3,
+      "successful_runs": 0,
+      "success_rate": 0.0,
+      "avg_duration": 19.071852684020996
+    },
+    "bigobench_binary_search": {
+      "total_runs": 3,
+      "successful_runs": 3,
+      "success_rate": 100.0,
+      "avg_duration": 4.362513383229573
+    },
+    "cf_1285e_delete_a_segment": {
+      "total_runs": 3,
+      "successful_runs": 1,
+      "success_rate": 33.33333333333333,
+      "avg_duration": 7.987494389216105
+    },
+    "bigobench_bfs_graph": {
+      "total_runs": 3,
+      "successful_runs": 2,
+      "success_rate": 66.66666666666667,
+      "avg_duration": 6.5072557131449384
+    },
+    "cf_1285b_just_eat_it": {
+      "total_runs": 3,
+      "successful_runs": 2,
+      "success_rate": 66.66666666666667,
+      "avg_duration": 5.345202445983887
+    },
+    "bigobench_prefix_sum": {
+      "total_runs": 3,
+      "successful_runs": 3,
+      "success_rate": 100.0,
+      "avg_duration": 3.9044546286265054
+    },
+    "bigobench_dijkstra": {
+      "total_runs": 3,
+      "successful_runs": 1,
+      "success_rate": 33.33333333333333,
+      "avg_duration": 5.508826017379761
+    },
+    "bigobench_quick_sort": {
+      "total_runs": 3,
+      "successful_runs": 2,
+      "success_rate": 66.66666666666667,
+      "avg_duration": 2.781402508417765
+    },
+    "bigobench_heap_operations": {
+      "total_runs": 3,
+      "successful_runs": 3,
+      "success_rate": 100.0,
+      "avg_duration": 2.3791632652282715
+    },
+    "bigobench_linear_scan": {
+      "total_runs": 3,
+      "successful_runs": 3,
+      "success_rate": 100.0,
+      "avg_duration": 2.8105817635854087
+    },
+    "bigobench_backtracking": {
+      "total_runs": 3,
+      "successful_runs": 0,
+      "success_rate": 0.0,
+      "avg_duration": 12.713300625483194
+    },
+    "cf_1286c1_madness_easy": {
+      "total_runs": 3,
+      "successful_runs": 1,
+      "success_rate": 33.33333333333333,
+      "avg_duration": 12.19097630182902
+    },
+    "bigobench_sliding_window": {
+      "total_runs": 3,
+      "successful_runs": 2,
+      "success_rate": 66.66666666666667,
+      "avg_duration": 2.6311869621276855
+    },
+    "cf_1286c2_madness_hard": {
+      "total_runs": 3,
+      "successful_runs": 0,
+      "success_rate": 0.0,
+      "avg_duration": 9.950398683547974
+    }
+  },
+  "baseline_insights": {
+    "agent_type": "GPT-4 Direct (Single Attempt)",
+    "dataset_source_performance": {
+      "bigobench": {
+        "success_rate": 60.416666666666664,
+        "avg_duration": 5.074099337061246,
+        "count": 48
+      },
+      "codeforces": {
+        "success_rate": 44.44444444444444,
+        "avg_duration": 9.827705710022538,
+        "count": 27
+      }
+    },
+    "iteration_consistency": "Always 1 iteration per run",
+    "no_replanning": "Single attempt per task-seed combination"
+  }
+}
