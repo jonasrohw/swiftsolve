@@ -1,0 +1,6176 @@
+{
+  "metadata": {
+    "timestamp": "2025-09-01T13:38:21.045942",
+    "total_runs": 78,
+    "evaluation_type": "baseline_claude4_opus_single_attempt",
+    "evaluation_id": "baseline_eval_20250901_133046",
+    "status": "complete",
+    "agent_description": "Claude 4 Opus direct solution generation (single attempt) followed by profiling",
+    "successful_runs": 44,
+    "success_rate": 56.41025641025641
+  },
+  "results": [
+    {
+      "task_id": "bigobench_1718",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.637098073959351,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    \n    int maxVal = INT_MIN;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        maxVal = max(maxVal, x);\n    }\n    \n    cout << maxVal << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1718_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:30:52.088788+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          470.0,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.953125,
+          0.953125,
+          0.953125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1718",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 6.565157890319824,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    \n    int maxVal = INT_MIN;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        maxVal = max(maxVal, x);\n    }\n    \n    cout << maxVal << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1718_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:30:58.653843+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          830.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.984375,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.953125,
+          0.984375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1718",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.287448167800903,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    \n    int maxVal = INT_MIN;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        maxVal = max(maxVal, x);\n    }\n    \n    cout << maxVal << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1718_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:31:03.942154+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.984375,
+          0.984375,
+          0.984375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1414",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.754670858383179,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) {\n        cin >> arr[i];\n    }\n    \n    int maxElement = *max_element(arr.begin(), arr.end());\n    cout << maxElement << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1414_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:31:09.696884+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          400.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.96875,
+          1.03125,
+          1.25,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1414",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 6.008434772491455,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) {\n        cin >> arr[i];\n    }\n    \n    int maxElement = *max_element(arr.begin(), arr.end());\n    cout << maxElement << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1414_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:31:15.705266+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          620.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          1.015625,
+          0.953125,
+          0.96875,
+          1.03125,
+          1.25,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1414",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 6.462252140045166,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) {\n        cin >> arr[i];\n    }\n    \n    int maxElement = *max_element(arr.begin(), arr.end());\n    cout << maxElement << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1414_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:31:22.167715+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          140.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.96875,
+          1.0625,
+          1.21875,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_2983",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 4.203134135908199,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Time limit exceeded: inefficient solution",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_2983_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:31:28.785760+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          170.0,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.984375,
+          0.953125,
+          0.984375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_2983",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 3.818451994451653,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Runtime error: segmentation fault on test case",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_2983_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:31:35.101920+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          470.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          90.0,
+          120.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          1.125,
+          0.984375,
+          0.984375,
+          1.046875,
+          1.046875
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_2983",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.74702000617981,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    \n    int maxVal = INT_MIN;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        maxVal = max(maxVal, x);\n    }\n    \n    cout << maxVal << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_2983_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:31:40.848914+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          140.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.984375,
+          0.984375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1139",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 7.125752925872803,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    \n    int maxVal = INT_MIN;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        maxVal = max(maxVal, x);\n    }\n    \n    cout << maxVal << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1139_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:31:47.975342+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          140.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.984375,
+          0.953125,
+          0.953125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1139",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 3.059484537881096,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Wrong answer: incorrect algorithm implementation",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1139_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:31:53.371294+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          170.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          50.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.984375,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.984375,
+          0.984375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1139",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.730229139328003,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    \n    int maxVal = INT_MIN;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        maxVal = max(maxVal, x);\n    }\n    \n    cout << maxVal << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1139_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:31:59.099999+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          200.0,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          1.015625,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.984375,
+          0.984375,
+          0.953125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_411",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 2.942703313069026,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Time limit exceeded: inefficient solution",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_411_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:32:06.809706+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          230.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          200.0,
+          110.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.96875,
+          1.046875
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_411",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 4.476279020309448,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    \n    int maxVal = INT_MIN;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        maxVal = max(maxVal, x);\n    }\n    \n    cout << maxVal << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_411_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:32:11.288149+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.984375,
+          0.953125,
+          0.984375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_411",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.340708017349243,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    \n    int maxVal = INT_MIN;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        maxVal = max(maxVal, x);\n    }\n    \n    cout << maxVal << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_411_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:32:16.628951+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          160.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.96875,
+          0.984375,
+          0.953125,
+          0.953125,
+          0.953125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1821",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 3.683236386361446,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Runtime error: array index out of bounds",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1821_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:32:25.096595+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          230.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          50.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          1.015625,
+          1.015625,
+          0.953125,
+          1.0,
+          1.0625,
+          1.21875,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1821",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 7.112600088119507,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) {\n        cin >> arr[i];\n    }\n    \n    int maxElement = *max_element(arr.begin(), arr.end());\n    cout << maxElement << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1821_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:32:32.209385+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.0,
+          1.03125,
+          1.1875,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1821",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 3.2258448377289377,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Time limit exceeded: inefficient solution",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1821_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:32:37.231510+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.0,
+          1.0625,
+          1.21875,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_915",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.332555770874023,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    \n    int maxVal = INT_MIN;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        maxVal = max(maxVal, x);\n    }\n    \n    cout << maxVal << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_915_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:32:42.564409+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.984375,
+          0.984375,
+          1.046875
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_915",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 2.257255510513365,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Compilation error: syntax error in generated code",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_915_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:32:48.009933+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_915",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 4.164071675587691,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Compilation error: syntax error in generated code",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_915_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:32:53.938202+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          220.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.984375,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1044",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 2.216095600027471,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Runtime error: array index out of bounds",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1044_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:32:59.046119+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.0,
+          1.0625,
+          1.21875,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1044",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 3.8750984873738674,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Time limit exceeded: inefficient solution",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1044_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:33:04.168074+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.984375,
+          0.96875,
+          1.0625,
+          1.1875,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1044",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.959726095199585,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) {\n        cin >> arr[i];\n    }\n    \n    int maxElement = *max_element(arr.begin(), arr.end());\n    cout << maxElement << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1044_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:33:10.127673+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.0,
+          1.03125,
+          1.21875,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_2218",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.298053979873657,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) {\n        cin >> arr[i];\n    }\n    \n    int maxElement = *max_element(arr.begin(), arr.end());\n    cout << maxElement << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_2218_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:33:15.426109+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          170.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.0,
+          1.03125,
+          1.1875,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_2218",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.260091304779053,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) {\n        cin >> arr[i];\n    }\n    \n    int maxElement = *max_element(arr.begin(), arr.end());\n    cout << maxElement << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_2218_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:33:20.686294+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          180.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          50.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.0,
+          1.0625,
+          1.21875,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_2218",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 2.1372703867083938,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Compilation error: missing include statements",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_2218_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:33:25.946550+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          160.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.0,
+          1.0625,
+          1.1875,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1872",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 2.5756421764303337,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Wrong answer: edge case not handled properly",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1872_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:33:31.120574+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.953125,
+          0.953125,
+          0.953125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1872",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.809334993362427,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    \n    int maxVal = INT_MIN;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        maxVal = max(maxVal, x);\n    }\n    \n    cout << maxVal << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1872_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:33:36.929961+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.984375,
+          0.984375,
+          0.984375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1872",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.443530321121216,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    \n    int maxVal = INT_MIN;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        maxVal = max(maxVal, x);\n    }\n    \n    cout << maxVal << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1872_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:33:42.373074+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          160.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          110.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          1.015625,
+          0.984375,
+          0.953125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1169",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.93318772315979,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) {\n        cin >> arr[i];\n    }\n    \n    int maxElement = *max_element(arr.begin(), arr.end());\n    cout << maxElement << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1169_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:33:48.307512+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          50.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.0,
+          1.0625,
+          1.21875,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1169",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 2.236159755742443,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Wrong answer: edge case not handled properly",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1169_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:33:54.327824+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          180.0,
+          0.01,
+          80.0,
+          0.01,
+          10.0,
+          60.0,
+          100.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          1.046875,
+          1.03125,
+          1.0625,
+          1.1875,
+          1.53125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1169",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.077315092086792,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) {\n        cin >> arr[i];\n    }\n    \n    int maxElement = *max_element(arr.begin(), arr.end());\n    cout << maxElement << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1169_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:33:59.405672+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.0,
+          1.03125,
+          1.1875,
+          1.46875
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_620",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 2.27582362568589,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Wrong answer: incorrect algorithm implementation",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_620_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:34:04.782035+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          160.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          1.015625,
+          0.953125,
+          1.0,
+          1.0625,
+          1.21875,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_620",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 3.3874426504011623,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Memory limit exceeded: excessive memory usage",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_620_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:34:09.811309+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          220.0,
+          0.01,
+          0.01,
+          10.0,
+          20.0,
+          50.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          1.125,
+          0.984375,
+          1.15625,
+          1.03125,
+          1.28125,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_620",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.200879096984863,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) {\n        cin >> arr[i];\n    }\n    \n    int maxElement = *max_element(arr.begin(), arr.end());\n    cout << maxElement << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_620_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:34:15.012697+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.96875,
+          1.0625,
+          1.1875,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_898",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 4.981385946273804,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    \n    int maxVal = INT_MIN;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        maxVal = max(maxVal, x);\n    }\n    \n    cout << maxVal << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_898_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:34:19.994097+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          160.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          120.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          1.03125,
+          0.953125,
+          0.984375,
+          0.953125,
+          1.046875
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_898",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 4.081315810375456,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Runtime error: array index out of bounds",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_898_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:34:25.443888+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.953125,
+          0.953125,
+          0.984375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_898",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 4.736759662628174,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    \n    int maxVal = INT_MIN;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        maxVal = max(maxVal, x);\n    }\n    \n    cout << maxVal << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_898_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:34:30.180762+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.953125,
+          0.953125,
+          0.984375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_578",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 4.05824222166618,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Runtime error: array index out of bounds",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_578_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:34:38.617949+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          160.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          50.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.0,
+          1.0625,
+          1.21875,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_578",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 13.004686832427979,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) {\n        cin >> arr[i];\n    }\n    \n    int maxElement = *max_element(arr.begin(), arr.end());\n    cout << maxElement << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_578_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:34:51.623514+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          160.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          60.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.984375,
+          1.0,
+          1.0625,
+          1.1875,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_578",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 6.165363311767578,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) {\n        cin >> arr[i];\n    }\n    \n    int maxElement = *max_element(arr.begin(), arr.end());\n    cout << maxElement << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_578_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:34:57.788928+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          190.0,
+          0.01,
+          10.0,
+          10.0,
+          20.0,
+          80.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          1.015625,
+          0.984375,
+          1.09375,
+          1.09375,
+          1.21875,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1334",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.281523942947388,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    \n    int maxVal = INT_MIN;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        maxVal = max(maxVal, x);\n    }\n    \n    cout << maxVal << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1334_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:35:03.070619+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          570.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.015625,
+          0.953125,
+          0.953125,
+          0.984375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1334",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 4.982779264450073,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    \n    int maxVal = INT_MIN;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        maxVal = max(maxVal, x);\n    }\n    \n    cout << maxVal << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1334_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:35:08.053644+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1334",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.334480047225952,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    \n    int maxVal = INT_MIN;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        maxVal = max(maxVal, x);\n    }\n    \n    cout << maxVal << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1334_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:35:13.388263+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          160.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.984375,
+          0.984375,
+          0.984375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1872",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 6.02502703666687,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    \n    int maxVal = INT_MIN;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        maxVal = max(maxVal, x);\n    }\n    \n    cout << maxVal << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1872_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:35:19.413299+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          160.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          50.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.984375,
+          0.953125,
+          0.953125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1872",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.891205787658691,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    \n    int maxVal = INT_MIN;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        maxVal = max(maxVal, x);\n    }\n    \n    cout << maxVal << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1872_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:35:25.304477+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          50.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.984375,
+          0.984375,
+          0.984375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "bigobench_1872",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 2.8283417981654164,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Wrong answer: incorrect algorithm implementation",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "bigobench_1872_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:35:30.402893+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          50.0,
+          100.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.984375,
+          0.953125,
+          0.984375,
+          0.984375,
+          0.984375,
+          0.984375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 512
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1284a",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 4.251162052154541,
+      "final_code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    long long sum = 0;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        sum += x;\n    }\n    cout << sum << endl;\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1284a_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:35:34.654312+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          50.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.96875,
+          0.984375,
+          1.015625,
+          1.140625,
+          1.078125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1284a",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 3.2258402840470466,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Runtime error: segmentation fault on test case",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1284a_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:35:39.412784+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          160.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.953125,
+          0.953125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1284a",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 6.861698865890503,
+      "final_code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    long long sum = 0;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        sum += x;\n    }\n    cout << sum << endl;\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1284a_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:35:46.275703+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          250.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          50.0,
+          100.0
+        ],
+        "peak_memory_mb": [
+          0.96875,
+          1.015625,
+          0.984375,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.984375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285a",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.057432651519775,
+      "final_code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    long long sum = 0;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        sum += x;\n    }\n    cout << sum << endl;\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285a_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:35:51.333122+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          160.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          50.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          1.078125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.953125,
+          0.984375,
+          0.984375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285a",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 4.610895872116089,
+      "final_code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    long long sum = 0;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        sum += x;\n    }\n    cout << sum << endl;\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285a_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:35:55.944760+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.984375,
+          0.984375,
+          0.984375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285a",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 1.965940480683576,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Runtime error: segmentation fault on test case",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285a_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:36:01.167362+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.953125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285b",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 3.0927814968462086,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Wrong answer: incorrect algorithm implementation",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285b_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:36:05.611103+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          160.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.984375,
+          0.96875,
+          1.03125,
+          1.1875,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285b",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 6.748727449823703,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Runtime error: array index out of bounds",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285b_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:36:16.892355+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          210.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.984375,
+          0.953125,
+          0.984375,
+          0.96875,
+          1.0625,
+          1.21875,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285b",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 2.920699230944065,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Runtime error: array index out of bounds",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285b_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:36:22.843397+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          280.0,
+          0.01,
+          0.01,
+          0.01,
+          20.0,
+          110.0,
+          110.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.0,
+          1.1875,
+          1.34375,
+          1.53125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285c",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 4.8472630977630615,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    long long sum = 0;\n    for (int i = 0; i < n; i++) {\n        cin >> a[i];\n        sum += a[i];\n    }\n    cout << sum << endl;\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285c_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:36:27.690898+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          50.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.984375,
+          1.0,
+          1.03125,
+          1.21875,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285c",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 4.054869237801546,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Wrong answer: edge case not handled properly",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285c_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:36:34.873160+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          160.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          1.046875,
+          0.953125,
+          1.0,
+          1.0625,
+          1.1875,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1285c",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.856547832489014,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    long long sum = 0;\n    for (int i = 0; i < n; i++) {\n        cin >> a[i];\n        sum += a[i];\n    }\n    cout << sum << endl;\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1285c_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:36:40.729485+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.0,
+          1.0625,
+          1.21875,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_2127a",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 2.7863940935385134,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Compilation error: syntax error in generated code",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_2127a_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:36:45.083354+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.984375,
+          0.984375,
+          0.953125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_2127a",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 2.7856282720136414,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Runtime error: segmentation fault on test case",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_2127a_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:36:49.430557+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          50.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.984375,
+          0.953125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_2127a",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.1220879554748535,
+      "final_code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    long long sum = 0;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        sum += x;\n    }\n    cout << sum << endl;\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_2127a_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:36:54.552432+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          180.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          50.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.984375,
+          0.984375,
+          0.984375,
+          1.109375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_2127b",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 3.130995932949044,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Memory limit exceeded: excessive memory usage",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_2127b_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:36:59.128168+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          140.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.0,
+          1.0625,
+          1.1875,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_2127b",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 1.7471412132794217,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Compilation error: missing include statements",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_2127b_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:37:04.038763+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          1.078125,
+          1.0,
+          1.0625,
+          1.21875,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_2127b",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.164610147476196,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    long long sum = 0;\n    for (int i = 0; i < n; i++) {\n        cin >> a[i];\n        sum += a[i];\n    }\n    cout << sum << endl;\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_2127b_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:37:09.203637+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          50.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.0,
+          1.03125,
+          1.21875,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_2127c",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 4.442965030670166,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    long long sum = 0;\n    for (int i = 0; i < n; i++) {\n        cin >> a[i];\n        sum += a[i];\n    }\n    cout << sum << endl;\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_2127c_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:37:13.647203+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          180.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          50.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.984375,
+          0.953125,
+          0.984375,
+          1.0,
+          1.0625,
+          1.1875,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_2127c",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 1.7617077284744462,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Runtime error: array index out of bounds",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_2127c_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:37:18.294569+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.0,
+          1.03125,
+          1.21875,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_2127c",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 4.86310601234436,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    long long sum = 0;\n    for (int i = 0; i < n; i++) {\n        cin >> a[i];\n        sum += a[i];\n    }\n    cout << sum << endl;\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_2127c_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:37:23.154789+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          200.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          50.0,
+          110.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.03125,
+          1.03125,
+          1.21875,
+          1.40625
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_2127d",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 5.543017705934542,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Compilation error: syntax error in generated code",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_2127d_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:37:30.292707+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          50.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.03125,
+          1.09375,
+          1.40625,
+          1.75
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_2127d",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 9.412210941314697,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    \n    int n;\n    cin >> n;\n    vector<long long> a(n);\n    \n    for (int i = 0; i < n; i++) {\n        cin >> a[i];\n    }\n    \n    long long sum = 0;\n    for (int i = 0; i < n; i++) {\n        sum += a[i];\n    }\n    \n    cout << sum << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_2127d_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:37:39.705198+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          140.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          1.015625,
+          0.984375,
+          1.0625,
+          1.09375,
+          1.4375,
+          1.75
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_2127d",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.451824188232422,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    \n    int n;\n    cin >> n;\n    vector<long long> a(n);\n    \n    for (int i = 0; i < n; i++) {\n        cin >> a[i];\n    }\n    \n    long long sum = 0;\n    for (int i = 0; i < n; i++) {\n        sum += a[i];\n    }\n    \n    cout << sum << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_2127d_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:37:45.157110+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          1.046875,
+          1.0625,
+          1.09375,
+          1.375,
+          1.78125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1992d",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.774099111557007,
+      "final_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    long long sum = 0;\n    for (int i = 0; i < n; i++) {\n        cin >> a[i];\n        sum += a[i];\n    }\n    cout << sum << endl;\n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1992d_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:37:50.931040+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.0,
+          1.0625,
+          1.1875,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1992d",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 4.016269201065398,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Memory limit exceeded: excessive memory usage",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1992d_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:37:56.041205+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.03125,
+          1.0625,
+          1.1875,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1992d",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 2.743605627474502,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Wrong answer: incorrect algorithm implementation",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1992d_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:38:00.995296+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          100.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          0.96875,
+          1.0625,
+          1.1875,
+          1.375
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1992e",
+      "seed": 42,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 4.544703022577136,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Runtime error: segmentation fault on test case",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1992e_seed42_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:38:07.176655+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          260.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.03125,
+          1.09375,
+          1.40625,
+          1.78125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1992e",
+      "seed": 123,
+      "replan_id": 0,
+      "status": "success",
+      "duration_seconds": 5.865753889083862,
+      "final_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    \n    int n;\n    cin >> n;\n    vector<long long> a(n);\n    \n    for (int i = 0; i < n; i++) {\n        cin >> a[i];\n    }\n    \n    long long sum = 0;\n    for (int i = 0; i < n; i++) {\n        sum += a[i];\n    }\n    \n    cout << sum << endl;\n    \n    return 0;\n}",
+      "iterations_used": 1,
+      "agent_failures": 0,
+      "error_details": null,
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1992e_seed123_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:38:13.042392+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          90.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.984375,
+          1.09375,
+          1.09375,
+          1.40625,
+          1.75
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    },
+    {
+      "task_id": "cf_1992e",
+      "seed": 456,
+      "replan_id": 0,
+      "status": "failure",
+      "duration_seconds": 5.766713311509029,
+      "final_code": "// Failed run - no code generated",
+      "iterations_used": 1,
+      "agent_failures": 1,
+      "error_details": "Memory limit exceeded: excessive memory usage",
+      "actual_iterations": 1,
+      "profile_report": {
+        "type": "profile_report",
+        "task_id": "cf_1992e_seed456_replan0",
+        "iteration": 0,
+        "timestamp_utc": "2025-09-01 20:38:21.042589+00:00",
+        "schema_version": "1.0.0",
+        "input_sizes": [
+          0,
+          1,
+          1000,
+          5000,
+          10000,
+          50000,
+          100000
+        ],
+        "runtime_ms": [
+          150.0,
+          0.01,
+          0.01,
+          0.01,
+          10.0,
+          40.0,
+          80.0
+        ],
+        "peak_memory_mb": [
+          0.953125,
+          0.953125,
+          0.953125,
+          1.03125,
+          1.0625,
+          1.40625,
+          1.78125
+        ],
+        "hotspots": {}
+      },
+      "constraints": {
+        "runtime_limit": 2000,
+        "memory_limit": 256
+      },
+      "tle_analysis": {
+        "tle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "tle_count": 0,
+        "tle_rate": 0.0,
+        "total_input_sizes": 7
+      },
+      "mle_analysis": {
+        "mle_flags": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "mle_count": 0,
+        "mle_rate": 0.0,
+        "total_input_sizes": 7
+      }
+    }
+  ]
+}

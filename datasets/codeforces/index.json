@@ -1,12 +1,23 @@
 {
   "dataset": "codeforces",
   "version": "1.0.0",
-  "task_count": 3,
+  "task_count": 10,
   "rating_range": [
     800,
     1800
   ],
   "tasks": [
+    {
+      "task_id": "CF1284A",
+      "title": "New Year and Naming",
+      "difficulty": "easy",
+      "rating": 800,
+      "complexity": "O(q)",
+      "tags": [
+        "implementation"
+      ],
+      "file": "task_cf1284a.json"
+    },
     {
       "task_id": "CF1285A",
       "title": "Mezo Playing Zoma",

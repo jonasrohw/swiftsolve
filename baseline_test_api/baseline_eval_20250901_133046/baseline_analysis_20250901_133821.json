@@ -1,0 +1,182 @@
+{
+  "evaluation_summary": {
+    "total_runs": 78,
+    "successful_runs": 44,
+    "success_rate_percent": 56.41025641025641,
+    "total_duration_minutes": 4.2424532492955525,
+    "avg_duration_per_run_seconds": 5.785163521766663
+  },
+  "status_breakdown": {
+    "success": 44,
+    "failure": 34
+  },
+  "task_analysis": {
+    "bigobench_1718": {
+      "total_runs": 3,
+      "successful_runs": 3,
+      "success_rate": 100.0,
+      "avg_duration": 5.829901377360026
+    },
+    "bigobench_1414": {
+      "total_runs": 3,
+      "successful_runs": 3,
+      "success_rate": 100.0,
+      "avg_duration": 6.075119256973267
+    },
+    "bigobench_2983": {
+      "total_runs": 3,
+      "successful_runs": 1,
+      "success_rate": 33.33333333333333,
+      "avg_duration": 5.74702000617981
+    },
+    "bigobench_1139": {
+      "total_runs": 3,
+      "successful_runs": 2,
+      "success_rate": 66.66666666666666,
+      "avg_duration": 6.427991032600403
+    },
+    "bigobench_411": {
+      "total_runs": 3,
+      "successful_runs": 2,
+      "success_rate": 66.66666666666666,
+      "avg_duration": 4.908493518829346
+    },
+    "bigobench_1821": {
+      "total_runs": 3,
+      "successful_runs": 1,
+      "success_rate": 33.33333333333333,
+      "avg_duration": 7.112600088119507
+    },
+    "bigobench_915": {
+      "total_runs": 3,
+      "successful_runs": 1,
+      "success_rate": 33.33333333333333,
+      "avg_duration": 5.332555770874023
+    },
+    "bigobench_1044": {
+      "total_runs": 3,
+      "successful_runs": 1,
+      "success_rate": 33.33333333333333,
+      "avg_duration": 5.959726095199585
+    },
+    "bigobench_2218": {
+      "total_runs": 3,
+      "successful_runs": 2,
+      "success_rate": 66.66666666666666,
+      "avg_duration": 5.279072642326355
+    },
+    "bigobench_1872": {
+      "total_runs": 6,
+      "successful_runs": 4,
+      "success_rate": 66.66666666666666,
+      "avg_duration": 5.792274534702301
+    },
+    "bigobench_1169": {
+      "total_runs": 3,
+      "successful_runs": 2,
+      "success_rate": 66.66666666666666,
+      "avg_duration": 5.505251407623291
+    },
+    "bigobench_620": {
+      "total_runs": 3,
+      "successful_runs": 1,
+      "success_rate": 33.33333333333333,
+      "avg_duration": 5.200879096984863
+    },
+    "bigobench_898": {
+      "total_runs": 3,
+      "successful_runs": 2,
+      "success_rate": 66.66666666666666,
+      "avg_duration": 4.859072804450989
+    },
+    "bigobench_578": {
+      "total_runs": 3,
+      "successful_runs": 2,
+      "success_rate": 66.66666666666666,
+      "avg_duration": 9.585025072097778
+    },
+    "bigobench_1334": {
+      "total_runs": 3,
+      "successful_runs": 3,
+      "success_rate": 100.0,
+      "avg_duration": 5.199594418207805
+    },
+    "cf_1284a": {
+      "total_runs": 3,
+      "successful_runs": 2,
+      "success_rate": 66.66666666666666,
+      "avg_duration": 5.556430459022522
+    },
+    "cf_1285a": {
+      "total_runs": 3,
+      "successful_runs": 2,
+      "success_rate": 66.66666666666666,
+      "avg_duration": 4.834164261817932
+    },
+    "cf_1285b": {
+      "total_runs": 3,
+      "successful_runs": 0,
+      "success_rate": 0.0,
+      "avg_duration": 0
+    },
+    "cf_1285c": {
+      "total_runs": 3,
+      "successful_runs": 2,
+      "success_rate": 66.66666666666666,
+      "avg_duration": 5.351905465126038
+    },
+    "cf_2127a": {
+      "total_runs": 3,
+      "successful_runs": 1,
+      "success_rate": 33.33333333333333,
+      "avg_duration": 5.1220879554748535
+    },
+    "cf_2127b": {
+      "total_runs": 3,
+      "successful_runs": 1,
+      "success_rate": 33.33333333333333,
+      "avg_duration": 5.164610147476196
+    },
+    "cf_2127c": {
+      "total_runs": 3,
+      "successful_runs": 2,
+      "success_rate": 66.66666666666666,
+      "avg_duration": 4.653035521507263
+    },
+    "cf_2127d": {
+      "total_runs": 3,
+      "successful_runs": 2,
+      "success_rate": 66.66666666666666,
+      "avg_duration": 7.43201756477356
+    },
+    "cf_1992d": {
+      "total_runs": 3,
+      "successful_runs": 1,
+      "success_rate": 33.33333333333333,
+      "avg_duration": 5.774099111557007
+    },
+    "cf_1992e": {
+      "total_runs": 3,
+      "successful_runs": 1,
+      "success_rate": 33.33333333333333,
+      "avg_duration": 5.865753889083862
+    }
+  },
+  "baseline_insights": {
+    "agent_type": "Claude 4 Opus Direct (Single Attempt)",
+    "dataset_source_performance": {
+      "bigobench": {
+        "success_rate": 62.5,
+        "avg_duration": 5.898851243654887,
+        "count": 48
+      },
+      "codeforces": {
+        "success_rate": 46.666666666666664,
+        "avg_duration": 5.541546974863325,
+        "count": 30
+      }
+    },
+    "iteration_consistency": "Always 1 iteration per run",
+    "no_replanning": "Single attempt per task-seed combination"
+  }
+}

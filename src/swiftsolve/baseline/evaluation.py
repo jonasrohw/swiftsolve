@@ -4,7 +4,7 @@ Baseline Evaluation Module
 ==========================
 
 Implements the baseline evaluation pipeline that mirrors the research evaluation
-but uses GPT-4 directly instead of the SwiftSolve multi-agent system.
+but uses Claude 4 Opus directly instead of the SwiftSolve multi-agent system.
 
 This serves as a robust baseline for comparison against SwiftSolve.
 """
@@ -47,7 +47,7 @@ class BaselineRunResult:
 
 
 class BaselineEvaluationRunner:
-    """Runs baseline evaluation using GPT-4 directly on the same dataset as research evaluation."""
+    """Runs baseline evaluation using Claude 4 Opus directly on the same dataset as research evaluation."""
     
     def __init__(self, output_dir: Path, max_workers: int = 4):
         """Initialize baseline evaluation runner."""
@@ -88,7 +88,7 @@ class BaselineEvaluationRunner:
         results = []
         
         log.info(f"📊 Dataset: {len(tasks)} tasks × {len(seeds)} seeds = {len(tasks) * len(seeds)} total runs")
-        log.info(f"🤖 Using GPT-4 directly (single attempt per problem, no replanning)")
+        log.info(f"🤖 Using Claude 4 Opus directly (single attempt per problem, no replanning)")
         
         # Generate all job specifications (single attempt per task-seed combination)
         jobs = []
@@ -167,7 +167,7 @@ class BaselineEvaluationRunner:
         try:
             # Create problem input from task metadata
             # For baseline, we don't modify the prompt based on replan_id
-            # since GPT-4 should handle replanning internally
+            # since Claude 4 Opus should handle replanning internally
             problem = ProblemInput(
                 task_id=f"{task.task_id}_seed{seed}_replan{replan_id}",
                 prompt=task.description,
@@ -178,7 +178,7 @@ class BaselineEvaluationRunner:
                 unit_tests=[{"input": tc.input, "output": tc.output} for tc in task.test_cases[:3]]
             )
             
-            # Run baseline pipeline (GPT-4 → Profiler)
+            # Run baseline pipeline (Claude 4 Opus → Profiler)
             result = run_baseline_pipeline(problem)
             
             duration = time.time() - start_time
@@ -318,7 +318,7 @@ class BaselineEvaluationRunner:
             "status_breakdown": status_counts,
             "task_analysis": task_analysis,
             "baseline_insights": {
-                "agent_type": "GPT-4 Direct (Single Attempt)",
+                "agent_type": "Claude 4 Opus Direct (Single Attempt)",
                 "dataset_source_performance": self._analyze_by_source(results),
                 "iteration_consistency": "Always 1 iteration per run",
                 "no_replanning": "Single attempt per task-seed combination"
@@ -358,10 +358,10 @@ class BaselineEvaluationRunner:
             "metadata": {
                 "timestamp": datetime.now().isoformat(),
                 "total_runs": len(results),
-                "evaluation_type": "baseline_gpt4_single_attempt",
+                "evaluation_type": "baseline_claude4_opus_single_attempt",
                 "evaluation_id": evaluation_id,
                 "status": "complete",
-                "agent_description": "GPT-4 direct solution generation (single attempt) followed by profiling"
+                "agent_description": "Claude 4 Opus direct solution generation (single attempt) followed by profiling"
             },
             "results": [self._serialize_result(r) for r in results]
         }

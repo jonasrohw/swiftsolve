@@ -3,12 +3,12 @@
 Baseline Pipeline
 ================
 
-A simple pipeline that uses GPT-4 directly followed by profiling.
+A simple pipeline that uses Claude 4 Opus directly followed by profiling.
 This mirrors the SwiftSolve pipeline structure but replaces the 
-planner+coder+analyst loop with a single GPT-4 call.
+planner+coder+analyst loop with a single Claude 4 Opus call.
 """
 
-from .agent import GPT4BaselineAgent
+from .agent import ClaudeOpusBaselineAgent
 from ..agents.profiler import Profiler
 from ..schemas import ProblemInput
 from ..utils.logger import get_logger
@@ -19,7 +19,7 @@ log = get_logger("BaselinePipeline")
 
 def run_baseline_pipeline(problem: ProblemInput):
     """
-    Run the baseline pipeline: GPT-4 → Profiler
+    Run the baseline pipeline: Claude 4 Opus → Profiler
     
     Args:
         problem: The problem to solve
@@ -31,25 +31,25 @@ def run_baseline_pipeline(problem: ProblemInput):
     log.info(f"Problem input: {problem.model_dump_json(indent=2)}")
     
     # Initialize agents
-    baseline_agent = GPT4BaselineAgent()
+    baseline_agent = ClaudeOpusBaselineAgent()
     profiler = Profiler()
     
     # Track for consistency with main pipeline
     agent_failures = 0
     max_failures = 2
     
-    # GPT-4 Generation Phase
-    log.info("--- Starting GPT-4 Baseline Agent ---")
+    # Claude 4 Opus Generation Phase
+    log.info("--- Starting Claude 4 Opus Baseline Agent ---")
     try:
         code = baseline_agent.solve(problem)
-        log.info(f"✅ GPT-4 baseline generated solution successfully")
+        log.info(f"✅ Claude 4 Opus baseline generated solution successfully")
         log.info(f"Code length: {len(code.code_cpp)} characters")
     except Exception as e:
         agent_failures += 1
-        log.error(f"GPT-4 baseline failed (attempt {agent_failures}/{max_failures}): {e}")
+        log.error(f"Claude 4 Opus baseline failed (attempt {agent_failures}/{max_failures}): {e}")
         return {
             "status": "agent_failure", 
-            "error": "GPT-4 baseline failed", 
+            "error": "Claude 4 Opus baseline failed", 
             "details": str(e), 
             "iterations": 1
         }
