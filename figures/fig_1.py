@@ -40,5 +40,5 @@ plt.grid(axis="y", linestyle="--", alpha=0.6)
 plt.gca().yaxis.set_major_locator(MultipleLocator(4))
 
 # Save to file
-plt.savefig("fig_1.png", dpi=300, bbox_inches="tight")
+plt.savefig("fig_1.svg", bbox_inches="tight")
 plt.close()

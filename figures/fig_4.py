@@ -15,4 +15,4 @@ plt.gca().yaxis.set_major_locator(MultipleLocator(4))
 
 plt.bar(["Replan 0", "Replan 1", "Replan 2"], dat)
 
-plt.savefig('fig_4.png', bbox_inches='tight')
+plt.savefig("fig_4.svg", bbox_inches="tight")

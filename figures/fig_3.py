@@ -19,4 +19,4 @@ plt.title("Result Types for Each Testcase")
 
 plt.bar(["Total", "TLE Count", "MLE Count"], dat)
 
-plt.savefig('fig_3.png', bbox_inches='tight')
+plt.savefig("fig_3.svg", bbox_inches="tight")

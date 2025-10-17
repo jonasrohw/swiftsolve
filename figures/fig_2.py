@@ -29,4 +29,4 @@ plt.title("Input Size vs. Runtime for Various Tasks")
 plt.legend()
 plt.grid(True)
 
-plt.savefig('fig_2.png', bbox_inches='tight')
+plt.savefig("fig_2.svg", bbox_inches="tight")
