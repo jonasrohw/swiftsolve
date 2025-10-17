@@ -65,40 +65,41 @@ class ResearchDatasetCurator:
     
     # Curated BigO(Bench) tasks (16 total)
     BIGOBENCH_TASKS = [
-        {"id": "bigobench_binary_search", "complexity": "O(log n)", "difficulty": "easy"},
-        {"id": "bigobench_linear_scan", "complexity": "O(n)", "difficulty": "easy"},
-        {"id": "bigobench_two_pointers", "complexity": "O(n)", "difficulty": "easy"},
-        {"id": "bigobench_hash_lookup", "complexity": "O(1)", "difficulty": "easy"},
-        {"id": "bigobench_prefix_sum", "complexity": "O(n)", "difficulty": "easy"},
-        {"id": "bigobench_sliding_window", "complexity": "O(n)", "difficulty": "medium"},
-        {"id": "bigobench_merge_sort", "complexity": "O(n log n)", "difficulty": "medium"},
-        {"id": "bigobench_quick_sort", "complexity": "O(n log n)", "difficulty": "medium"},
-        {"id": "bigobench_heap_operations", "complexity": "O(log n)", "difficulty": "medium"},
-        {"id": "bigobench_bfs_graph", "complexity": "O(V + E)", "difficulty": "medium"},
-        {"id": "bigobench_dfs_graph", "complexity": "O(V + E)", "difficulty": "medium"},
-        {"id": "bigobench_dijkstra", "complexity": "O((V + E) log V)", "difficulty": "hard"},
-        {"id": "bigobench_dynamic_programming", "complexity": "O(n^2)", "difficulty": "hard"},
-        {"id": "bigobench_backtracking", "complexity": "O(2^n)", "difficulty": "hard"},
-        {"id": "bigobench_matrix_multiplication", "complexity": "O(n^3)", "difficulty": "hard"},
-        {"id": "bigobench_segment_tree", "complexity": "O(log n)", "difficulty": "hard"},
+        {"id": "bigobench_1718", "complexity": "O(n)", "difficulty": "easy"},
+        {"id": "bigobench_1414", "complexity": "O(n**2)", "difficulty": "medium"},
+        {"id": "bigobench_2983", "complexity": "O(n)", "difficulty": "easy"},
+        {"id": "bigobench_1139", "complexity": "O(n*m)", "difficulty": "medium"},
+        {"id": "bigobench_411", "complexity": "O(n)", "difficulty": "easy"},
+        {"id": "bigobench_1821", "complexity": "O(n**2)", "difficulty": "medium"},
+        {"id": "bigobench_915", "complexity": "O(n*m)", "difficulty": "medium"},
+        {"id": "bigobench_1044", "complexity": "O(n**2)", "difficulty": "medium"},
+        {"id": "bigobench_2218", "complexity": "O(n**2)", "difficulty": "medium"},
+        {"id": "bigobench_1872", "complexity": "O(n)", "difficulty": "easy"},
+        {"id": "bigobench_1169", "complexity": "O(n**2)", "difficulty": "medium"},
+        {"id": "bigobench_620", "complexity": "O(n**2)", "difficulty": "medium"},
+        {"id": "bigobench_898", "complexity": "O(n)", "difficulty": "easy"},
+        {"id": "bigobench_578", "complexity": "O(n**2)", "difficulty": "medium"},
+        {"id": "bigobench_1334", "complexity": "O(n)", "difficulty": "easy"},
+        {"id": "bigobench_1872", "complexity": "O(n)", "difficulty": "easy"},
     ]
     
-    # Curated Codeforces Div-2 tasks (9 total)
+    # Curated Codeforces Div-2 tasks (10 total)
     CODEFORCES_TASKS = [
-        {"id": "cf_1285a_meximum_array", "rating": 800, "difficulty": "easy"},
-        {"id": "cf_1285b_just_eat_it", "rating": 1200, "difficulty": "easy"},
-        {"id": "cf_1285c_fadi_and_lcm", "rating": 1400, "difficulty": "medium"},
-        {"id": "cf_1285d_dr_evil_underscores", "rating": 1600, "difficulty": "medium"},
-        {"id": "cf_1285e_delete_a_segment", "rating": 1800, "difficulty": "medium"},
-        {"id": "cf_1286a_garland", "rating": 1000, "difficulty": "easy"},
-        {"id": "cf_1286b_numbers_on_tree", "rating": 1400, "difficulty": "medium"},
-        {"id": "cf_1286c1_madness_easy", "rating": 1600, "difficulty": "hard"},
-        {"id": "cf_1286c2_madness_hard", "rating": 2000, "difficulty": "hard"},
+        {"id": "cf_1284a", "rating": 800, "difficulty": "easy"},
+        {"id": "cf_1285a", "rating": 800, "difficulty": "easy"},
+        {"id": "cf_1285b", "rating": 1200, "difficulty": "medium"},
+        {"id": "cf_1285c", "rating": 1600, "difficulty": "hard"},
+        {"id": "cf_2127a", "rating": 800, "difficulty": "easy"},
+        {"id": "cf_2127b", "rating": 1300, "difficulty": "medium"},
+        {"id": "cf_2127c", "rating": 1400, "difficulty": "medium"},
+        {"id": "cf_2127d", "rating": 1800, "difficulty": "hard"},
+        {"id": "cf_1992d", "rating": 1200, "difficulty": "medium"},
+        {"id": "cf_1992e", "rating": 1700, "difficulty": "hard"},
     ]
     
     @classmethod
     def create_curated_dataset(cls) -> List[TaskMetadata]:
-        """Create the curated 25-task dataset."""
+        """Create the curated 26-task dataset."""
         tasks = []
         
         # Add BigO(Bench) tasks

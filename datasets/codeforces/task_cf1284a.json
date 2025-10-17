@@ -1,0 +1,44 @@
+{
+  "task_id": "CF1284A",
+  "title": "New Year and Naming",
+  "source": "codeforces",
+  "difficulty": "easy",
+  "description": "Given two sequences of strings s1..sn and t1..tm, and q queries with year y, output the concatenation s[(y−1) mod n] + t[(y−1) mod m] for each query.",
+  "input_format": "First line: n m (1 ≤ n,m ≤ 20). Next line: n lowercase strings (length 1..10). Next line: m lowercase strings (length 1..10). Next line: q (1 ≤ q ≤ 2020). Next q lines: integer y (1 ≤ y ≤ 10^9).",
+  "output_format": "Print q lines; each line is the concatenated name for the given y.",
+  "input_bounds": {
+    "n_max": 20,
+    "m_max": 20,
+    "q_max": 2020,
+    "string_len_min": 1,
+    "string_len_max": 10,
+    "y_max": 1000000000
+  },
+  "time_limit_ms": 1000,
+  "memory_limit_mb": 1024,
+  "expected_complexity": "O(q)",
+  "expected_approach": "Modulo indexing on both sequences: s_idx=(y-1)%n, t_idx=(y-1)%m; concatenate s[s_idx] + t[t_idx].",
+  "test_cases": [
+    {
+      "input": "3 4\na b c\nd e f g\n5\n1\n2\n3\n4\n5\n",
+      "output": "ad\nbe\ncf\nag\nbd\n",
+      "explanation": "Wrap around each list independently using modulo."
+    },
+    {
+      "input": "1 1\nab\ncd\n3\n1\n2\n3\n",
+      "output": "abcd\nabcd\nabcd\n",
+      "explanation": "Both sequences have length 1; the result repeats."
+    },
+    {
+      "input": "2 2\nx y\np q\n3\n2\n3\n4\n",
+      "output": "yq\nxp\nyq\n",
+      "explanation": "Indexes cycle every 2 years for both sequences."
+    }
+  ],
+  "source_url": "https://codeforces.com/problemset/problem/1284/A",
+  "source_rating": 800,
+  "tags": [
+    "implementation",
+    "strings"
+  ]
+}

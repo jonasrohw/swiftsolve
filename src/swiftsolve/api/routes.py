@@ -401,10 +401,10 @@ class MiniBaselineEvalResponse(BaseModel):
 @router.post("/baseline/evaluate", response_model=BaselineEvalResponse)
 async def start_baseline_evaluation(request: BaselineEvalRequest, background_tasks: BackgroundTasks):
     """
-    Start a comprehensive 75-iteration baseline evaluation using GPT-4 directly.
+    Start a comprehensive 75-iteration baseline evaluation using Claude 4 Opus directly.
     
     This serves as a robust baseline for comparing against SwiftSolve.
-    Uses GPT-4 directly (single attempt per problem) instead of the planner+coder+analyst pipeline.
+    Uses Claude 4 Opus directly (single attempt per problem) instead of the planner+coder+analyst pipeline.
     
     Returns immediately with evaluation ID and estimates.
     The actual evaluation runs in the background.
@@ -450,7 +450,7 @@ async def start_baseline_evaluation(request: BaselineEvalRequest, background_tas
 @router.post("/mini-baseline/evaluate", response_model=MiniBaselineEvalResponse)
 async def start_mini_baseline_evaluation(request: MiniBaselineEvalRequest, background_tasks: BackgroundTasks):
     """
-    Start a mini baseline evaluation using GPT-4 directly (6 iterations instead of 75).
+    Start a mini baseline evaluation using Claude 4 Opus directly (6 iterations instead of 75).
     
     Mini evaluation: 2 tasks × 3 seeds = 6 iterations total (single attempt per problem).
     Perfect for testing the baseline setup before running the full benchmark.

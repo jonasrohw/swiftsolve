@@ -1,7 +1,7 @@
 {
   "dataset": "bigobench",
   "version": "1.0.0",
-  "task_count": 3,
+  "task_count": 16,
   "tasks": [
     {
       "task_id": "BIGOBENCH_1718",

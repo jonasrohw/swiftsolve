@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+title: "SwiftSolve: Multi-Agent Code Generation with Efficiency Optimization"
+version: "v0.1-anon"
+message: "If you use this artifact, please cite it."
+type: software
+authors:
+
+* name: "Anonymous"
+  date-released: 2025-09-01
+  abstract: >
+  SwiftSolve is a modular multi-agent framework that synthesizes functionally
+  correct and computationally efficient C++ solutions from natural-language problem
+  statements. Unlike correctness-only systems, SwiftSolve co-optimizes for Big-O
+  efficiency via iterative planning, coding, profiling, and analysis, and reports
+  pass\@k alongside efficiency metrics under real resource limits.
+  keywords:
+* multi-agent systems
+* code generation
+* computational efficiency
+* C++
+* benchmarking
+* reproducibility
+  preferred-citation:
+  type: article
+  authors:
+
+  * name: "Anonymous"
+    title: "SwiftSolve: Complexity-Aware Multi-Agent Code Generation"
+    journal: "NeurIPS 2025 Workshop on Systems for Efficient AI (SEA)"
+    year: 2025

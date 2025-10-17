@@ -1,0 +1,137 @@
+{
+    "dataset": "codeforces",
+    "version": "1.0.0",
+    "task_count": 10,
+    "rating_range": [
+      800,
+      1800
+    ],
+    "tasks": [
+      {
+        "task_id": "CF1284A",
+        "title": "New Year and Naming",
+        "difficulty": "easy",
+        "rating": 800,
+        "complexity": "O(q)",
+        "tags": [
+          "implementation"
+        ],
+        "file": "task_cf1284a.json"
+      },
+      {
+        "task_id": "CF1285A",
+        "title": "Mezo Playing Zoma",
+        "difficulty": "easy",
+        "rating": 800,
+        "complexity": "O(n)",
+        "tags": [
+          "implementation"
+        ],
+        "file": "task_cf1285a.json"
+      },
+      {
+        "task_id": "CF1285B",
+        "title": "Just Eat It!",
+        "difficulty": "medium",
+        "rating": 1200,
+        "complexity": "O(n)",
+        "tags": [
+          "greedy",
+          "implementation"
+        ],
+        "file": "task_cf1285b.json"
+      },
+      {
+        "task_id": "CF1285C",
+        "title": "Fadi and LCM",
+        "difficulty": "hard",
+        "rating": 1600,
+        "complexity": "O(n)",
+        "tags": [
+          "math",
+          "number theory"
+        ],
+        "file": "task_cf1285c.json"
+      },
+      {
+        "task_id": "CF2127A",
+        "title": "Mix Mex Max",
+        "difficulty": "easy",
+        "rating": 800,
+        "complexity": "O(n)",
+        "tags": [
+          "constructive algorithms",
+          "greedy",
+          "math"
+        ],
+        "file": "task_cf2127a.json"
+      },
+      {
+        "task_id": "CF2127B",
+        "title": "Hamiiid, Haaamid... Hamid?",
+        "difficulty": "medium",
+        "rating": 1300,
+        "complexity": "O(n)",
+        "tags": [
+          "games",
+          "greedy"
+        ],
+        "file": "task_cf2127b.json"
+      },
+      {
+        "task_id": "CF2127C",
+        "title": "Trip Shopping",
+        "difficulty": "medium",
+        "rating": 1400,
+        "complexity": "O(n)",
+        "tags": [
+          "games",
+          "greedy",
+          "sortings"
+        ],
+        "file": "task_cf2127c.json"
+      },
+      {
+        "task_id": "CF2127D",
+        "title": "Root was Built by Love, Broken by Destiny",
+        "difficulty": "hard",
+        "rating": 1800,
+        "complexity": "O(n)",
+        "tags": [
+          "combinatorics",
+          "dfs and similar",
+          "graphs",
+          "trees"
+        ],
+        "file": "task_cf2127d.json"
+      },
+      {
+        "task_id": "CF1992D",
+        "title": "Test of Love",
+        "difficulty": "medium",
+        "rating": 1200,
+        "complexity": "O(n)",
+        "tags": [
+          "dp",
+          "greedy",
+          "implementation"
+        ],
+        "file": "task_cf1992d.json"
+      },
+      {
+        "task_id": "CF1992E",
+        "title": "Novice's Mistake",
+        "difficulty": "hard",
+        "rating": 1700,
+        "complexity": "O(a * digits(n))",
+        "tags": [
+          "brute force",
+          "constructive algorithms",
+          "implementation",
+          "math",
+          "strings"
+        ],
+        "file": "task_cf1992e.json"
+      }
+    ]
+  }
